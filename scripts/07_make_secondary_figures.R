@@ -29,8 +29,7 @@ responses <- c(
   "Late.g",
   "Growth",
   "D12_SMI",
-  "D12_RTARS",
-  "D12_SURV"
+  "D12_RTARS"
 )
 
 `%||%` <- function(x, y) if (is.null(x)) y else x

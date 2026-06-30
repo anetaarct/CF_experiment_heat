@@ -180,26 +180,4 @@ for (response in continuous_responses) {
   plot_model_effect(response)
 }
 
-plot_model_effect("D12_SURV")
-
-surv_raw <- dat %>%
-  filter(!is.na(D12_SURV)) %>%
-  mutate(D12_SURV = factor(D12_SURV, levels = c(0, 1), labels = c("Dead", "Survived"))) %>%
-  count(EXP.INC, EXP.NEST, D12_SURV) %>%
-  group_by(EXP.INC, EXP.NEST) %>%
-  mutate(prop = n / sum(n)) %>%
-  ungroup()
-
-p_surv <- ggplot(surv_raw, aes(x = EXP.INC, y = prop, fill = D12_SURV)) +
-  geom_col(position = "fill") +
-  facet_wrap(~ EXP.NEST) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  scale_fill_manual(values = c("#8A8F98", "#476F67")) +
-  labs(x = "Incubation treatment", y = "Observed proportion", fill = "Outcome") +
-  theme_minimal(base_size = 12) +
-  theme(panel.grid.minor = element_blank(), legend.position = "bottom")
-
-ggsave(file.path("figures", "raw_distributions", "raw_D12_SURV.png"), p_surv, width = 7.2, height = 4.8, dpi = 300)
-ggsave(file.path("figures", "raw_distributions", "raw_D12_SURV.pdf"), p_surv, width = 7.2, height = 4.8)
-
 message("Figures saved in figures/raw_distributions and figures/model_effects.")

@@ -146,57 +146,6 @@ plot_continuous_model_effect <- function(response) {
 }
 ```
 
-## Survival figures
-
-For survival, the model-effect figure combines observed survival proportions in the background with predicted survival probabilities and 95% confidence intervals from the selected binomial mixed model.
-
-```{r}
-#| label: survival-figure-code
-#| eval: false
-#| code-fold: true
-#| code-summary: "Show survival figure code"
-
-plot_survival_model_effect <- function() {
-  fit <- readRDS("models/best_model_D12_SURV.rds")
-
-  raw_prop <- dat |>
-    filter(!is.na(D12_SURV), !is.na(EXP.INC), !is.na(EXP.NEST)) |>
-    mutate(D12_SURV_num = as.numeric(as.character(D12_SURV))) |>
-    group_by(EXP.INC, EXP.NEST) |>
-    summarise(observed_survival = mean(D12_SURV_num, na.rm = TRUE), .groups = "drop")
-
-  pred <- ggpredict(fit, terms = c("EXP.INC", "EXP.NEST"))
-
-  p <- ggplot() +
-    geom_col(
-      data = raw_prop,
-      aes(x = EXP.INC, y = observed_survival, fill = EXP.NEST),
-      position = position_dodge(width = 0.45),
-      width = 0.32,
-      alpha = 0.18,
-      color = NA
-    ) +
-    geom_line(
-      data = pred,
-      aes(x = x, y = predicted, color = group, group = group),
-      linewidth = 0.85
-    ) +
-    geom_pointrange(
-      data = pred,
-      aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high, color = group, group = group),
-      size = 0.58,
-      linewidth = 0.5,
-      position = position_dodge(width = 0.18)
-    ) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-    labs(x = "Incubation treatment", y = "Predicted survival", color = "Nestling treatment") +
-    theme_minimal(base_size = 12) +
-    theme(panel.grid.minor = element_blank(), legend.position = "bottom")
-
-  ggsave("figures/model_effects/model_effect_D12_SURV.pdf", p, width = 7.2, height = 4.8)
-}
-```
-
 ## Interaction and temperature figures
 
 The interaction figures use the same visual rule as the primary figures: model predictions are the main signal and raw data are shown as pale background points when the plot remains readable.
