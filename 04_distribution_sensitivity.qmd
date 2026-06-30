@@ -2,12 +2,14 @@
 
 For continuous nestling traits, the primary models use Gaussian errors. Student-t models are fitted as robustness checks because AIC can favour heavier-tailed distributions even when the observed trait distributions do not strongly depart from normality.
 
-AIC is therefore reported here as descriptive model-comparison information, not as the sole criterion for choosing the biological model. The main interpretation remains based on the Gaussian mixed models; Student-t results are used to check whether effect directions and support are robust to the distributional assumption.
+AIC is therefore reported as descriptive model-comparison information, not as the sole criterion for choosing the biological model. The main interpretation remains based on the Gaussian mixed models; Student-t results are used to check whether treatment-effect directions and support are robust to the distributional assumption.
 
-## Candidate model set
+## Sensitivity summary
+
+The table below gives a compact Gaussian versus Student-t comparison for the experimental treatment effects. An asterisk in the direction columns marks effects with `p < 0.05`.
 
 ```{r}
-#| label: distributional-candidate-models
+#| label: distributional-sensitivity-summary
 #| echo: false
 #| message: false
 #| warning: false
@@ -15,6 +17,88 @@ AIC is therefore reported here as descriptive model-comparison information, not 
 library(dplyr)
 library(readr)
 library(knitr)
+library(tidyr)
+
+coef_file <- "models/model_coefficients.csv"
+
+if (file.exists(coef_file)) {
+  direction_label <- function(estimate, p_value) {
+    direction <- case_when(
+      is.na(estimate) ~ "not estimable",
+      estimate < 0 ~ "negative",
+      estimate > 0 ~ "positive",
+      TRUE ~ "zero"
+    )
+    support <- case_when(
+      is.na(p_value) ~ "",
+      p_value < 0.05 ~ "*",
+      TRUE ~ ""
+    )
+    paste0(direction, support)
+  }
+
+  read_csv(coef_file, show_col_types = FALSE) |>
+    filter(
+      response != "D12_SURV",
+      model_name %in% c("gaussian_mean", "student_mean"),
+      grepl("^EXP\\.", term)
+    ) |>
+    mutate(
+      effect = recode(
+        term,
+        "EXP.INCHeated" = "Incubation warming",
+        "EXP.NESTHeated" = "Nestling-stage warming",
+        .default = term
+      ),
+      direction = direction_label(estimate, p_value),
+      supported = !is.na(p_value) & p_value < 0.05
+    ) |>
+    select(response_label, effect, model_name, direction, supported) |>
+    pivot_wider(
+      names_from = model_name,
+      values_from = c(direction, supported),
+      names_sep = "_"
+    ) |>
+    mutate(
+      same_direction = gsub("\\*", "", direction_gaussian_mean) == gsub("\\*", "", direction_student_mean),
+      same_support = supported_gaussian_mean == supported_student_mean,
+      `Main effect robust?` = case_when(
+        same_direction & same_support & supported_gaussian_mean ~ "yes",
+        same_direction & same_support & !supported_gaussian_mean ~ "yes, direction only",
+        same_direction & !same_support ~ "cautious",
+        TRUE ~ "no/cautious"
+      ),
+      Interpretation = case_when(
+        `Main effect robust?` == "yes" ~ "robust",
+        `Main effect robust?` == "yes, direction only" ~ "same direction, weak statistical support",
+        same_direction & !same_support ~ "same direction, support differs",
+        TRUE ~ "distribution-sensitive"
+      )
+    ) |>
+    select(
+      Response = response_label,
+      Effect = effect,
+      `Main effect robust?`,
+      `Gaussian direction` = direction_gaussian_mean,
+      `Student-t direction` = direction_student_mean,
+      Interpretation
+    ) |>
+    arrange(Response, Effect) |>
+    kable()
+} else {
+  cat("Distributional sensitivity summary is not available yet.")
+}
+```
+
+## Candidate model set
+
+The detailed AIC table is retained as background information. It is not used as an automatic rule for selecting the biological model.
+
+```{r}
+#| label: distributional-candidate-models
+#| echo: false
+#| message: false
+#| warning: false
 
 comparison_file <- "models/model_comparisons.csv"
 
@@ -34,33 +118,6 @@ if (file.exists(comparison_file)) {
 }
 ```
 
-## Gaussian versus Student-t coefficients
-
-The table below compares the primary Gaussian mean model with the Student-t mean model for the same fixed-effect structure. This is the clearest robustness check for whether conclusions depend on the assumed error distribution.
-
-```{r}
-#| label: distributional-coefficient-comparison
-#| echo: false
-#| message: false
-#| warning: false
-
-coef_file <- "models/model_coefficients.csv"
-
-if (file.exists(coef_file)) {
-  read_csv(coef_file, show_col_types = FALSE) |>
-    filter(response != "D12_SURV", model_name %in% c("gaussian_mean", "student_mean")) |>
-    mutate(
-      estimate = round(estimate, 3),
-      p_value = round(p_value, 4)
-    ) |>
-    select(response_label, model_name, term, estimate, p_value) |>
-    arrange(response_label, term, model_name) |>
-    kable(col.names = c("Response", "Model", "Term", "Estimate", "p"))
-} else {
-  cat("Distributional coefficient table is not available yet.")
-}
-```
-
 ## Interpretation rule
 
-Effects that show the same direction and similar support in Gaussian and Student-t models are treated as robust. Effects that appear only under the Gaussian model, or only under the Student-t model, are interpreted cautiously as distribution-sensitive results.
+Effects that show the same direction in Gaussian and Student-t models are treated as directionally robust. The asterisk indicates whether the effect also has statistical support (`p < 0.05`). Effects that change direction, or have support only under one distributional assumption, are interpreted cautiously as distribution-sensitive results.

@@ -145,8 +145,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#distributional-sensitivity-analysis" id="toc-distributional-sensitivity-analysis" class="nav-link active" data-scroll-target="#distributional-sensitivity-analysis">Distributional sensitivity analysis</a>
   <ul class="collapse">
+  <li><a href="#sensitivity-summary" id="toc-sensitivity-summary" class="nav-link" data-scroll-target="#sensitivity-summary">Sensitivity summary</a></li>
   <li><a href="#candidate-model-set" id="toc-candidate-model-set" class="nav-link" data-scroll-target="#candidate-model-set">Candidate model set</a></li>
-  <li><a href="#gaussian-versus-student-t-coefficients" id="toc-gaussian-versus-student-t-coefficients" class="nav-link" data-scroll-target="#gaussian-versus-student-t-coefficients">Gaussian versus Student-t coefficients</a></li>
   <li><a href="#interpretation-rule" id="toc-interpretation-rule" class="nav-link" data-scroll-target="#interpretation-rule">Interpretation rule</a></li>
   </ul></li>
   </ul>
@@ -161,9 +161,160 @@ ul.task-list li input[type="checkbox"] {
 <section id="distributional-sensitivity-analysis" class="level1">
 <h1>Distributional sensitivity analysis</h1>
 <p>For continuous nestling traits, the primary models use Gaussian errors. Student-t models are fitted as robustness checks because AIC can favour heavier-tailed distributions even when the observed trait distributions do not strongly depart from normality.</p>
-<p>AIC is therefore reported here as descriptive model-comparison information, not as the sole criterion for choosing the biological model. The main interpretation remains based on the Gaussian mixed models; Student-t results are used to check whether effect directions and support are robust to the distributional assumption.</p>
+<p>AIC is therefore reported as descriptive model-comparison information, not as the sole criterion for choosing the biological model. The main interpretation remains based on the Gaussian mixed models; Student-t results are used to check whether treatment-effect directions and support are robust to the distributional assumption.</p>
+<section id="sensitivity-summary" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-summary">Sensitivity summary</h2>
+<p>The table below gives a compact Gaussian versus Student-t comparison for the experimental treatment effects. An asterisk in the direction columns marks effects with <code>p &lt; 0.05</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Effect</th>
+<th style="text-align: left;">Main effect robust?</th>
+<th style="text-align: left;">Gaussian direction</th>
+<th style="text-align: left;">Student-t direction</th>
+<th style="text-align: left;">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-2 body mass</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">negative*</td>
+<td style="text-align: left;">negative*</td>
+<td style="text-align: left;">robust</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">negative*</td>
+<td style="text-align: left;">negative*</td>
+<td style="text-align: left;">robust</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">yes, direction only</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: left;">same direction, weak statistical support</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">Incubation warming</td>
+<td style="text-align: left;">no/cautious</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">positive*</td>
+<td style="text-align: left;">distribution-sensitive</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">Nestling-stage warming</td>
+<td style="text-align: left;">no/cautious</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">positive*</td>
+<td style="text-align: left;">distribution-sensitive</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 <section id="candidate-model-set" class="level2">
 <h2 class="anchored" data-anchor-id="candidate-model-set">Candidate model set</h2>
+<p>The detailed AIC table is retained as background information. It is not used as an automatic rule for selecting the biological model.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -193,7 +344,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">2088.37</td>
+<td style="text-align: right;">2091.50</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
@@ -202,8 +353,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_scale</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">2092.30</td>
-<td style="text-align: right;">3.94</td>
+<td style="text-align: right;">2095.42</td>
+<td style="text-align: right;">3.92</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
@@ -229,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">2243.70</td>
+<td style="text-align: right;">2239.72</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
@@ -238,8 +389,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">2245.26</td>
-<td style="text-align: right;">1.56</td>
+<td style="text-align: right;">2241.32</td>
+<td style="text-align: right;">1.60</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
 <tr class="odd">
@@ -247,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_scale</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">2246.90</td>
+<td style="text-align: right;">2242.92</td>
 <td style="text-align: right;">3.20</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
@@ -256,8 +407,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_scale</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">2247.88</td>
-<td style="text-align: right;">4.18</td>
+<td style="text-align: right;">2243.95</td>
+<td style="text-align: right;">4.23</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
@@ -265,7 +416,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">1057.04</td>
+<td style="text-align: right;">1060.37</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
@@ -274,8 +425,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_scale</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">1059.06</td>
-<td style="text-align: right;">2.02</td>
+<td style="text-align: right;">1062.47</td>
+<td style="text-align: right;">2.11</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
@@ -283,8 +434,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_scale</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">1084.49</td>
-<td style="text-align: right;">27.44</td>
+<td style="text-align: right;">1088.26</td>
+<td style="text-align: right;">27.89</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="even">
@@ -292,8 +443,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">1086.67</td>
-<td style="text-align: right;">29.63</td>
+<td style="text-align: right;">1090.34</td>
+<td style="text-align: right;">29.97</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
 <tr class="odd">
@@ -301,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">1622.67</td>
+<td style="text-align: right;">1626.70</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
@@ -310,8 +461,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_scale</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~EXP.INC</td>
-<td style="text-align: right;">1623.92</td>
-<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">1627.96</td>
+<td style="text-align: right;">1.26</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
@@ -319,8 +470,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">1628.11</td>
-<td style="text-align: right;">5.44</td>
+<td style="text-align: right;">1631.86</td>
+<td style="text-align: right;">5.16</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
 <tr class="even">
@@ -328,8 +479,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">gaussian_scale</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC</td>
-<td style="text-align: right;">1629.10</td>
-<td style="text-align: right;">6.43</td>
+<td style="text-align: right;">1632.86</td>
+<td style="text-align: right;">6.16</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
@@ -337,7 +488,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">2483.76</td>
+<td style="text-align: right;">2594.63</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
@@ -346,56 +497,47 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">student_scale</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">2485.01</td>
-<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">2596.48</td>
+<td style="text-align: right;">1.85</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_scale</td>
-<td style="text-align: left;">Gaussian</td>
-<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">2563.14</td>
-<td style="text-align: right;">79.38</td>
-<td style="text-align: left;">Sensitivity model</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Day-8 body mass</td>
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">2566.51</td>
-<td style="text-align: right;">82.75</td>
+<td style="text-align: right;">2690.49</td>
+<td style="text-align: right;">95.86</td>
 <td style="text-align: left;">Primary Gaussian model</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">Gaussian</td>
+<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
+<td style="text-align: right;">2691.95</td>
+<td style="text-align: right;">97.31</td>
+<td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_scale</td>
-<td style="text-align: left;">Student-t</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">-615.03</td>
+<td style="text-align: right;">-529.96</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_scale</td>
-<td style="text-align: left;">Gaussian</td>
-<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">-551.76</td>
-<td style="text-align: right;">63.26</td>
-<td style="text-align: left;">Sensitivity model</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">-541.64</td>
-<td style="text-align: right;">73.38</td>
+<td style="text-align: right;">-529.00</td>
+<td style="text-align: right;">0.96</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Early growth</td>
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
@@ -404,35 +546,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_scale</td>
-<td style="text-align: left;">Gaussian</td>
-<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">103.72</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: left;">Sensitivity model</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">Gaussian</td>
-<td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">116.73</td>
-<td style="text-align: right;">13.01</td>
-<td style="text-align: left;">Primary Gaussian model</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">Student-t</td>
-<td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">Sensitivity model</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">Early growth</td>
 <td style="text-align: left;">student_scale</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
@@ -441,824 +556,76 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">Gaussian</td>
+<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
+<td style="text-align: right;">105.56</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: left;">Sensitivity model</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">gaussian_mean</td>
+<td style="text-align: left;">Gaussian</td>
+<td style="text-align: left;">~ 1</td>
+<td style="text-align: right;">118.68</td>
+<td style="text-align: right;">13.12</td>
+<td style="text-align: left;">Primary Gaussian model</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
 <td style="text-align: left;">student_mean</td>
 <td style="text-align: left;">Student-t</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">-1050.65</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Sensitivity model</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">student_scale</td>
+<td style="text-align: left;">Student-t</td>
+<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Sensitivity model</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">student_scale</td>
+<td style="text-align: left;">Student-t</td>
+<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
+<td style="text-align: right;">-1041.49</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_scale</td>
-<td style="text-align: left;">Student-t</td>
-<td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">-1049.54</td>
-<td style="text-align: right;">1.11</td>
-<td style="text-align: left;">Sensitivity model</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">gaussian_scale</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~EXP.INC + EXP.NEST</td>
-<td style="text-align: right;">-1024.91</td>
-<td style="text-align: right;">25.74</td>
+<td style="text-align: right;">-1017.19</td>
+<td style="text-align: right;">24.31</td>
 <td style="text-align: left;">Sensitivity model</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">gaussian_mean</td>
 <td style="text-align: left;">Gaussian</td>
 <td style="text-align: left;">~ 1</td>
-<td style="text-align: right;">-1021.71</td>
-<td style="text-align: right;">28.94</td>
+<td style="text-align: right;">-1013.99</td>
+<td style="text-align: right;">27.50</td>
 <td style="text-align: left;">Primary Gaussian model</td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="gaussian-versus-student-t-coefficients" class="level2">
-<h2 class="anchored" data-anchor-id="gaussian-versus-student-t-coefficients">Gaussian versus Student-t coefficients</h2>
-<p>The table below compares the primary Gaussian mean model with the Student-t mean model for the same fixed-effect structure. This is the clearest robustness check for whether conclusions depend on the assumed error distribution.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 17%">
-<col style="width: 32%">
-<col style="width: 11%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Response</th>
-<th style="text-align: left;">Model</th>
-<th style="text-align: left;">Term</th>
-<th style="text-align: right;">Estimate</th>
-<th style="text-align: right;">p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">13.886</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.214</td>
+<td style="text-align: left;">Student-t</td>
+<td style="text-align: left;">~ 1</td>
 <td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.003</td>
-<td style="text-align: right;">0.9787</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.110</td>
 <td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.237</td>
-<td style="text-align: right;">0.2890</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.147</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.076</td>
-<td style="text-align: right;">0.7345</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.193</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.143</td>
-<td style="text-align: right;">0.0501</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.125</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.248</td>
-<td style="text-align: right;">0.0448</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">0.262</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.201</td>
-<td style="text-align: right;">0.0874</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.319</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">13.783</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">13.774</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.179</td>
-<td style="text-align: right;">0.0860</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.174</td>
-<td style="text-align: right;">0.0936</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">0.079</td>
-<td style="text-align: right;">0.7109</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">0.061</td>
-<td style="text-align: right;">0.7713</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.124</td>
-<td style="text-align: right;">0.5619</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.126</td>
-<td style="text-align: right;">0.5523</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.271</td>
-<td style="text-align: right;">0.0020</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.278</td>
-<td style="text-align: right;">0.0013</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">0.020</td>
-<td style="text-align: right;">0.8961</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">0.019</td>
-<td style="text-align: right;">0.9069</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">0.056</td>
-<td style="text-align: right;">0.8248</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">0.025</td>
-<td style="text-align: right;">0.9293</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">16.883</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">16.901</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">0.045</td>
-<td style="text-align: right;">0.3232</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">0.043</td>
-<td style="text-align: right;">0.3345</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.155</td>
-<td style="text-align: right;">0.0989</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.140</td>
-<td style="text-align: right;">0.1266</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.042</td>
-<td style="text-align: right;">0.6533</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.045</td>
-<td style="text-align: right;">0.6240</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">-0.049</td>
-<td style="text-align: right;">0.1848</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">-0.058</td>
-<td style="text-align: right;">0.0901</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.136</td>
-<td style="text-align: right;">0.0086</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.127</td>
-<td style="text-align: right;">0.0115</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.181</td>
-<td style="text-align: right;">0.0003</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.180</td>
-<td style="text-align: right;">0.0002</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">3.189</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">3.233</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">0.073</td>
-<td style="text-align: right;">0.0649</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">0.086</td>
-<td style="text-align: right;">0.0375</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.010</td>
-<td style="text-align: right;">0.9036</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.025</td>
-<td style="text-align: right;">0.7675</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">-0.023</td>
-<td style="text-align: right;">0.5623</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">-0.039</td>
-<td style="text-align: right;">0.3083</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">0.147</td>
-<td style="text-align: right;">0.0028</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-2 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">0.144</td>
-<td style="text-align: right;">0.0013</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">12.536</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">12.625</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.042</td>
-<td style="text-align: right;">0.7277</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.011</td>
-<td style="text-align: right;">0.9297</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.506</td>
-<td style="text-align: right;">0.0394</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.526</td>
-<td style="text-align: right;">0.0327</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.038</td>
-<td style="text-align: right;">0.8772</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.031</td>
-<td style="text-align: right;">0.9007</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.073</td>
-<td style="text-align: right;">0.3970</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.159</td>
-<td style="text-align: right;">0.0297</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.273</td>
-<td style="text-align: right;">0.2535</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.199</td>
-<td style="text-align: right;">0.1295</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.122</td>
-<td style="text-align: right;">0.6743</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.276</td>
-<td style="text-align: right;">0.1136</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.562</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.518</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.013</td>
-<td style="text-align: right;">0.4899</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.015</td>
-<td style="text-align: right;">0.3753</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.101</td>
-<td style="text-align: right;">0.0099</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.095</td>
-<td style="text-align: right;">0.0089</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">-0.008</td>
-<td style="text-align: right;">0.8361</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">-0.012</td>
-<td style="text-align: right;">0.7392</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.029</td>
-<td style="text-align: right;">0.0050</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.030</td>
-<td style="text-align: right;">0.0009</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.066</td>
-<td style="text-align: right;">0.0012</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.230</td>
-<td style="text-align: right;">0.0002</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.031</td>
-<td style="text-align: right;">0.0935</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">0.032</td>
-<td style="text-align: right;">0.1737</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.271</td>
-<td style="text-align: right;">0.0003</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.255</td>
-<td style="text-align: right;">0.0011</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.011</td>
-<td style="text-align: right;">0.6456</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.014</td>
-<td style="text-align: right;">0.5305</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">0.036</td>
-<td style="text-align: right;">0.4491</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">0.064</td>
-<td style="text-align: right;">0.1176</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.025</td>
-<td style="text-align: right;">0.5890</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">0.022</td>
-<td style="text-align: right;">0.5805</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.013</td>
-<td style="text-align: right;">0.4581</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">-0.002</td>
-<td style="text-align: right;">0.9083</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.135</td>
-<td style="text-align: right;">0.0376</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.133</td>
-<td style="text-align: right;">0.0368</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.044</td>
-<td style="text-align: right;">0.5484</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.044</td>
-<td style="text-align: right;">0.3227</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.065</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">1.068</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.006</td>
-<td style="text-align: right;">0.6086</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">BS_sc</td>
-<td style="text-align: right;">-0.009</td>
-<td style="text-align: right;">0.4395</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.027</td>
-<td style="text-align: right;">0.2660</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: right;">-0.028</td>
-<td style="text-align: right;">0.2326</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">-0.005</td>
-<td style="text-align: right;">0.8257</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: right;">-0.004</td>
-<td style="text-align: right;">0.8770</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.019</td>
-<td style="text-align: right;">0.0121</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">SEXM</td>
-<td style="text-align: right;">0.017</td>
-<td style="text-align: right;">0.0145</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.049</td>
-<td style="text-align: right;">0.0002</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">-0.049</td>
-<td style="text-align: right;">0.0001</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">gaussian_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.011</td>
-<td style="text-align: right;">0.3632</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">student_mean</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">-0.014</td>
-<td style="text-align: right;">0.2616</td>
+<td style="text-align: left;">Sensitivity model</td>
 </tr>
 </tbody>
 </table>
@@ -1267,7 +634,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="interpretation-rule" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-rule">Interpretation rule</h2>
-<p>Effects that show the same direction and similar support in Gaussian and Student-t models are treated as robust. Effects that appear only under the Gaussian model, or only under the Student-t model, are interpreted cautiously as distribution-sensitive results.</p>
+<p>Effects that show the same direction in Gaussian and Student-t models are treated as directionally robust. The asterisk indicates whether the effect also has statistical support (<code>p &lt; 0.05</code>). Effects that change direction, or have support only under one distributional assumption, are interpreted cautiously as distribution-sensitive results.</p>
 
 
 </section>
