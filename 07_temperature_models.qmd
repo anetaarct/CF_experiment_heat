@@ -12,6 +12,56 @@ cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temper
 
 Day-2 mass is not included because it occurs before most of the nestling-period treatment.
 
+## Collinearity check
+
+Before interpreting the temperature-interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.
+
+```{r}
+#| label: temperature-collinearity
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+
+correlation_file <- "models/collinearity/temperature_correlation.csv"
+vif_file <- "models/collinearity/temperature_model_vif.csv"
+
+if (file.exists(correlation_file) && file.exists(vif_file)) {
+  temperature_correlation <- read_csv(correlation_file, show_col_types = FALSE)
+  vif_table <- read_csv(vif_file, show_col_types = FALSE)
+
+  cat(
+    "The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = ",
+    round(temperature_correlation$pearson_r[1], 3),
+    "` based on `n = ",
+    temperature_correlation$n_complete[1],
+    "` complete records. This indicates no strong linear correlation between the two measured temperature variables.\n\n",
+    sep = ""
+  )
+
+  cat(
+    "The largest VIF in the temperature-interaction models is `",
+    round(max(vif_table$VIF, na.rm = TRUE), 2),
+    "`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.\n\n",
+    sep = ""
+  )
+
+  vif_table |>
+    filter(grepl("temperature", Term)) |>
+    mutate(
+      VIF = round(VIF, 2),
+      SE_factor = round(SE_factor, 2)
+    ) |>
+    select(response_label, Term, VIF, SE_factor) |>
+    kable(col.names = c("Response", "Term", "VIF", "SE inflation factor"))
+} else {
+  cat("Collinearity diagnostics are not available yet.")
+}
+```
+
 ## Temperature-interaction terms
 
 ```{r}

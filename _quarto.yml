@@ -41,6 +41,7 @@ resources:
   - CF_exp_all_2026.xlsx
   - models/summary_pdf/*.pdf
   - models/diagnostics/*.pdf
+  - models/collinearity/*.csv
   - figures/model_effects/*
   - figures/raw_distributions/*
   - figures/experiment_interactions/*
