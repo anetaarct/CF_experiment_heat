@@ -12,11 +12,11 @@ This website documents a reproducible analysis workflow for the nest-heating exp
 knitr::include_graphics("figures/overview/collared_flycatcher_nest_heating_overview.png")
 ```
 
-This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (*Ficedula albicollis*). Using a fully factorial 2 x 2 design, we independently warmed nests during incubation and during the nestling period. This created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.
+This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (*Ficedula albicollis*). Using a fully factorial 2 × 2 design, we independently warmed nest boxes during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.
 
 We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.
 
-The analyses separate two related questions. The primary results test whether the experimental warming treatments affect offspring traits and survival. Additional model pages test whether the two experimental stages interact, and whether measured external temperature during incubation and the nestling period is associated with the same responses.
+The analyses separate two related questions. The primary results test whether the experimental thermal treatments affect offspring traits and survival. Additional model pages test whether incubation-stage and nestling-stage warming interact, and whether measured nest temperatures during incubation and the nestling period are associated with the same responses.
 
 ## Study system
 
