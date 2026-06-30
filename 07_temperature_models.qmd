@@ -90,7 +90,7 @@ if (file.exists(interaction_file)) {
 
 ## Response-level models
 
-For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation: lines show population-level predicted values across incubation-period ambient temperature at low, average, and high nestling-period ambient temperature; ribbons are 95% confidence intervals; pale points show original observations when readable.
+For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation. Panel A shows the incubation-temperature effect at low, mean, and high nestling-stage temperature. Panel B shows the nestling-stage temperature effect at low, mean, and high incubation temperature. Lines show population-level model predictions, shaded ribbons show 95% confidence intervals, and grey points show raw observations.
 
 ```{r}
 #| label: ambient-temperature-response-level
@@ -145,6 +145,7 @@ for (response in responses) {
   cat("#### Prediction figure\n\n")
   if (file.exists(figure_file)) {
     cat(glue("![]({figure_file})"), "\n\n")
+    cat("Lines show population-level model predictions. In panel A, lines are estimated at low (-1 SD), mean, and high (+1 SD) nestling-stage temperature. In panel B, lines are estimated at low, mean, and high incubation temperature. Shaded ribbons show 95% confidence intervals. Grey points show raw observations.\n\n")
   } else {
     cat("Prediction figure is not available for this response.\n\n")
   }
