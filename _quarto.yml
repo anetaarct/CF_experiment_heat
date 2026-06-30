@@ -31,7 +31,7 @@ website:
       - href: 06_experiment_interactions.qmd
         text: Experiment interaction
       - href: 07_temperature_models.qmd
-        text: Ambient temperature
+        text: Ambient temperature models
       - href: 06_figures.qmd
         text: Figures
 

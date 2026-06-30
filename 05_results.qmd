@@ -1,6 +1,6 @@
 # Results
 
-This chapter presents the primary experiment-only models response by response. These models test whether the warming treatment affected each trait, while keeping measured external temperature out of the primary experimental test. Temperature models are shown on a separate page.
+This chapter presents the primary experiment-only models response by response. These models test whether the warming treatment affected each trait. Temperature models are shown on a separate page.
 
 ```{r}
 #| label: results-setup
@@ -75,6 +75,18 @@ print_saved_summary <- function(summary_file) {
   cat("\n```\n")
   cat("</details>\n\n")
 }
+
+significant_experiment_figures <- c("D8_MASS", "Early.g")
+
+experiment_figure_note <- function(response) {
+  notes <- c(
+    D8_MASS = "The figure shows day-8 body mass by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). Colours indicate the nestling-stage treatment: `Control` means the nest box was not warmed during the nestling period, and `Heated` means it was warmed during the nestling period. The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes had lower predicted day-8 body mass.",
+    Early.g = "The figure shows early growth rate between day 2 and day 8 by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). Colours indicate the nestling-stage treatment: `Control` means the nest box was not warmed during the nestling period, and `Heated` means it was warmed during the nestling period. The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes showed lower predicted early growth."
+  )
+  notes[[response]] %||% ""
+}
+
+`%||%` <- function(x, y) if (is.null(x)) y else x
 ```
 
 ## Response-level results
@@ -151,24 +163,10 @@ if (nrow(selected_models) > 0) {
     raw_fig <- file.path("figures", "raw_distributions", paste0("raw_", response, ".png"))
     effect_fig <- file.path("figures", "model_effects", paste0("model_effect_", response, ".png"))
 
-    if (file.exists(effect_fig)) {
+    if (file.exists(effect_fig) && response %in% significant_experiment_figures) {
       cat("#### Model prediction figure\n\n")
-      if (response == "D12_SURV") {
-        cat("This plot uses model predictions as the main signal. Dark points and lines show predicted survival probability from the primary binomial mixed model, vertical intervals are 95% confidence intervals, and pale bars in the background show observed survival proportions.\n\n")
-      } else {
-        cat("This plot uses model predictions as the main signal. Dark points and lines show fitted means from the primary mixed model, vertical intervals are 95% confidence intervals, and pale jittered points in the background show the original observations.\n\n")
-      }
       cat(glue("![]({effect_fig})"), "\n\n")
-    }
-
-    if (file.exists(raw_fig)) {
-      cat("#### Raw-data distribution\n\n")
-      if (response == "D12_SURV") {
-        cat("This raw-data plot shows observed survival proportions within each treatment combination. Bars are proportions of nestlings classified as dead or survived; no model-based uncertainty interval is shown.\n\n")
-      } else {
-        cat("This raw-data plot shows the response distribution within treatment groups. The box centre line is the median, the box spans the interquartile range (25th-75th percentiles), whiskers show the boxplot range, and points are individual nestling observations.\n\n")
-      }
-      cat(glue("![]({raw_fig})"), "\n\n")
+      cat(experiment_figure_note(response), "\n\n")
     }
   }
 } else {

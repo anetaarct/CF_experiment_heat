@@ -156,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./07_temperature_models.html"> 
-<span class="menu-text">Ambient temperature</span></a>
+<span class="menu-text">Ambient temperature models</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./06_figures.html" aria-current="page"> 
@@ -357,7 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">color =</span> group, <span class="at">group =</span> group), <span class="at">data =</span> pred) <span class="sc">+</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">color =</span> group), <span class="at">data =</span> pred)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># External-temperature interaction:</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Ambient-temperature interaction:</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"models/sensitivity_temperature_interaction/temperature_interaction_models_D12_MASS.rds"</span>)</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> fit<span class="sc">$</span>interaction_gaussian</span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(fit, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"incubation_temperature_sc [all]"</span>, <span class="st">"nestling_temperature_sc [-1,0,1]"</span>))</span>

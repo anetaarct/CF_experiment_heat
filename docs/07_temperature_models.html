@@ -121,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./07_temperature_models.html" aria-current="page"> 
-<span class="menu-text">Ambient temperature</span></a>
+<span class="menu-text">Ambient temperature models</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -143,9 +143,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ambient-temperature-interaction-models" id="toc-ambient-temperature-interaction-models" class="nav-link active" data-scroll-target="#ambient-temperature-interaction-models">Ambient-temperature interaction models</a>
+  <li><a href="#ambient-temperature-models" id="toc-ambient-temperature-models" class="nav-link active" data-scroll-target="#ambient-temperature-models">Ambient temperature models</a>
   <ul class="collapse">
-  <li><a href="#collinearity-check" id="toc-collinearity-check" class="nav-link" data-scroll-target="#collinearity-check">Collinearity check</a></li>
   <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms">Interaction terms</a></li>
   <li><a href="#response-level-models" id="toc-response-level-models" class="nav-link" data-scroll-target="#response-level-models">Response-level models</a>
   <ul class="collapse">
@@ -168,8 +167,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="ambient-temperature-interaction-models" class="level1">
-<h1>Ambient-temperature interaction models</h1>
+<section id="ambient-temperature-models" class="level1">
+<h1>Ambient temperature models</h1>
 <p>This page addresses a separate question from the primary experiment results: whether measured ambient temperature is associated with offspring traits and survival.</p>
 <p>The aim is not to replace the experimental treatment models, but to show whether natural variation in ambient temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period ambient temperature:</p>
 <div class="cell">
@@ -178,181 +177,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Day-2 mass is not included because it occurs before most of the nestling-period treatment.</p>
-<section id="collinearity-check" class="level2">
-<h2 class="anchored" data-anchor-id="collinearity-check">Collinearity check</h2>
-<p>Before interpreting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 840` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
-
-The largest VIF in the ambient-temperature interaction models is `4.29`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
-</div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 50%">
-<col style="width: 5%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Response</th>
-<th style="text-align: left;">Term</th>
-<th style="text-align: right;">VIF</th>
-<th style="text-align: right;">SE inflation factor</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.59</td>
-<td style="text-align: right;">1.26</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">1.30</td>
-<td style="text-align: right;">1.14</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-8 body mass</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.72</td>
-<td style="text-align: right;">1.31</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.67</td>
-<td style="text-align: right;">1.63</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.65</td>
-<td style="text-align: right;">1.63</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 body mass</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.17</td>
-<td style="text-align: right;">2.04</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.41</td>
-<td style="text-align: right;">1.19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">1.17</td>
-<td style="text-align: right;">1.08</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Early growth</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.44</td>
-<td style="text-align: right;">1.20</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.72</td>
-<td style="text-align: right;">1.31</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">1.15</td>
-<td style="text-align: right;">1.07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Late growth</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.68</td>
-<td style="text-align: right;">1.29</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.73</td>
-<td style="text-align: right;">1.65</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.69</td>
-<td style="text-align: right;">1.64</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Whole-period growth</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.29</td>
-<td style="text-align: right;">2.07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.69</td>
-<td style="text-align: right;">1.64</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.63</td>
-<td style="text-align: right;">1.62</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 scaled mass index</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.17</td>
-<td style="text-align: right;">2.04</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.68</td>
-<td style="text-align: right;">1.64</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.63</td>
-<td style="text-align: right;">1.62</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 tarsus length</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.15</td>
-<td style="text-align: right;">2.04</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 survival</td>
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.32</td>
-<td style="text-align: right;">1.15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Day-12 survival</td>
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">1.07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Day-12 survival</td>
-<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.25</td>
-<td style="text-align: right;">1.12</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
 <section id="interaction-terms" class="level2">
 <h2 class="anchored" data-anchor-id="interaction-terms">Interaction terms</h2>
 <div class="cell">
@@ -449,6 +273,7 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <section id="response-level-models" class="level2">
 <h2 class="anchored" data-anchor-id="response-level-models">Response-level models</h2>
 <p>For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation. Panel A shows the incubation-temperature effect at low, mean, and high nestling-stage temperature. Panel B shows the nestling-stage temperature effect at low, mean, and high incubation temperature. Lines show population-level model predictions, shaded ribbons show 95% confidence intervals, and grey points show raw observations.</p>
+<p>Prediction figures are shown only for interaction terms with statistical support or near-support (<code>p &lt;= 0.09</code>).</p>
 <section id="day-8-body-mass" class="level3">
 <h3 class="anchored" data-anchor-id="day-8-body-mass">Day-8 body mass</h3>
 <p><strong>Model:</strong> <code>D8_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
@@ -848,11 +673,6 @@ incubation_temperature_sc:nestling_temperature_sc   0.2757
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
 </section>
-<section id="prediction-figure-6" class="level4">
-<h4 class="anchored" data-anchor-id="prediction-figure-6">Prediction figure</h4>
-<p><img src="figures/temperature_interactions/temperature_interaction_D12_RTARS.png" class="img-fluid"></p>
-<p>Lines show population-level model predictions. In panel A, lines are estimated at low (-1 SD), mean, and high (+1 SD) nestling-stage temperature. In panel B, lines are estimated at low, mean, and high incubation temperature. Shaded ribbons show 95% confidence intervals. Grey points show raw observations.</p>
-</section>
 </section>
 <section id="day-12-survival" class="level3">
 <h3 class="anchored" data-anchor-id="day-12-survival">Day-12 survival</h3>
@@ -902,10 +722,6 @@ incubation_temperature_sc:nestling_temperature_sc    0.387
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
-</section>
-<section id="prediction-figure-7" class="level4">
-<h4 class="anchored" data-anchor-id="prediction-figure-7">Prediction figure</h4>
-<p>Prediction figure is not available for this response.</p>
 
 
 </section>

@@ -156,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./07_temperature_models.html"> 
-<span class="menu-text">Ambient temperature</span></a>
+<span class="menu-text">Ambient temperature models</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -185,6 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sex-filter" id="toc-sex-filter" class="nav-link" data-scroll-target="#sex-filter">Sex filter</a></li>
   <li><a href="#repeated-females" id="toc-repeated-females" class="nav-link" data-scroll-target="#repeated-females">Repeated females</a></li>
   <li><a href="#standardised-predictors" id="toc-standardised-predictors" class="nav-link" data-scroll-target="#standardised-predictors">Standardised predictors</a></li>
+  <li><a href="#collinearity-check" id="toc-collinearity-check" class="nav-link" data-scroll-target="#collinearity-check">Collinearity check</a></li>
   <li><a href="#scaled-mass-index" id="toc-scaled-mass-index" class="nav-link" data-scroll-target="#scaled-mass-index">Scaled mass index</a></li>
   <li><a href="#treatment-counts" id="toc-treatment-counts" class="nav-link" data-scroll-target="#treatment-counts">Treatment counts</a></li>
   <li><a href="#final-analysis-dataset" id="toc-final-analysis-dataset" class="nav-link" data-scroll-target="#final-analysis-dataset">Final analysis dataset</a></li>
@@ -313,6 +314,181 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Result: the model covariates are <code>BS_sc</code>, <code>HD_sc</code>, <code>incubation_temperature_sc</code>, and <code>nestling_temperature_sc</code>.</p>
 </section>
+<section id="collinearity-check" class="level2">
+<h2 class="anchored" data-anchor-id="collinearity-check">Collinearity check</h2>
+<p>Before fitting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 840` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
+
+The largest VIF in the ambient-temperature interaction models is `4.29`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 50%">
+<col style="width: 5%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">VIF</th>
+<th style="text-align: right;">SE inflation factor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">1.59</td>
+<td style="text-align: right;">1.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">1.30</td>
+<td style="text-align: right;">1.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">1.63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">2.65</td>
+<td style="text-align: right;">1.63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">4.17</td>
+<td style="text-align: right;">2.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">1.41</td>
+<td style="text-align: right;">1.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">1.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">1.44</td>
+<td style="text-align: right;">1.20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">1.15</td>
+<td style="text-align: right;">1.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">1.68</td>
+<td style="text-align: right;">1.29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">2.73</td>
+<td style="text-align: right;">1.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">1.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">4.29</td>
+<td style="text-align: right;">2.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">1.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">2.63</td>
+<td style="text-align: right;">1.62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">4.17</td>
+<td style="text-align: right;">2.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">1.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">2.63</td>
+<td style="text-align: right;">1.62</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">4.15</td>
+<td style="text-align: right;">2.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 survival</td>
+<td style="text-align: left;">incubation_temperature_sc</td>
+<td style="text-align: right;">1.32</td>
+<td style="text-align: right;">1.15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 survival</td>
+<td style="text-align: left;">nestling_temperature_sc</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">1.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 survival</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">1.12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 <section id="scaled-mass-index" class="level2">
 <h2 class="anchored" data-anchor-id="scaled-mass-index">Scaled mass index</h2>
 <p>Day-12 scaled mass index is calculated from day-12 body mass and day-12 tarsus length:</p>
@@ -321,25 +497,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Show SMI code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>smi_base <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(D12_MASS, D12_RTARS) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(D12_MASS <span class="sc">&gt;</span> <span class="dv">0</span>, D12_RTARS <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">log_mass_n =</span> <span class="fu">log</span>(D12_MASS),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">log_tars_n =</span> <span class="fu">log</span>(D12_RTARS)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>b_sma_chicks <span class="ot">&lt;-</span> <span class="fu">sd</span>(smi_base<span class="sc">$</span>log_mass_n, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sd</span>(smi_base<span class="sc">$</span>log_tars_n, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>L0_chicks <span class="ot">&lt;-</span> <span class="fu">mean</span>(smi_base<span class="sc">$</span>D12_RTARS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>prepared_nestlings <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">D12_SMI =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(D12_MASS) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(D12_RTARS) <span class="sc">&amp;</span> D12_MASS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> D12_RTARS <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      D12_MASS <span class="sc">*</span> (L0_chicks <span class="sc">/</span> D12_RTARS)<span class="sc">^</span>b_sma_chicks,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>smi_base <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(D12_MASS, D12_RTARS) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(D12_MASS <span class="sc">&gt;</span> <span class="dv">0</span>, D12_RTARS <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">log_mass_n =</span> <span class="fu">log</span>(D12_MASS),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">log_tars_n =</span> <span class="fu">log</span>(D12_RTARS)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>b_sma_chicks <span class="ot">&lt;-</span> <span class="fu">sd</span>(smi_base<span class="sc">$</span>log_mass_n, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sd</span>(smi_base<span class="sc">$</span>log_tars_n, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>L0_chicks <span class="ot">&lt;-</span> <span class="fu">mean</span>(smi_base<span class="sc">$</span>D12_RTARS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>prepared_nestlings <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">D12_SMI =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(D12_MASS) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(D12_RTARS) <span class="sc">&amp;</span> D12_MASS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> D12_RTARS <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      D12_MASS <span class="sc">*</span> (L0_chicks <span class="sc">/</span> D12_RTARS)<span class="sc">^</span>b_sma_chicks,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Result: day-12 scaled mass index is available for 679 nestlings.</p>
@@ -350,15 +526,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Show treatment-count code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>treatment_counts <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(EXP.INC, EXP.NEST, GROUP, <span class="at">name =</span> <span class="st">"nestling_records"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    prepared_nestlings <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">distinct</span>(F_RING, YEAR, BOX, LD, EXP.INC, EXP.NEST, GROUP) <span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">count</span>(EXP.INC, EXP.NEST, GROUP, <span class="at">name =</span> <span class="st">"nests"</span>),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"EXP.INC"</span>, <span class="st">"EXP.NEST"</span>, <span class="st">"GROUP"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(EXP.INC, EXP.NEST, GROUP, nests, nestling_records)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>treatment_counts <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(EXP.INC, EXP.NEST, GROUP, <span class="at">name =</span> <span class="st">"nestling_records"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    prepared_nestlings <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">distinct</span>(F_RING, YEAR, BOX, LD, EXP.INC, EXP.NEST, GROUP) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">count</span>(EXP.INC, EXP.NEST, GROUP, <span class="at">name =</span> <span class="st">"nests"</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"EXP.INC"</span>, <span class="st">"EXP.NEST"</span>, <span class="st">"GROUP"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(EXP.INC, EXP.NEST, GROUP, nests, nestling_records)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
@@ -413,19 +589,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Show final-column selection code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>analysis_columns <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"F_RING"</span>, <span class="st">"YEAR"</span>, <span class="st">"SEX"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EXP.INC"</span>, <span class="st">"EXP.NEST"</span>, <span class="st">"GROUP"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"D2_MASS"</span>, <span class="st">"D8_MASS"</span>, <span class="st">"D12_MASS"</span>, <span class="st">"D12_RTARS"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Early.g"</span>, <span class="st">"Late.g"</span>, <span class="st">"Growth"</span>, <span class="st">"D12_SMI"</span>, <span class="st">"D12_SURV"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BS_sc"</span>, <span class="st">"incubation_temperature_sc"</span>, <span class="st">"nestling_temperature_sc"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>analysis_nestlings <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">all_of</span>(analysis_columns))</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(analysis_nestlings, <span class="st">"data/prepared_nestlings.rds"</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(analysis_nestlings, <span class="st">"data/prepared_nestlings.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>analysis_columns <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"F_RING"</span>, <span class="st">"YEAR"</span>, <span class="st">"SEX"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EXP.INC"</span>, <span class="st">"EXP.NEST"</span>, <span class="st">"GROUP"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"D2_MASS"</span>, <span class="st">"D8_MASS"</span>, <span class="st">"D12_MASS"</span>, <span class="st">"D12_RTARS"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Early.g"</span>, <span class="st">"Late.g"</span>, <span class="st">"Growth"</span>, <span class="st">"D12_SMI"</span>, <span class="st">"D12_SURV"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BS_sc"</span>, <span class="st">"incubation_temperature_sc"</span>, <span class="st">"nestling_temperature_sc"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>analysis_nestlings <span class="ot">&lt;-</span> prepared_nestlings <span class="sc">|&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">all_of</span>(analysis_columns))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(analysis_nestlings, <span class="st">"data/prepared_nestlings.rds"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(analysis_nestlings, <span class="st">"data/prepared_nestlings.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Result: the final analysis dataset contains 883 nestling records and 18 columns.</p>

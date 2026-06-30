@@ -1,4 +1,4 @@
-# Ambient-temperature interaction models
+# Ambient temperature models
 
 This page addresses a separate question from the primary experiment results: whether measured ambient temperature is associated with offspring traits and survival.
 
@@ -12,12 +12,10 @@ cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temper
 
 Day-2 mass is not included because it occurs before most of the nestling-period treatment.
 
-## Collinearity check
-
-Before interpreting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.
+## Interaction terms
 
 ```{r}
-#| label: ambient-temperature-collinearity
+#| label: ambient-temperature-interaction-terms
 #| echo: false
 #| message: false
 #| warning: false
@@ -26,50 +24,6 @@ library(dplyr)
 library(readr)
 library(knitr)
 library(glue)
-
-correlation_file <- "models/collinearity/temperature_correlation.csv"
-vif_file <- "models/collinearity/temperature_model_vif.csv"
-
-if (file.exists(correlation_file) && file.exists(vif_file)) {
-  temperature_correlation <- read_csv(correlation_file, show_col_types = FALSE)
-  vif_table <- read_csv(vif_file, show_col_types = FALSE)
-
-  cat(
-    "The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = ",
-    round(temperature_correlation$pearson_r[1], 3),
-    "` based on `n = ",
-    temperature_correlation$n_complete[1],
-    "` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.\n\n",
-    sep = ""
-  )
-
-  cat(
-    "The largest VIF in the ambient-temperature interaction models is `",
-    round(max(vif_table$VIF, na.rm = TRUE), 2),
-    "`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.\n\n",
-    sep = ""
-  )
-
-  vif_table |>
-    filter(grepl("temperature", Term)) |>
-    mutate(
-      VIF = round(VIF, 2),
-      SE_factor = round(SE_factor, 2)
-    ) |>
-    select(response_label, Term, VIF, SE_factor) |>
-    kable(col.names = c("Response", "Term", "VIF", "SE inflation factor"))
-} else {
-  cat("Collinearity diagnostics are not available yet.")
-}
-```
-
-## Interaction terms
-
-```{r}
-#| label: ambient-temperature-interaction-terms
-#| echo: false
-#| message: false
-#| warning: false
 
 interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
 
@@ -92,6 +46,8 @@ if (file.exists(interaction_file)) {
 
 For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation. Panel A shows the incubation-temperature effect at low, mean, and high nestling-stage temperature. Panel B shows the nestling-stage temperature effect at low, mean, and high incubation temperature. Lines show population-level model predictions, shaded ribbons show 95% confidence intervals, and grey points show raw observations.
 
+Prediction figures are shown only for interaction terms with statistical support or near-support (`p <= 0.09`).
+
 ```{r}
 #| label: ambient-temperature-response-level
 #| echo: false
@@ -113,6 +69,15 @@ response_labels <- c(
 responses <- names(response_labels)
 
 formula_text <- "response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
+
+interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
+figure_responses <- character(0)
+
+if (file.exists(interaction_file)) {
+  figure_responses <- readr::read_csv(interaction_file, show_col_types = FALSE) |>
+    dplyr::filter(!is.na(p_value), p_value <= 0.09) |>
+    dplyr::pull(response)
+}
 
 for (response in responses) {
   response_label <- response_labels[[response]]
@@ -142,12 +107,13 @@ for (response in responses) {
     cat("Saved model summary is not available for this response.\n\n")
   }
 
-  cat("#### Prediction figure\n\n")
-  if (file.exists(figure_file)) {
+  if (response %in% figure_responses) {
+    cat("#### Prediction figure\n\n")
+  }
+
+  if (file.exists(figure_file) && response %in% figure_responses) {
     cat(glue("![]({figure_file})"), "\n\n")
     cat("Lines show population-level model predictions. In panel A, lines are estimated at low (-1 SD), mean, and high (+1 SD) nestling-stage temperature. In panel B, lines are estimated at low, mean, and high incubation temperature. Shaded ribbons show 95% confidence intervals. Grey points show raw observations.\n\n")
-  } else {
-    cat("Prediction figure is not available for this response.\n\n")
   }
 }
 ```

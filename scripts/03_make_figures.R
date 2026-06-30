@@ -148,12 +148,11 @@ plot_model_effect <- function(response) {
         linewidth = 0.5,
         position = position_dodge(width = 0.18)
       ) +
-      facet_wrap(~ EXP.NEST) +
       labs(
         x = "Incubation treatment",
-        y = paste("Predicted", y_label),
-        color = "Nestling treatment",
-        caption = "Pale points show individual observations; dark points/lines and vertical intervals show model-predicted means with 95% confidence intervals."
+        y = y_label,
+        color = "Nestling-stage treatment",
+        caption = "Pale points show individual observations. Dark points and lines show model-predicted means with 95% confidence intervals."
       )
   }
 

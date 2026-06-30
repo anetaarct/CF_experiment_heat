@@ -121,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./07_temperature_models.html"> 
-<span class="menu-text">Ambient temperature</span></a>
+<span class="menu-text">Ambient temperature models</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -149,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#distributional-strategy" id="toc-distributional-strategy" class="nav-link" data-scroll-target="#distributional-strategy">Distributional strategy</a></li>
   <li><a href="#primary-experiment-models" id="toc-primary-experiment-models" class="nav-link" data-scroll-target="#primary-experiment-models">Primary experiment models</a></li>
   <li><a href="#experimental-interaction-models" id="toc-experimental-interaction-models" class="nav-link" data-scroll-target="#experimental-interaction-models">Experimental interaction models</a></li>
-  <li><a href="#external-temperature-models" id="toc-external-temperature-models" class="nav-link" data-scroll-target="#external-temperature-models">External-temperature models</a></li>
+  <li><a href="#ambient-temperature-models" id="toc-ambient-temperature-models" class="nav-link" data-scroll-target="#ambient-temperature-models">Ambient-temperature models</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>Model strategy</h1>
 <p>The analyses are organised around two biological questions that are kept separate throughout the website.</p>
 <p>First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year.</p>
-<p>Second, we ask whether measured external temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in outside temperature during incubation and the nestling period is related to offspring phenotype or survival.</p>
+<p>Second, we ask whether measured ambient temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in ambient temperature during incubation and the nestling period is related to offspring phenotype or survival.</p>
 <section id="response-variables" class="level2">
 <h2 class="anchored" data-anchor-id="response-variables">Response variables</h2>
 <p>The dependent variables are:</p>
@@ -218,15 +218,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>These models address carry-over effects of the experimental treatment. They are presented separately from the primary additive experiment models so that the main treatment effects and interaction question remain easy to read.</p>
 </section>
-<section id="external-temperature-models" class="level2">
-<h2 class="anchored" data-anchor-id="external-temperature-models">External-temperature models</h2>
-<p>Measured external temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:</p>
+<section id="ambient-temperature-models" class="level2">
+<h2 class="anchored" data-anchor-id="ambient-temperature-models">Ambient-temperature models</h2>
+<p>Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
-<p>These models ask whether natural variation in external temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.</p>
+<p>These models ask whether natural variation in ambient temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.</p>
 
 
 </section>

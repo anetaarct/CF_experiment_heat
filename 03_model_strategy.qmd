@@ -4,7 +4,7 @@ The analyses are organised around two biological questions that are kept separat
 
 First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year.
 
-Second, we ask whether measured external temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in outside temperature during incubation and the nestling period is related to offspring phenotype or survival.
+Second, we ask whether measured ambient temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in ambient temperature during incubation and the nestling period is related to offspring phenotype or survival.
 
 ## Response variables
 
@@ -68,9 +68,9 @@ cat("response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 
 These models address carry-over effects of the experimental treatment. They are presented separately from the primary additive experiment models so that the main treatment effects and interaction question remain easy to read.
 
-## External-temperature models
+## Ambient-temperature models
 
-Measured external temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:
+Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:
 
 ```{r}
 #| label: temperature-interaction-model
@@ -78,4 +78,4 @@ Measured external temperature is analysed on a separate page using an interactio
 cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
 
-These models ask whether natural variation in external temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.
+These models ask whether natural variation in ambient temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.

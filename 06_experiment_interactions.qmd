@@ -41,35 +41,6 @@ if (file.exists(interaction_file)) {
 }
 ```
 
-## Prediction figures
-
-```{r}
-#| label: experiment-interaction-figures
-#| echo: false
-#| message: false
-#| warning: false
-#| results: asis
-
-library(glue)
-
-figures <- list.files(
-  "figures/experiment_interactions",
-  pattern = "^experiment_interaction_.*\\.png$",
-  full.names = TRUE
-)
-
-if (length(figures) > 0) {
-  for (fig in sort(figures)) {
-    response <- sub("^experiment_interaction_", "", tools::file_path_sans_ext(basename(fig)))
-    cat("\n\n### ", response, "\n\n", sep = "")
-    cat("Predicted values are the main model signal. Pale points show the original observations in the background, and vertical intervals show 95% confidence intervals around population-level predictions.\n\n")
-    cat(glue("![]({fig})"), "\n\n")
-  }
-} else {
-  cat("Experiment-interaction figures are not available yet.")
-}
-```
-
 ## Saved model summaries
 
 ```{r}

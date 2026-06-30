@@ -173,7 +173,7 @@ ggplot() +
   geom_line(aes(x = x, y = predicted, color = group, group = group), data = pred) +
   geom_pointrange(aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high, color = group), data = pred)
 
-# External-temperature interaction:
+# Ambient-temperature interaction:
 fit <- readRDS("models/sensitivity_temperature_interaction/temperature_interaction_models_D12_MASS.rds")
 fit <- fit$interaction_gaussian
 pred <- ggpredict(fit, terms = c("incubation_temperature_sc [all]", "nestling_temperature_sc [-1,0,1]"))
