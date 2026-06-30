@@ -2,7 +2,7 @@
 
 The analyses are organised around two biological questions that are kept separate throughout the website.
 
-First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year, but they do not include measured ambient temperature covariates.
+First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year.
 
 Second, we ask whether measured external temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in outside temperature during incubation and the nestling period is related to offspring phenotype or survival.
 
