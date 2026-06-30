@@ -51,11 +51,22 @@ source_dictionary <- data.frame(
   filter(!is.na(variable))
 
 derived_dictionary <- data.frame(
-  variable = c("BS_sc", "incubation_temperature_sc", "nestling_temperature_sc", "D12_SMI"),
+  variable = c(
+    "BS_sc",
+    "incubation_temperature_sc",
+    "nestling_temperature_sc",
+    "Early.g",
+    "Late.g",
+    "Growth",
+    "D12_SMI"
+  ),
   meaning = c(
     "Standardised brood size used as a covariate in the mixed models.",
     "Standardised measured incubation-period temperature, derived from LOGMEAN_INCUBATION.",
     "Standardised measured nestling-period temperature, derived from LOGMEAN_NESTLING.",
+    "Nestling growth rate between day 2 and day 8 of life.",
+    "Nestling growth rate between day 8 and day 12 of life.",
+    "Nestling growth rate across the full measured period, from day 2 to day 12 of life.",
     "Day-12 scaled mass index derived from day-12 body mass and day-12 tarsus length."
   ),
   check.names = FALSE
