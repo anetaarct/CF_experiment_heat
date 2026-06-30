@@ -7,8 +7,9 @@ project:
     - 02_data_preparation.qmd
     - 03_model_strategy.qmd
     - 04_distribution_sensitivity.qmd
-    - 04_temperature_interaction_sensitivity.qmd
     - 05_results.qmd
+    - 06_experiment_interactions.qmd
+    - 07_temperature_models.qmd
     - 06_figures.qmd
 
 website:
@@ -25,10 +26,12 @@ website:
         text: Model strategy
       - href: 04_distribution_sensitivity.qmd
         text: Distribution sensitivity
-      - href: 04_temperature_interaction_sensitivity.qmd
-        text: Temperature interaction
       - href: 05_results.qmd
-        text: Results
+        text: Experiment results
+      - href: 06_experiment_interactions.qmd
+        text: Experiment interaction
+      - href: 07_temperature_models.qmd
+        text: External temperature
       - href: 06_figures.qmd
         text: Figures
 
@@ -40,6 +43,8 @@ resources:
   - models/diagnostics/*.pdf
   - figures/model_effects/*
   - figures/raw_distributions/*
+  - figures/experiment_interactions/*
+  - figures/temperature_interactions/*
 
 format:
   html:

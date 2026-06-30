@@ -112,12 +112,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Distribution sensitivity</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04_temperature_interaction_sensitivity.html"> 
-<span class="menu-text">Temperature interaction</span></a>
+    <a class="nav-link" href="./05_results.html"> 
+<span class="menu-text">Experiment results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./05_results.html"> 
-<span class="menu-text">Results</span></a>
+    <a class="nav-link" href="./06_experiment_interactions.html"> 
+<span class="menu-text">Experiment interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07_temperature_models.html"> 
+<span class="menu-text">External temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -143,8 +147,9 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#response-variables" id="toc-response-variables" class="nav-link" data-scroll-target="#response-variables">Response variables</a></li>
   <li><a href="#distributional-strategy" id="toc-distributional-strategy" class="nav-link" data-scroll-target="#distributional-strategy">Distributional strategy</a></li>
-  <li><a href="#main-model" id="toc-main-model" class="nav-link" data-scroll-target="#main-model">Main model</a></li>
-  <li><a href="#temperature-interaction-sensitivity-analysis" id="toc-temperature-interaction-sensitivity-analysis" class="nav-link" data-scroll-target="#temperature-interaction-sensitivity-analysis">Temperature-interaction sensitivity analysis</a></li>
+  <li><a href="#primary-experiment-models" id="toc-primary-experiment-models" class="nav-link" data-scroll-target="#primary-experiment-models">Primary experiment models</a></li>
+  <li><a href="#experimental-interaction-models" id="toc-experimental-interaction-models" class="nav-link" data-scroll-target="#experimental-interaction-models">Experimental interaction models</a></li>
+  <li><a href="#external-temperature-models" id="toc-external-temperature-models" class="nav-link" data-scroll-target="#external-temperature-models">External-temperature models</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -157,7 +162,9 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="model-strategy" class="level1">
 <h1>Model strategy</h1>
-<p>The analysis uses one common mixed-model structure across nestling-level responses. The same biological predictors are used wherever they are relevant, so the interpretation of treatment and measured-temperature effects is comparable across traits.</p>
+<p>The analyses are organised around two biological questions that are kept separate throughout the website.</p>
+<p>First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year, but they do not include measured ambient temperature covariates.</p>
+<p>Second, we ask whether measured external temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in outside temperature during incubation and the nestling period is related to offspring phenotype or survival.</p>
 <section id="response-variables" class="level2">
 <h2 class="anchored" data-anchor-id="response-variables">Response variables</h2>
 <p>The dependent variables are:</p>
@@ -172,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 <li>day-12 tarsus length (<code>D12_RTARS</code>),</li>
 <li>day-12 survival (<code>D12_SURV</code>).</li>
 </ul>
-<p>Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period conditions.</p>
+<p>Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period predictors.</p>
 </section>
 <section id="distributional-strategy" class="level2">
 <h2 class="anchored" data-anchor-id="distributional-strategy">Distributional strategy</h2>
@@ -180,36 +187,46 @@ ul.task-list li input[type="checkbox"] {
 <p>AIC values are reported descriptively in the distributional sensitivity analysis. Effects that are consistent between Gaussian and Student-t models are interpreted as more robust. Effects that appear only under one distributional assumption are treated cautiously.</p>
 <p>For day-12 survival, the primary model uses a binomial error distribution.</p>
 </section>
-<section id="main-model" class="level2">
-<h2 class="anchored" data-anchor-id="main-model">Main model</h2>
-<p>For day-2 body mass, the main model includes incubation treatment, measured incubation temperature, sex, brood size, female identity, and year:</p>
+<section id="primary-experiment-models" class="level2">
+<h2 class="anchored" data-anchor-id="primary-experiment-models">Primary experiment models</h2>
+<p>For day-2 body mass, the primary model tests incubation-stage treatment only:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+<pre><code>D2_MASS ~ EXP.INC + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
-<p>For later continuous traits, the main model is:</p>
+<p>For later continuous traits, the primary experiment model is:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+<pre><code>response ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
 <p>For day-12 survival, the same fixed-effect structure is fitted with a binomial error distribution:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+<pre><code>D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
 </section>
-<section id="temperature-interaction-sensitivity-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="temperature-interaction-sensitivity-analysis">Temperature-interaction sensitivity analysis</h2>
-<p>The main model assumes that measured incubation temperature and measured nestling-period temperature have additive effects. As a sensitivity analysis, later responses are also evaluated with an interaction between the two measured-temperature variables:</p>
+<section id="experimental-interaction-models" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-interaction-models">Experimental interaction models</h2>
+<p>A separate page tests whether incubation-stage warming changes the response to nestling-stage warming:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+</div>
+</div>
+<p>These models address carry-over effects of the experimental treatment. They are presented separately from the primary additive experiment models so that the main treatment effects and interaction question remain easy to read.</p>
+</section>
+<section id="external-temperature-models" class="level2">
+<h2 class="anchored" data-anchor-id="external-temperature-models">External-temperature models</h2>
+<p>Measured external temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
-<p>This sensitivity model asks whether the association between incubation-period temperature and the response changes depending on nestling-period temperature. Day-2 mass is not included in this temperature-interaction sensitivity analysis because it precedes most of the nestling-period treatment. The full interaction analysis is shown on a separate page.</p>
+<p>These models ask whether natural variation in external temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.</p>
 
 
 </section>

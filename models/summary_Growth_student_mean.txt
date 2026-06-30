@@ -1,30 +1,27 @@
  Family: t  ( identity )
 Formula:          
-Growth ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  -1050.6   -1001.2     536.3   -1072.6       653 
+       NA        NA        NA        NA       655 
 
 Random effects:
 
 Conditional model:
- Groups Name        Variance  Std.Dev. 
- F_RING (Intercept) 1.681e-02 1.296e-01
- YEAR   (Intercept) 2.024e-11 4.498e-06
+ Groups Name        Variance Std.Dev.
+ F_RING (Intercept) 1.188    1.090   
+ YEAR   (Intercept) 1.039    1.019   
 Number of obs: 664, groups:  F_RING, 140; YEAR, 4
 
-Dispersion estimate for t family (sigma^2): 0.00467 
+Dispersion estimate for t family (sigma^2): 0.00554 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                1.068401   0.021056   50.74  < 2e-16 ***
-EXP.INCHeated             -0.027885   0.023361   -1.19  0.23261    
-incubation_temperature_sc -0.048756   0.012743   -3.83  0.00013 ***
-EXP.NESTHeated            -0.003611   0.023330   -0.15  0.87698    
-nestling_temperature_sc   -0.013775   0.012271   -1.12  0.26163    
-SEXM                       0.017275   0.007064    2.45  0.01447 *  
-BS_sc                     -0.008935   0.011559   -0.77  0.43952    
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     0.96556        NaN     NaN      NaN    
+EXP.INCHeated   0.73453    0.15447   4.755 1.98e-06 ***
+EXP.NESTHeated  0.77432    0.13670   5.664 1.48e-08 ***
+SEXM           -0.00927    0.00787  -1.178  0.23885    
+BS_sc           0.17951    0.05271   3.406  0.00066 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

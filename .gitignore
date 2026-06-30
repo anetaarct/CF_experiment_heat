@@ -5,3 +5,5 @@ _freeze/
 .Ruserdata
 .DS_Store
 Thumbs.db
+/.quarto/
+**/*.quarto_ipynb

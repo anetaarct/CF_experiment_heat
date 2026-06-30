@@ -1,6 +1,6 @@
 # Figure code
 
-This chapter documents how the figures are generated. The code blocks are not evaluated during website rendering; they show the exact plotting logic. Final figures are called from the saved PDF files in `figures/raw_distributions/` and `figures/model_effects/`.
+This chapter documents how the figures are generated. The code blocks are not evaluated during website rendering; they show the plotting logic. Final figures are called from saved PDF files in `figures/raw_distributions/`, `figures/model_effects/`, `figures/experiment_interactions/`, and `figures/temperature_interactions/`.
 
 ## Figure setup
 
@@ -14,6 +14,7 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(ggeffects)
+library(glmmTMB)
 
 dat <- readRDS("data/prepared_nestlings.rds")
 selected_models <- read_csv("models/selected_models.csv", show_col_types = FALSE)
@@ -196,6 +197,50 @@ plot_survival_model_effect <- function() {
 }
 ```
 
+## Interaction and temperature figures
+
+The interaction figures use the same visual rule as the primary figures: model predictions are the main signal and raw data are shown as pale background points when the plot remains readable.
+
+```{r}
+#| label: secondary-figure-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show interaction-figure code pattern"
+
+# Experimental interaction:
+fit <- readRDS("models/experiment_interaction/experiment_interaction_models_D12_MASS.rds")
+fit <- fit$interaction_gaussian
+pred <- ggpredict(fit, terms = c("EXP.INC", "EXP.NEST"))
+
+ggplot() +
+  geom_jitter(
+    data = dat |> filter(!is.na(D12_MASS)),
+    aes(x = EXP.INC, y = D12_MASS),
+    width = 0.13,
+    alpha = 0.14,
+    size = 0.9,
+    color = "grey35"
+  ) +
+  geom_line(aes(x = x, y = predicted, color = group, group = group), data = pred) +
+  geom_pointrange(aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high, color = group), data = pred)
+
+# External-temperature interaction:
+fit <- readRDS("models/sensitivity_temperature_interaction/temperature_interaction_models_D12_MASS.rds")
+fit <- fit$interaction_gaussian
+pred <- ggpredict(fit, terms = c("incubation_temperature_sc [all]", "nestling_temperature_sc [-1,0,1]"))
+
+ggplot() +
+  geom_point(
+    data = dat |> filter(!is.na(D12_MASS)),
+    aes(x = incubation_temperature_sc, y = D12_MASS),
+    alpha = 0.14,
+    size = 0.8,
+    color = "grey35"
+  ) +
+  geom_ribbon(aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), data = pred, alpha = 0.16) +
+  geom_line(aes(x = x, y = predicted, color = group), data = pred)
+```
+
 ## Figure PDFs
 
 The final figures are saved as PDF files and can be opened directly from the website.
@@ -211,7 +256,9 @@ library(glue)
 
 figure_pdfs <- c(
   list.files("figures/raw_distributions", pattern = "\\.pdf$", full.names = TRUE),
-  list.files("figures/model_effects", pattern = "\\.pdf$", full.names = TRUE)
+  list.files("figures/model_effects", pattern = "\\.pdf$", full.names = TRUE),
+  list.files("figures/experiment_interactions", pattern = "\\.pdf$", full.names = TRUE),
+  list.files("figures/temperature_interactions", pattern = "\\.pdf$", full.names = TRUE)
 )
 
 if (length(figure_pdfs) > 0) {

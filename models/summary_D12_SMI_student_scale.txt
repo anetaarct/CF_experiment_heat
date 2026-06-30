@@ -1,35 +1,32 @@
  Family: t  ( identity )
 Formula:          
-D12_SMI ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+D12_SMI ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Dispersion:               ~EXP.INC + EXP.NEST
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2246.9    2305.7   -1110.4    2220.9       666 
+   2242.9    2292.6   -1110.5    2220.9       668 
 
 Random effects:
 
 Conditional model:
  Groups Name        Variance Std.Dev.
- F_RING (Intercept) 1.31049  1.1448  
- YEAR   (Intercept) 0.04631  0.2152  
+ F_RING (Intercept) 1.30418  1.1420  
+ YEAR   (Intercept) 0.05871  0.2423  
 Number of obs: 679, groups:  F_RING, 141; YEAR, 4
 
 Conditional model:
-                          Estimate Std. Error z value Pr(>|z|)    
-(Intercept)               13.77739    0.22019   62.57  < 2e-16 ***
-EXP.INCHeated              0.06553    0.21156    0.31  0.75676    
-incubation_temperature_sc  0.01876    0.16029    0.12  0.90683    
-EXP.NESTHeated             0.12362    0.21162    0.58  0.55911    
-nestling_temperature_sc    0.03118    0.27995    0.11  0.91132    
-SEXM                       0.27299    0.08689    3.14  0.00168 ** 
-BS_sc                     -0.17323    0.10381   -1.67  0.09515 .  
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    13.77533    0.22543   61.11  < 2e-16 ***
+EXP.INCHeated   0.06537    0.21113    0.31  0.75686    
+EXP.NESTHeated  0.12545    0.21082    0.60  0.55180    
+SEXM            0.27292    0.08688    3.14  0.00168 ** 
+BS_sc          -0.17524    0.10161   -1.72  0.08461 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Dispersion model:
-               Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -0.03674    0.07755  -0.474    0.636
-EXP.INCHeated   0.00150    0.06744   0.022    0.982
-EXP.NESTHeated -0.06082    0.06755  -0.900    0.368
+                Estimate Std. Error z value Pr(>|z|)
+(Intercept)    -0.037238   0.077443  -0.481    0.631
+EXP.INCHeated   0.001668   0.067454   0.025    0.980
+EXP.NESTHeated -0.060676   0.067561  -0.898    0.369

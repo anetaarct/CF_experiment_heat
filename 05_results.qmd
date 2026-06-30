@@ -1,6 +1,6 @@
 # Results
 
-This chapter presents the fitted models response by response. For each dependent variable, the page shows what is being tested, the primary model, the saved model summary, and the corresponding figures.
+This chapter presents the primary experiment-only models response by response. These models test whether the warming treatment affected each trait, while keeping measured external temperature out of the primary experimental test. Temperature models are shown on a separate page.
 
 ```{r}
 #| label: results-setup
@@ -35,15 +35,15 @@ link_path <- function(path, text = basename(path)) {
 
 response_question <- function(response, response_label) {
   questions <- c(
-    D2_MASS = "Does incubation treatment and measured incubation-period temperature explain body mass at day 2?",
-    D8_MASS = "Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 8?",
-    D12_MASS = "Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 12?",
-    Early.g = "Does treatment and measured temperature explain early nestling growth?",
-    Late.g = "Does treatment and measured temperature explain late nestling growth?",
-    Growth = "Does treatment and measured temperature explain whole-period growth?",
-    D12_SMI = "Does treatment and measured temperature explain day-12 scaled mass index?",
-    D12_RTARS = "Does treatment and measured temperature explain day-12 tarsus length?",
-    D12_SURV = "Does treatment and measured temperature explain survival to day 12?"
+    D2_MASS = "Does incubation-stage warming affect body mass at day 2?",
+    D8_MASS = "Do incubation-stage and nestling-stage warming affect body mass at day 8?",
+    D12_MASS = "Do incubation-stage and nestling-stage warming affect body mass at day 12?",
+    Early.g = "Do incubation-stage and nestling-stage warming affect early nestling growth?",
+    Late.g = "Do incubation-stage and nestling-stage warming affect late nestling growth?",
+    Growth = "Do incubation-stage and nestling-stage warming affect whole-period growth?",
+    D12_SMI = "Do incubation-stage and nestling-stage warming affect day-12 scaled mass index?",
+    D12_RTARS = "Do incubation-stage and nestling-stage warming affect day-12 tarsus length?",
+    D12_SURV = "Do incubation-stage and nestling-stage warming affect survival to day 12?"
   )
   if (!is.na(questions[[response]])) questions[[response]] else paste("Model for", response_label)
 }

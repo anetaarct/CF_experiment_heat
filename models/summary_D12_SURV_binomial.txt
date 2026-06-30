@@ -1,28 +1,25 @@
  Family: binomial  ( logit )
-Formula:          
-D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Formula:          D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +  
+    (1 | YEAR)
 Data: surv_dat
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    481.4     524.0    -231.7     463.4       831 
+    566.6     600.1    -276.3     552.6       876 
 
 Random effects:
 
 Conditional model:
  Groups Name        Variance  Std.Dev. 
- F_RING (Intercept) 1.541e+01 3.926e+00
- YEAR   (Intercept) 2.469e-09 4.969e-05
-Number of obs: 840, groups:  F_RING, 161; YEAR, 4
+ F_RING (Intercept) 9.391e+01 9.6906055
+ YEAR   (Intercept) 1.420e-08 0.0001192
+Number of obs: 883, groups:  F_RING, 169; YEAR, 4
 
 Conditional model:
-                          Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                4.17383    0.86308   4.836 1.32e-06 ***
-EXP.INCHeated             -0.46390    0.78523  -0.591    0.555    
-EXP.NESTHeated             0.91084    0.78775   1.156    0.248    
-incubation_temperature_sc -2.65064    0.51405  -5.156 2.52e-07 ***
-nestling_temperature_sc   -0.39513    0.40123  -0.985    0.325    
-SEXM                       0.09102    0.32221   0.282    0.778    
-BS_sc                      0.07122    0.36092   0.197    0.844    
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     7.73315    1.07785   7.175 7.25e-13 ***
+EXP.INCHeated  -0.19840    0.93153  -0.213    0.831    
+EXP.NESTHeated  0.04142    0.92887   0.045    0.964    
+SEXM            0.23129    0.33513   0.690    0.490    
+BS_sc           0.20250    0.39244   0.516    0.606    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

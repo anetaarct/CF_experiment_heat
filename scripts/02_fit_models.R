@@ -98,13 +98,13 @@ fit_continuous_set <- function(response, label, use_nestling_phase) {
   if (use_nestling_phase) {
     mean_formula <- as.formula(paste0(
       response,
-      " ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
+      " ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
     ))
     disp_formula <- ~ EXP.INC + EXP.NEST
   } else {
     mean_formula <- as.formula(paste0(
       response,
-      " ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
+      " ~ EXP.INC + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
     ))
     disp_formula <- ~ EXP.INC
   }
@@ -183,7 +183,7 @@ surv_dat <- dat %>%
   droplevels()
 
 model_surv <- glmmTMB(
-  D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR),
+  D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR),
   family = binomial(),
   data = surv_dat
 )

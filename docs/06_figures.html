@@ -147,12 +147,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Distribution sensitivity</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04_temperature_interaction_sensitivity.html"> 
-<span class="menu-text">Temperature interaction</span></a>
+    <a class="nav-link" href="./05_results.html"> 
+<span class="menu-text">Experiment results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./05_results.html"> 
-<span class="menu-text">Results</span></a>
+    <a class="nav-link" href="./06_experiment_interactions.html"> 
+<span class="menu-text">Experiment interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07_temperature_models.html"> 
+<span class="menu-text">External temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./06_figures.html" aria-current="page"> 
@@ -180,6 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#raw-data-distributions" id="toc-raw-data-distributions" class="nav-link" data-scroll-target="#raw-data-distributions">Raw-data distributions</a></li>
   <li><a href="#model-effect-figures-for-continuous-responses" id="toc-model-effect-figures-for-continuous-responses" class="nav-link" data-scroll-target="#model-effect-figures-for-continuous-responses">Model-effect figures for continuous responses</a></li>
   <li><a href="#survival-figures" id="toc-survival-figures" class="nav-link" data-scroll-target="#survival-figures">Survival figures</a></li>
+  <li><a href="#interaction-and-temperature-figures" id="toc-interaction-and-temperature-figures" class="nav-link" data-scroll-target="#interaction-and-temperature-figures">Interaction and temperature figures</a></li>
   <li><a href="#figure-pdfs" id="toc-figure-pdfs" class="nav-link" data-scroll-target="#figure-pdfs">Figure PDFs</a></li>
   </ul></li>
   </ul>
@@ -193,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="figure-code" class="level1">
 <h1>Figure code</h1>
-<p>This chapter documents how the figures are generated. The code blocks are not evaluated during website rendering; they show the exact plotting logic. Final figures are called from the saved PDF files in <code>figures/raw_distributions/</code> and <code>figures/model_effects/</code>.</p>
+<p>This chapter documents how the figures are generated. The code blocks are not evaluated during website rendering; they show the plotting logic. Final figures are called from saved PDF files in <code>figures/raw_distributions/</code>, <code>figures/model_effects/</code>, <code>figures/experiment_interactions/</code>, and <code>figures/temperature_interactions/</code>.</p>
 <section id="figure-setup" class="level2">
 <h2 class="anchored" data-anchor-id="figure-setup">Figure setup</h2>
 <div class="cell">
@@ -203,21 +208,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/prepared_nestlings.rds"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>selected_models <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"models/selected_models.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>trait_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">D2_MASS =</span> <span class="st">"Body mass day 2"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">D8_MASS =</span> <span class="st">"Body mass day 8"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_MASS =</span> <span class="st">"Body mass day 12"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_RTARS =</span> <span class="st">"Tarsus length day 12"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Early.g =</span> <span class="st">"Early growth"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Late.g =</span> <span class="st">"Late growth"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Growth =</span> <span class="st">"Whole-period growth"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_SMI =</span> <span class="st">"Scaled mass index day 12"</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_SURV =</span> <span class="st">"Survival to day 12"</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/prepared_nestlings.rds"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>selected_models <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"models/selected_models.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>trait_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">D2_MASS =</span> <span class="st">"Body mass day 2"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">D8_MASS =</span> <span class="st">"Body mass day 8"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_MASS =</span> <span class="st">"Body mass day 12"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_RTARS =</span> <span class="st">"Tarsus length day 12"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Early.g =</span> <span class="st">"Early growth"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Late.g =</span> <span class="st">"Late growth"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Growth =</span> <span class="st">"Whole-period growth"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_SMI =</span> <span class="st">"Scaled mass index day 12"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">D12_SURV =</span> <span class="st">"Survival to day 12"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -377,11 +383,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
+<section id="interaction-and-temperature-figures" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-and-temperature-figures">Interaction and temperature figures</h2>
+<p>The interaction figures use the same visual rule as the primary figures: model predictions are the main signal and raw data are shown as pale background points when the plot remains readable.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show interaction-figure code pattern</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimental interaction:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"models/experiment_interaction/experiment_interaction_models_D12_MASS.rds"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> fit<span class="sc">$</span>interaction_gaussian</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(fit, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"EXP.INC"</span>, <span class="st">"EXP.NEST"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(D12_MASS)),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> EXP.INC, <span class="at">y =</span> D12_MASS),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.13</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.14</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.9</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey35"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">color =</span> group, <span class="at">group =</span> group), <span class="at">data =</span> pred) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">color =</span> group), <span class="at">data =</span> pred)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># External-temperature interaction:</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"models/sensitivity_temperature_interaction/temperature_interaction_models_D12_MASS.rds"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> fit<span class="sc">$</span>interaction_gaussian</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(fit, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"incubation_temperature_sc [all]"</span>, <span class="st">"nestling_temperature_sc [-1,0,1]"</span>))</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(D12_MASS)),</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> incubation_temperature_sc, <span class="at">y =</span> D12_MASS),</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.14</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.8</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey35"</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">fill =</span> group), <span class="at">data =</span> pred, <span class="at">alpha =</span> <span class="fl">0.16</span>) <span class="sc">+</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted, <span class="at">color =</span> group), <span class="at">data =</span> pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
 <section id="figure-pdfs" class="level2">
 <h2 class="anchored" data-anchor-id="figure-pdfs">Figure PDFs</h2>
 <p>The final figures are saved as PDF files and can be opened directly from the website.</p>
 <ul>
-<li><a href="figures/model_effects/model_effect_D12_MASS.pdf">model_effect_D12_MASS.pdf</a>- <a href="figures/model_effects/model_effect_D12_RTARS.pdf">model_effect_D12_RTARS.pdf</a>- <a href="figures/model_effects/model_effect_D12_SMI.pdf">model_effect_D12_SMI.pdf</a>- <a href="figures/model_effects/model_effect_D12_SURV.pdf">model_effect_D12_SURV.pdf</a>- <a href="figures/model_effects/model_effect_D2_MASS.pdf">model_effect_D2_MASS.pdf</a>- <a href="figures/model_effects/model_effect_D8_MASS.pdf">model_effect_D8_MASS.pdf</a>- <a href="figures/model_effects/model_effect_Early.g.pdf">model_effect_Early.g.pdf</a>- <a href="figures/model_effects/model_effect_Growth.pdf">model_effect_Growth.pdf</a>- <a href="figures/model_effects/model_effect_Late.g.pdf">model_effect_Late.g.pdf</a>- <a href="figures/raw_distributions/raw_D12_MASS.pdf">raw_D12_MASS.pdf</a>- <a href="figures/raw_distributions/raw_D12_RTARS.pdf">raw_D12_RTARS.pdf</a>- <a href="figures/raw_distributions/raw_D12_SMI.pdf">raw_D12_SMI.pdf</a>- <a href="figures/raw_distributions/raw_D12_SURV.pdf">raw_D12_SURV.pdf</a>- <a href="figures/raw_distributions/raw_D2_MASS.pdf">raw_D2_MASS.pdf</a>- <a href="figures/raw_distributions/raw_D8_MASS.pdf">raw_D8_MASS.pdf</a>- <a href="figures/raw_distributions/raw_Early.g.pdf">raw_Early.g.pdf</a>- <a href="figures/raw_distributions/raw_Growth.pdf">raw_Growth.pdf</a>- <a href="figures/raw_distributions/raw_Late.g.pdf">raw_Late.g.pdf</a></li>
+<li><a href="figures/experiment_interactions/experiment_interaction_D12_MASS.pdf">experiment_interaction_D12_MASS.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_D12_RTARS.pdf">experiment_interaction_D12_RTARS.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_D12_SMI.pdf">experiment_interaction_D12_SMI.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_D12_SURV.pdf">experiment_interaction_D12_SURV.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_D8_MASS.pdf">experiment_interaction_D8_MASS.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_Early.g.pdf">experiment_interaction_Early.g.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_Growth.pdf">experiment_interaction_Growth.pdf</a>- <a href="figures/experiment_interactions/experiment_interaction_Late.g.pdf">experiment_interaction_Late.g.pdf</a>- <a href="figures/model_effects/model_effect_D12_MASS.pdf">model_effect_D12_MASS.pdf</a>- <a href="figures/model_effects/model_effect_D12_RTARS.pdf">model_effect_D12_RTARS.pdf</a>- <a href="figures/model_effects/model_effect_D12_SMI.pdf">model_effect_D12_SMI.pdf</a>- <a href="figures/model_effects/model_effect_D12_SURV.pdf">model_effect_D12_SURV.pdf</a>- <a href="figures/model_effects/model_effect_D2_MASS.pdf">model_effect_D2_MASS.pdf</a>- <a href="figures/model_effects/model_effect_D8_MASS.pdf">model_effect_D8_MASS.pdf</a>- <a href="figures/model_effects/model_effect_Early.g.pdf">model_effect_Early.g.pdf</a>- <a href="figures/model_effects/model_effect_Growth.pdf">model_effect_Growth.pdf</a>- <a href="figures/model_effects/model_effect_Late.g.pdf">model_effect_Late.g.pdf</a>- <a href="figures/raw_distributions/raw_D12_MASS.pdf">raw_D12_MASS.pdf</a>- <a href="figures/raw_distributions/raw_D12_RTARS.pdf">raw_D12_RTARS.pdf</a>- <a href="figures/raw_distributions/raw_D12_SMI.pdf">raw_D12_SMI.pdf</a>- <a href="figures/raw_distributions/raw_D12_SURV.pdf">raw_D12_SURV.pdf</a>- <a href="figures/raw_distributions/raw_D2_MASS.pdf">raw_D2_MASS.pdf</a>- <a href="figures/raw_distributions/raw_D8_MASS.pdf">raw_D8_MASS.pdf</a>- <a href="figures/raw_distributions/raw_Early.g.pdf">raw_Early.g.pdf</a>- <a href="figures/raw_distributions/raw_Growth.pdf">raw_Growth.pdf</a>- <a href="figures/raw_distributions/raw_Late.g.pdf">raw_Late.g.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_D12_MASS.pdf">temperature_interaction_D12_MASS.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_D12_RTARS.pdf">temperature_interaction_D12_RTARS.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_D12_SMI.pdf">temperature_interaction_D12_SMI.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_D12_SURV.pdf">temperature_interaction_D12_SURV.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_D8_MASS.pdf">temperature_interaction_D8_MASS.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_Early.g.pdf">temperature_interaction_Early.g.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_Growth.pdf">temperature_interaction_Growth.pdf</a>- <a href="figures/temperature_interactions/temperature_interaction_Late.g.pdf">temperature_interaction_Late.g.pdf</a></li>
 </ul>
 
 

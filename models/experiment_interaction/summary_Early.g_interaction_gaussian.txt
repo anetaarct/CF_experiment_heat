@@ -1,0 +1,29 @@
+ Family: gaussian  ( identity )
+Formula:          
+Early.g ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -527.2    -485.6     272.6    -545.2       748 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 0.05305  0.23032 
+ YEAR     (Intercept) 0.00475  0.06892 
+ Residual             0.01620  0.12728 
+Number of obs: 757, groups:  F_RING, 150; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.0162 
+
+Conditional model:
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                   1.57059    0.05318  29.532  < 2e-16 ***
+EXP.INCHeated                -0.11435    0.05685  -2.012  0.04426 *  
+EXP.NESTHeated               -0.03658    0.05590  -0.654  0.51279    
+SEXM                          0.03148    0.01030   3.057  0.00224 ** 
+BS_sc                        -0.02084    0.01887  -1.104  0.26952    
+EXP.INCHeated:EXP.NESTHeated  0.03664    0.07826   0.468  0.63964    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

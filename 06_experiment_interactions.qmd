@@ -1,0 +1,101 @@
+# Experimental interaction models
+
+This page tests whether the effect of nestling-stage warming depends on incubation-stage warming. Biologically, this asks whether conditions experienced before hatching modify later responses to the nestling-period treatment.
+
+The interaction model is:
+
+```{r}
+#| label: experiment-interaction-formula
+#| echo: false
+cat("response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+Day-2 mass is not included here because it occurs before most of the nestling-stage treatment.
+
+## Interaction terms
+
+```{r}
+#| label: experiment-interaction-terms
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+
+interaction_file <- "models/experiment_interaction/experiment_interaction_terms.csv"
+
+if (file.exists(interaction_file)) {
+  read_csv(interaction_file, show_col_types = FALSE) |>
+    mutate(
+      estimate = round(estimate, 3),
+      std_error = round(std_error, 3),
+      statistic = round(statistic, 3),
+      p_value = round(p_value, 4)
+    ) |>
+    select(response_label, term, estimate, std_error, statistic, p_value) |>
+    kable(col.names = c("Response", "Interaction term", "Estimate", "SE", "z", "p"))
+} else {
+  cat("Experiment-interaction results are not available yet.")
+}
+```
+
+## Prediction figures
+
+```{r}
+#| label: experiment-interaction-figures
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+library(glue)
+
+figures <- list.files(
+  "figures/experiment_interactions",
+  pattern = "^experiment_interaction_.*\\.png$",
+  full.names = TRUE
+)
+
+if (length(figures) > 0) {
+  for (fig in sort(figures)) {
+    response <- sub("^experiment_interaction_", "", tools::file_path_sans_ext(basename(fig)))
+    cat("\n\n### ", response, "\n\n", sep = "")
+    cat("Predicted values are the main model signal. Pale points show the original observations in the background, and vertical intervals show 95% confidence intervals around population-level predictions.\n\n")
+    cat(glue("![]({fig})"), "\n\n")
+  }
+} else {
+  cat("Experiment-interaction figures are not available yet.")
+}
+```
+
+## Saved model summaries
+
+```{r}
+#| label: experiment-interaction-summaries
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+summary_files <- list.files(
+  "models/experiment_interaction",
+  pattern = "^summary_.*interaction.*\\.txt$",
+  full.names = TRUE
+)
+
+if (length(summary_files) > 0) {
+  for (summary_file in sort(summary_files)) {
+    cat("\n\n### ", tools::file_path_sans_ext(basename(summary_file)), "\n\n", sep = "")
+    cat("<details>\n")
+    cat("<summary>Show saved model summary</summary>\n\n")
+    cat("```text\n")
+    cat(paste(readLines(summary_file, warn = FALSE), collapse = "\n"))
+    cat("\n```\n")
+    cat("</details>\n")
+  }
+} else {
+  cat("Saved experiment-interaction summaries are not available yet.")
+}
+```

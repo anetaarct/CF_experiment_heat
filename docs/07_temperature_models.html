@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>temperature_interaction_sensitivity – Nest heating experiment in collared flycatchers</title>
+<title>temperature_models – Nest heating experiment in collared flycatchers</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -112,12 +112,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Distribution sensitivity</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./04_temperature_interaction_sensitivity.html" aria-current="page"> 
-<span class="menu-text">Temperature interaction</span></a>
+    <a class="nav-link" href="./05_results.html"> 
+<span class="menu-text">Experiment results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./05_results.html"> 
-<span class="menu-text">Results</span></a>
+    <a class="nav-link" href="./06_experiment_interactions.html"> 
+<span class="menu-text">Experiment interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./07_temperature_models.html" aria-current="page"> 
+<span class="menu-text">External temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -139,9 +143,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#temperature-interaction-sensitivity-analysis" id="toc-temperature-interaction-sensitivity-analysis" class="nav-link active" data-scroll-target="#temperature-interaction-sensitivity-analysis">Temperature-interaction sensitivity analysis</a>
+  <li><a href="#external-temperature-models" id="toc-external-temperature-models" class="nav-link active" data-scroll-target="#external-temperature-models">External-temperature models</a>
   <ul class="collapse">
-  <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms">Interaction terms</a></li>
+  <li><a href="#temperature-interaction-terms" id="toc-temperature-interaction-terms" class="nav-link" data-scroll-target="#temperature-interaction-terms">Temperature-interaction terms</a></li>
+  <li><a href="#prediction-figures" id="toc-prediction-figures" class="nav-link" data-scroll-target="#prediction-figures">Prediction figures</a>
+  <ul class="collapse">
+  <li><a href="#d12_mass" id="toc-d12_mass" class="nav-link" data-scroll-target="#d12_mass">D12_MASS</a></li>
+  <li><a href="#d12_rtars" id="toc-d12_rtars" class="nav-link" data-scroll-target="#d12_rtars">D12_RTARS</a></li>
+  <li><a href="#d12_smi" id="toc-d12_smi" class="nav-link" data-scroll-target="#d12_smi">D12_SMI</a></li>
+  <li><a href="#d12_surv" id="toc-d12_surv" class="nav-link" data-scroll-target="#d12_surv">D12_SURV</a></li>
+  <li><a href="#d8_mass" id="toc-d8_mass" class="nav-link" data-scroll-target="#d8_mass">D8_MASS</a></li>
+  <li><a href="#early.g" id="toc-early.g" class="nav-link" data-scroll-target="#early.g">Early.g</a></li>
+  <li><a href="#growth" id="toc-growth" class="nav-link" data-scroll-target="#growth">Growth</a></li>
+  <li><a href="#late.g" id="toc-late.g" class="nav-link" data-scroll-target="#late.g">Late.g</a></li>
+  </ul></li>
   <li><a href="#saved-model-summaries" id="toc-saved-model-summaries" class="nav-link" data-scroll-target="#saved-model-summaries">Saved model summaries</a>
   <ul class="collapse">
   <li><a href="#summary_d12_mass_interaction_gaussian" id="toc-summary_d12_mass_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_mass_interaction_gaussian">summary_D12_MASS_interaction_gaussian</a></li>
@@ -163,18 +178,18 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="temperature-interaction-sensitivity-analysis" class="level1">
-<h1>Temperature-interaction sensitivity analysis</h1>
-<p>The main models treat measured incubation-period temperature and measured nestling-period temperature as additive predictors. As a sensitivity analysis, we also fitted models with an interaction between these two measured-temperature variables:</p>
+<section id="external-temperature-models" class="level1">
+<h1>External-temperature models</h1>
+<p>This page addresses a separate question from the primary experiment results: whether measured external temperature is associated with offspring traits and survival.</p>
+<p>The aim is not to replace the experimental treatment models, but to show whether natural variation in external temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period temperature:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
-<p>For day-12 survival, the same fixed-effect structure was fitted with a binomial error distribution. Day-2 mass is not included because it occurs before most of the nestling-period treatment.</p>
-<p>These models are shown as a sensitivity analysis rather than as the primary results. They are used to check whether the additive temperature structure of the main models is sufficient, while the main interpretation remains based on the primary additive models.</p>
-<section id="interaction-terms" class="level2">
-<h2 class="anchored" data-anchor-id="interaction-terms">Interaction terms</h2>
+<p>Day-2 mass is not included because it occurs before most of the nestling-period treatment.</p>
+<section id="temperature-interaction-terms" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-interaction-terms">Temperature-interaction terms</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -265,6 +280,49 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
+</section>
+<section id="prediction-figures" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-figures">Prediction figures</h2>
+<section id="d12_mass" class="level3">
+<h3 class="anchored" data-anchor-id="d12_mass">D12_MASS</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_MASS.png" class="img-fluid"></p>
+</section>
+<section id="d12_rtars" class="level3">
+<h3 class="anchored" data-anchor-id="d12_rtars">D12_RTARS</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_RTARS.png" class="img-fluid"></p>
+</section>
+<section id="d12_smi" class="level3">
+<h3 class="anchored" data-anchor-id="d12_smi">D12_SMI</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_SMI.png" class="img-fluid"></p>
+</section>
+<section id="d12_surv" class="level3">
+<h3 class="anchored" data-anchor-id="d12_surv">D12_SURV</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_SURV.png" class="img-fluid"></p>
+</section>
+<section id="d8_mass" class="level3">
+<h3 class="anchored" data-anchor-id="d8_mass">D8_MASS</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_D8_MASS.png" class="img-fluid"></p>
+</section>
+<section id="early.g" class="level3">
+<h3 class="anchored" data-anchor-id="early.g">Early.g</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_Early.g.png" class="img-fluid"></p>
+</section>
+<section id="growth" class="level3">
+<h3 class="anchored" data-anchor-id="growth">Growth</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_Growth.png" class="img-fluid"></p>
+</section>
+<section id="late.g" class="level3">
+<h3 class="anchored" data-anchor-id="late.g">Late.g</h3>
+<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<p><img src="figures/temperature_interactions/temperature_interaction_Late.g.png" class="img-fluid"></p>
+</section>
 </section>
 <section id="saved-model-summaries" class="level2">
 <h2 class="anchored" data-anchor-id="saved-model-summaries">Saved model summaries</h2>

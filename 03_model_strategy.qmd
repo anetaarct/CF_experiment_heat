@@ -1,6 +1,10 @@
 # Model strategy
 
-The analysis uses one common mixed-model structure across nestling-level responses. The same biological predictors are used wherever they are relevant, so the interpretation of treatment and measured-temperature effects is comparable across traits.
+The analyses are organised around two biological questions that are kept separate throughout the website.
+
+First, we ask whether the experimental warming treatment itself affects nestling performance. These are the primary results. They include treatment predictors, sex, brood size, female identity, and year, but they do not include measured ambient temperature covariates.
+
+Second, we ask whether measured external temperature is associated with the same responses. These models are shown separately because they address a different question: not whether the experimental manipulation worked, but whether natural variation in outside temperature during incubation and the nestling period is related to offspring phenotype or survival.
 
 ## Response variables
 
@@ -16,7 +20,7 @@ The dependent variables are:
 - day-12 tarsus length (`D12_RTARS`),
 - day-12 survival (`D12_SURV`).
 
-Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period conditions.
+Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period predictors.
 
 ## Distributional strategy
 
@@ -26,22 +30,22 @@ AIC values are reported descriptively in the distributional sensitivity analysis
 
 For day-12 survival, the primary model uses a binomial error distribution.
 
-## Main model
+## Primary experiment models
 
-For day-2 body mass, the main model includes incubation treatment, measured incubation temperature, sex, brood size, female identity, and year:
+For day-2 body mass, the primary model tests incubation-stage treatment only:
 
 ```{r}
 #| label: d2-main-model
 #| echo: false
-cat("D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+cat("D2_MASS ~ EXP.INC + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
 
-For later continuous traits, the main model is:
+For later continuous traits, the primary experiment model is:
 
 ```{r}
 #| label: later-main-model
 #| echo: false
-cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+cat("response ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
 
 For day-12 survival, the same fixed-effect structure is fitted with a binomial error distribution:
@@ -49,17 +53,29 @@ For day-12 survival, the same fixed-effect structure is fitted with a binomial e
 ```{r}
 #| label: survival-main-model
 #| echo: false
-cat("D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+cat("D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
 
-## Temperature-interaction sensitivity analysis
+## Experimental interaction models
 
-The main model assumes that measured incubation temperature and measured nestling-period temperature have additive effects. As a sensitivity analysis, later responses are also evaluated with an interaction between the two measured-temperature variables:
+A separate page tests whether incubation-stage warming changes the response to nestling-stage warming:
 
 ```{r}
-#| label: temperature-interaction-sensitivity-model
+#| label: experiment-interaction-model
+#| echo: false
+cat("response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+These models address carry-over effects of the experimental treatment. They are presented separately from the primary additive experiment models so that the main treatment effects and interaction question remain easy to read.
+
+## External-temperature models
+
+Measured external temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:
+
+```{r}
+#| label: temperature-interaction-model
 #| echo: false
 cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
 
-This sensitivity model asks whether the association between incubation-period temperature and the response changes depending on nestling-period temperature. Day-2 mass is not included in this temperature-interaction sensitivity analysis because it precedes most of the nestling-period treatment. The full interaction analysis is shown on a separate page.
+These models ask whether natural variation in external temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.

@@ -1,0 +1,101 @@
+# External-temperature models
+
+This page addresses a separate question from the primary experiment results: whether measured external temperature is associated with offspring traits and survival.
+
+The aim is not to replace the experimental treatment models, but to show whether natural variation in external temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period temperature:
+
+```{r}
+#| label: external-temperature-formula
+#| echo: false
+cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+Day-2 mass is not included because it occurs before most of the nestling-period treatment.
+
+## Temperature-interaction terms
+
+```{r}
+#| label: temperature-interaction-terms
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+
+interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
+
+if (file.exists(interaction_file)) {
+  read_csv(interaction_file, show_col_types = FALSE) |>
+    mutate(
+      estimate = round(estimate, 3),
+      std_error = round(std_error, 3),
+      statistic = round(statistic, 3),
+      p_value = round(p_value, 4)
+    ) |>
+    select(response_label, term, estimate, std_error, statistic, p_value) |>
+    kable(col.names = c("Response", "Interaction term", "Estimate", "SE", "z", "p"))
+} else {
+  cat("Temperature-interaction results are not available yet.")
+}
+```
+
+## Prediction figures
+
+```{r}
+#| label: temperature-interaction-figures
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+library(glue)
+
+figures <- list.files(
+  "figures/temperature_interactions",
+  pattern = "^temperature_interaction_.*\\.png$",
+  full.names = TRUE
+)
+
+if (length(figures) > 0) {
+  for (fig in sort(figures)) {
+    response <- sub("^temperature_interaction_", "", tools::file_path_sans_ext(basename(fig)))
+    cat("\n\n### ", response, "\n\n", sep = "")
+    cat("Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.\n\n")
+    cat(glue("![]({fig})"), "\n\n")
+  }
+} else {
+  cat("Temperature-interaction figures are not available yet.")
+}
+```
+
+## Saved model summaries
+
+```{r}
+#| label: temperature-interaction-summaries
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+summary_files <- list.files(
+  "models/sensitivity_temperature_interaction",
+  pattern = "^summary_.*interaction.*\\.txt$",
+  full.names = TRUE
+)
+
+if (length(summary_files) > 0) {
+  for (summary_file in sort(summary_files)) {
+    cat("\n\n### ", tools::file_path_sans_ext(basename(summary_file)), "\n\n", sep = "")
+    cat("<details>\n")
+    cat("<summary>Show saved model summary</summary>\n\n")
+    cat("```text\n")
+    cat(paste(readLines(summary_file, warn = FALSE), collapse = "\n"))
+    cat("\n```\n")
+    cat("</details>\n")
+  }
+} else {
+  cat("Saved temperature-interaction summaries are not available yet.")
+}
+```

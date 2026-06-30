@@ -16,7 +16,7 @@ This project tests how experimentally increased nest temperature affects reprodu
 
 We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.
 
-Our models test the main effects of incubation-stage warming and nestling-stage warming, as well as their interaction. The interaction is biologically important because it asks whether thermal conditions experienced during embryonic development modify later responses to nestling-stage warming. For example, incubation warming may have carry-over effects on nestling growth, body size, mass, or survival, even if the nestling environment itself is not warmed. Conversely, the effect of nestling-stage warming may depend on whether chicks previously experienced warmed or ambient conditions as embryos.
+The analyses separate two related questions. The primary results test whether the experimental warming treatments affect offspring traits and survival. Additional model pages test whether the two experimental stages interact, and whether measured external temperature during incubation and the nestling period is associated with the same responses.
 
 ## Study system
 
@@ -45,11 +45,12 @@ knitr::include_graphics("figures/overview/experimental_design.png")
 
 The website documents the full analytical workflow, from data preparation and treatment coding to response-variable construction, model fitting, diagnostics, sensitivity analyses, prediction plots, and biological interpretation.
 
-The workflow is organised around four steps:
+The workflow is organised around five steps:
 
 - data import from the raw workbook,
 - creation of the analysis dataset after removing later broods from repeated females,
-- fitting Gaussian primary models and Student-t robustness models with `glmmTMB`,
+- fitting primary experiment models with `glmmTMB`,
+- fitting separate interaction models for experimental treatments and measured external temperature,
 - generating model summaries, diagnostics, and publication figures.
 
 ## Files needed to reproduce the analyses

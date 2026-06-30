@@ -112,12 +112,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Distribution sensitivity</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04_temperature_interaction_sensitivity.html"> 
-<span class="menu-text">Temperature interaction</span></a>
+    <a class="nav-link active" href="./05_results.html" aria-current="page"> 
+<span class="menu-text">Experiment results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./05_results.html" aria-current="page"> 
-<span class="menu-text">Results</span></a>
+    <a class="nav-link" href="./06_experiment_interactions.html"> 
+<span class="menu-text">Experiment interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07_temperature_models.html"> 
+<span class="menu-text">External temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -165,19 +169,19 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="results" class="level1">
 <h1>Results</h1>
-<p>This chapter presents the fitted models response by response. For each dependent variable, the page shows what is being tested, the primary model, the saved model summary, and the corresponding figures.</p>
+<p>This chapter presents the primary experiment-only models response by response. These models test whether the warming treatment affected each trait, while keeping measured external temperature out of the primary experimental test. Temperature models are shown on a separate page.</p>
 <section id="response-level-results" class="level2">
 <h2 class="anchored" data-anchor-id="response-level-results">Response-level results</h2>
 <section id="day-2-body-mass" class="level3">
 <h3 class="anchored" data-anchor-id="day-2-body-mass">Day-2 body mass</h3>
 <section id="dependent-variable" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable">Dependent variable</h4>
-<p><code>D2_MASS</code>: Does incubation treatment and measured incubation-period temperature explain body mass at day 2?</p>
+<p><code>D2_MASS</code>: Does incubation-stage warming affect body mass at day 2?</p>
 </section>
 <section id="model" class="level4">
 <h4 class="anchored" data-anchor-id="model">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc +      (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
 <strong>Sample size:</strong> <code>858</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -196,38 +200,31 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">3.189</td>
-<td style="text-align: left;">0.067</td>
-<td style="text-align: left;">47.798</td>
+<td style="text-align: left;">3.171</td>
+<td style="text-align: left;">0.093</td>
+<td style="text-align: left;">33.947</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.010</td>
-<td style="text-align: left;">0.080</td>
-<td style="text-align: left;">-0.121</td>
-<td style="text-align: left;">0.9036</td>
+<td style="text-align: left;">-0.004</td>
+<td style="text-align: left;">0.081</td>
+<td style="text-align: left;">-0.054</td>
+<td style="text-align: left;">0.9569</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">0.147</td>
-<td style="text-align: left;">0.049</td>
-<td style="text-align: left;">2.991</td>
-<td style="text-align: left;">0.0028</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">SEXM</td>
 <td style="text-align: left;">-0.023</td>
 <td style="text-align: left;">0.040</td>
-<td style="text-align: left;">-0.579</td>
-<td style="text-align: left;">0.5623</td>
+<td style="text-align: left;">-0.572</td>
+<td style="text-align: left;">0.5670</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">0.073</td>
+<td style="text-align: left;">0.062</td>
 <td style="text-align: left;">0.039</td>
-<td style="text-align: left;">1.846</td>
-<td style="text-align: left;">0.0649</td>
+<td style="text-align: left;">1.596</td>
+<td style="text-align: left;">0.1104</td>
 </tr>
 </tbody>
 </table>
@@ -241,32 +238,29 @@ Diagnostic PDF: <a href="models/diagnostics/diagnostic_D2_MASS_gaussian_mean.pdf
 Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
-Formula:          
-D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc +  
-    (1 | F_RING) + (1 | YEAR)
+Formula:          D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1628.1    1666.1    -806.1    1612.1       850 
+   1631.9    1665.1    -808.9    1617.9       851 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.201171 0.44852 
- YEAR     (Intercept) 0.002827 0.05316 
- Residual             0.286199 0.53498 
+ F_RING   (Intercept) 0.2039   0.4516  
+ YEAR     (Intercept) 0.0195   0.1396  
+ Residual             0.2862   0.5350  
 Number of obs: 858, groups:  F_RING, 165; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 0.286 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                3.188934   0.066717   47.80  &lt; 2e-16 ***
-EXP.INCHeated             -0.009709   0.080146   -0.12  0.90358    
-incubation_temperature_sc  0.147440   0.049292    2.99  0.00278 ** 
-SEXM                      -0.023082   0.039841   -0.58  0.56235    
-BS_sc                      0.072712   0.039383    1.85  0.06485 .  
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    3.170625   0.093401   33.95   &lt;2e-16 ***
+EXP.INCHeated -0.004349   0.080563   -0.05    0.957    
+SEXM          -0.022812   0.039852   -0.57    0.567    
+BS_sc          0.061993   0.038834    1.60    0.110    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -286,12 +280,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="day-8-body-mass">Day-8 body mass</h3>
 <section id="dependent-variable-1" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-1">Dependent variable</h4>
-<p><code>D8_MASS</code>: Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 8?</p>
+<p><code>D8_MASS</code>: Do incubation-stage and nestling-stage warming affect body mass at day 8?</p>
 </section>
 <section id="model-1" class="level4">
 <h4 class="anchored" data-anchor-id="model-1">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>D8_MASS ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>D8_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
 <strong>Sample size:</strong> <code>775</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -310,52 +304,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">12.536</td>
-<td style="text-align: left;">0.275</td>
-<td style="text-align: left;">45.644</td>
+<td style="text-align: left;">12.511</td>
+<td style="text-align: left;">0.325</td>
+<td style="text-align: left;">38.501</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.506</td>
-<td style="text-align: left;">0.246</td>
-<td style="text-align: left;">-2.060</td>
-<td style="text-align: left;">0.0394</td>
+<td style="text-align: left;">-0.503</td>
+<td style="text-align: left;">0.247</td>
+<td style="text-align: left;">-2.032</td>
+<td style="text-align: left;">0.0421</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.273</td>
-<td style="text-align: left;">0.239</td>
-<td style="text-align: left;">-1.142</td>
-<td style="text-align: left;">0.2535</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.038</td>
-<td style="text-align: left;">0.245</td>
-<td style="text-align: left;">0.155</td>
-<td style="text-align: left;">0.8772</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.122</td>
-<td style="text-align: left;">0.291</td>
-<td style="text-align: left;">-0.420</td>
-<td style="text-align: left;">0.6743</td>
+<td style="text-align: left;">-0.027</td>
+<td style="text-align: left;">0.247</td>
+<td style="text-align: left;">-0.109</td>
+<td style="text-align: left;">0.9132</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">0.073</td>
-<td style="text-align: left;">0.087</td>
-<td style="text-align: left;">0.847</td>
-<td style="text-align: left;">0.3970</td>
+<td style="text-align: left;">0.101</td>
+<td style="text-align: left;">0.086</td>
+<td style="text-align: left;">1.170</td>
+<td style="text-align: left;">0.2420</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.042</td>
-<td style="text-align: left;">0.119</td>
-<td style="text-align: left;">-0.348</td>
-<td style="text-align: left;">0.7277</td>
+<td style="text-align: left;">-0.089</td>
+<td style="text-align: left;">0.122</td>
+<td style="text-align: left;">-0.732</td>
+<td style="text-align: left;">0.4643</td>
 </tr>
 </tbody>
 </table>
@@ -370,33 +350,30 @@ Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-D8_MASS ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+D8_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2566.5    2612.7   -1273.3    2546.5       736 
+   2690.5    2727.7   -1337.2    2674.5       767 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 1.9413   1.3933  
- YEAR     (Intercept) 0.1073   0.3276  
- Residual             1.1401   1.0678  
-Number of obs: 746, groups:  F_RING, 148; YEAR, 4
+ F_RING   (Intercept) 2.0522   1.4325  
+ YEAR     (Intercept) 0.2233   0.4725  
+ Residual             1.1761   1.0845  
+Number of obs: 775, groups:  F_RING, 153; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 1.14 
+Dispersion estimate for gaussian family (sigma^2): 1.18 
 
 Conditional model:
-                          Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)               12.53558    0.27464   45.64   &lt;2e-16 ***
-EXP.INCHeated             -0.50606    0.24562   -2.06   0.0394 *  
-incubation_temperature_sc -0.27273    0.23881   -1.14   0.2535    
-EXP.NESTHeated             0.03784    0.24494    0.15   0.8772    
-nestling_temperature_sc   -0.12248    0.29144   -0.42   0.6743    
-SEXM                       0.07338    0.08664    0.85   0.3970    
-BS_sc                     -0.04152    0.11926   -0.35   0.7277    
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    12.51076    0.32495   38.50   &lt;2e-16 ***
+EXP.INCHeated  -0.50254    0.24728   -2.03   0.0421 *  
+EXP.NESTHeated -0.02693    0.24701   -0.11   0.9132    
+SEXM            0.10086    0.08621    1.17   0.2420    
+BS_sc          -0.08891    0.12150   -0.73   0.4643    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -416,12 +393,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="day-12-body-mass">Day-12 body mass</h3>
 <section id="dependent-variable-2" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-2">Dependent variable</h4>
-<p><code>D12_MASS</code>: Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 12?</p>
+<p><code>D12_MASS</code>: Do incubation-stage and nestling-stage warming affect body mass at day 12?</p>
 </section>
 <section id="model-2" class="level4">
 <h4 class="anchored" data-anchor-id="model-2">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>D12_MASS ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>D12_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR)</code><br>
 <strong>Sample size:</strong> <code>687</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -440,52 +417,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">13.886</td>
-<td style="text-align: left;">0.201</td>
-<td style="text-align: left;">68.947</td>
+<td style="text-align: left;">13.930</td>
+<td style="text-align: left;">0.205</td>
+<td style="text-align: left;">68.027</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.237</td>
-<td style="text-align: left;">0.224</td>
-<td style="text-align: left;">-1.060</td>
-<td style="text-align: left;">0.2890</td>
+<td style="text-align: left;">-0.247</td>
+<td style="text-align: left;">0.230</td>
+<td style="text-align: left;">-1.072</td>
+<td style="text-align: left;">0.2837</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.248</td>
-<td style="text-align: left;">0.123</td>
-<td style="text-align: left;">-2.007</td>
-<td style="text-align: left;">0.0448</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.076</td>
-<td style="text-align: left;">0.224</td>
-<td style="text-align: left;">0.339</td>
-<td style="text-align: left;">0.7345</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.201</td>
-<td style="text-align: left;">0.118</td>
-<td style="text-align: left;">-1.709</td>
-<td style="text-align: left;">0.0874</td>
+<td style="text-align: left;">0.054</td>
+<td style="text-align: left;">0.229</td>
+<td style="text-align: left;">0.237</td>
+<td style="text-align: left;">0.8128</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">0.143</td>
+<td style="text-align: left;">0.144</td>
 <td style="text-align: left;">0.073</td>
-<td style="text-align: left;">1.959</td>
-<td style="text-align: left;">0.0501</td>
+<td style="text-align: left;">1.968</td>
+<td style="text-align: left;">0.0491</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.003</td>
-<td style="text-align: left;">0.107</td>
-<td style="text-align: left;">-0.027</td>
-<td style="text-align: left;">0.9787</td>
+<td style="text-align: left;">0.063</td>
+<td style="text-align: left;">0.101</td>
+<td style="text-align: left;">0.625</td>
+<td style="text-align: left;">0.5320</td>
 </tr>
 </tbody>
 </table>
@@ -499,34 +462,31 @@ Diagnostic PDF: <a href="models/diagnostics/diagnostic_D12_MASS_gaussian_mean.pd
 Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
-Formula:          
-D12_MASS ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Formula:          D12_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +  
+    (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2088.4    2133.7   -1034.2    2068.4       677 
+   2091.5    2127.8   -1037.7    2075.5       679 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 1.616e+00 1.2711126
- YEAR     (Intercept) 3.445e-09 0.0000587
- Residual             7.190e-01 0.8479289
+ F_RING   (Intercept) 1.715e+00 1.3096179
+ YEAR     (Intercept) 5.369e-08 0.0002317
+ Residual             7.182e-01 0.8474456
 Number of obs: 687, groups:  F_RING, 144; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.719 
+Dispersion estimate for gaussian family (sigma^2): 0.718 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)               13.886153   0.201405   68.95   &lt;2e-16 ***
-EXP.INCHeated             -0.237465   0.223938   -1.06   0.2890    
-incubation_temperature_sc -0.247710   0.123441   -2.01   0.0448 *  
-EXP.NESTHeated             0.075852   0.223669    0.34   0.7345    
-nestling_temperature_sc   -0.201217   0.117714   -1.71   0.0874 .  
-SEXM                       0.143063   0.073013    1.96   0.0501 .  
-BS_sc                     -0.002844   0.106741   -0.03   0.9787    
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    13.92954    0.20476   68.03   &lt;2e-16 ***
+EXP.INCHeated  -0.24661    0.23003   -1.07   0.2837    
+EXP.NESTHeated  0.05433    0.22942    0.24   0.8128    
+SEXM            0.14370    0.07302    1.97   0.0491 *  
+BS_sc           0.06310    0.10097    0.62   0.5320    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -546,12 +506,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="early-growth">Early growth</h3>
 <section id="dependent-variable-3" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-3">Dependent variable</h4>
-<p><code>Early.g</code>: Does treatment and measured temperature explain early nestling growth?</p>
+<p><code>Early.g</code>: Do incubation-stage and nestling-stage warming affect early nestling growth?</p>
 </section>
 <section id="model-3" class="level4">
 <h4 class="anchored" data-anchor-id="model-3">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>Early.g ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>Early.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
 <strong>Sample size:</strong> <code>757</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -570,52 +530,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">1.562</td>
-<td style="text-align: left;">0.035</td>
-<td style="text-align: left;">45.034</td>
+<td style="text-align: left;">1.561</td>
+<td style="text-align: left;">0.049</td>
+<td style="text-align: left;">31.579</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.101</td>
+<td style="text-align: left;">-0.095</td>
 <td style="text-align: left;">0.039</td>
-<td style="text-align: left;">-2.579</td>
-<td style="text-align: left;">0.0099</td>
+<td style="text-align: left;">-2.424</td>
+<td style="text-align: left;">0.0153</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.066</td>
-<td style="text-align: left;">0.020</td>
-<td style="text-align: left;">-3.230</td>
-<td style="text-align: left;">0.0012</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">-0.008</td>
+<td style="text-align: left;">-0.018</td>
 <td style="text-align: left;">0.039</td>
-<td style="text-align: left;">-0.207</td>
-<td style="text-align: left;">0.8361</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.031</td>
-<td style="text-align: left;">0.019</td>
-<td style="text-align: left;">-1.677</td>
-<td style="text-align: left;">0.0935</td>
+<td style="text-align: left;">-0.457</td>
+<td style="text-align: left;">0.6476</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">0.029</td>
+<td style="text-align: left;">0.031</td>
 <td style="text-align: left;">0.010</td>
-<td style="text-align: left;">2.808</td>
-<td style="text-align: left;">0.0050</td>
+<td style="text-align: left;">3.053</td>
+<td style="text-align: left;">0.0023</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.013</td>
-<td style="text-align: left;">0.018</td>
-<td style="text-align: left;">-0.690</td>
-<td style="text-align: left;">0.4899</td>
+<td style="text-align: left;">-0.020</td>
+<td style="text-align: left;">0.019</td>
+<td style="text-align: left;">-1.074</td>
+<td style="text-align: left;">0.2828</td>
 </tr>
 </tbody>
 </table>
@@ -630,33 +576,30 @@ Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-Early.g ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Early.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   -541.6    -495.7     280.8    -561.6       718 
+   -529.0    -492.0     272.5    -545.0       749 
 
 Random effects:
 
 Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 5.129e-02 2.265e-01
- YEAR     (Intercept) 5.560e-10 2.358e-05
- Residual             1.546e-02 1.243e-01
-Number of obs: 728, groups:  F_RING, 145; YEAR, 4
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 0.053109 0.23045 
+ YEAR     (Intercept) 0.004781 0.06915 
+ Residual             0.016202 0.12729 
+Number of obs: 757, groups:  F_RING, 150; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.0155 
+Dispersion estimate for gaussian family (sigma^2): 0.0162 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                1.562169   0.034689   45.03  &lt; 2e-16 ***
-EXP.INCHeated             -0.100725   0.039062   -2.58  0.00992 ** 
-incubation_temperature_sc -0.065994   0.020430   -3.23  0.00124 ** 
-EXP.NESTHeated            -0.008066   0.038994   -0.21  0.83612    
-nestling_temperature_sc   -0.031328   0.018680   -1.68  0.09353 .  
-SEXM                       0.028867   0.010281    2.81  0.00499 ** 
-BS_sc                     -0.012713   0.018412   -0.69  0.48989    
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)     1.56131    0.04944  31.579  &lt; 2e-16 ***
+EXP.INCHeated  -0.09508    0.03922  -2.424  0.01533 *  
+EXP.NESTHeated -0.01786    0.03908  -0.457  0.64761    
+SEXM            0.03145    0.01030   3.053  0.00226 ** 
+BS_sc          -0.02023    0.01883  -1.074  0.28279    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -676,12 +619,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="late-growth">Late growth</h3>
 <section id="dependent-variable-4" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-4">Dependent variable</h4>
-<p><code>Late.g</code>: Does treatment and measured temperature explain late nestling growth?</p>
+<p><code>Late.g</code>: Do incubation-stage and nestling-stage warming affect late nestling growth?</p>
 </section>
 <section id="model-4" class="level4">
 <h4 class="anchored" data-anchor-id="model-4">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>Late.g ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>Late.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
 <strong>Sample size:</strong> <code>677</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -700,52 +643,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">0.271</td>
-<td style="text-align: left;">0.074</td>
-<td style="text-align: left;">3.648</td>
-<td style="text-align: left;">0.0003</td>
+<td style="text-align: left;">0.280</td>
+<td style="text-align: left;">0.075</td>
+<td style="text-align: left;">3.741</td>
+<td style="text-align: left;">0.0002</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">0.036</td>
-<td style="text-align: left;">0.047</td>
-<td style="text-align: left;">0.757</td>
-<td style="text-align: left;">0.4491</td>
+<td style="text-align: left;">0.035</td>
+<td style="text-align: left;">0.048</td>
+<td style="text-align: left;">0.732</td>
+<td style="text-align: left;">0.4642</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.135</td>
-<td style="text-align: left;">0.065</td>
-<td style="text-align: left;">-2.079</td>
-<td style="text-align: left;">0.0376</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.025</td>
-<td style="text-align: left;">0.047</td>
-<td style="text-align: left;">0.540</td>
-<td style="text-align: left;">0.5890</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.044</td>
-<td style="text-align: left;">0.073</td>
-<td style="text-align: left;">-0.600</td>
-<td style="text-align: left;">0.5484</td>
+<td style="text-align: left;">0.026</td>
+<td style="text-align: left;">0.048</td>
+<td style="text-align: left;">0.550</td>
+<td style="text-align: left;">0.5824</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
 <td style="text-align: left;">0.013</td>
 <td style="text-align: left;">0.018</td>
-<td style="text-align: left;">0.742</td>
-<td style="text-align: left;">0.4581</td>
+<td style="text-align: left;">0.737</td>
+<td style="text-align: left;">0.4613</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.011</td>
+<td style="text-align: left;">-0.007</td>
 <td style="text-align: left;">0.023</td>
-<td style="text-align: left;">-0.460</td>
-<td style="text-align: left;">0.6456</td>
+<td style="text-align: left;">-0.285</td>
+<td style="text-align: left;">0.7758</td>
 </tr>
 </tbody>
 </table>
@@ -760,33 +689,30 @@ Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-Late.g ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Late.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    116.7     161.9     -48.4      96.7       667 
+    118.7     154.8     -51.3     102.7       669 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.06710  0.2590  
- YEAR     (Intercept) 0.01449  0.1204  
- Residual             0.04330  0.2081  
+ F_RING   (Intercept) 0.07058  0.2657  
+ YEAR     (Intercept) 0.01488  0.1220  
+ Residual             0.04328  0.2080  
 Number of obs: 677, groups:  F_RING, 141; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 0.0433 
 
 Conditional model:
-                          Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                0.27064    0.07419   3.648 0.000264 ***
-EXP.INCHeated              0.03592    0.04746   0.757 0.449095    
-incubation_temperature_sc -0.13460    0.06475  -2.079 0.037636 *  
-EXP.NESTHeated             0.02544    0.04710   0.540 0.589033    
-nestling_temperature_sc   -0.04396    0.07324  -0.600 0.548402    
-SEXM                       0.01329    0.01791   0.742 0.458054    
-BS_sc                     -0.01067    0.02319  -0.460 0.645646    
+                Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)     0.279846   0.074804   3.741 0.000183 ***
+EXP.INCHeated   0.035432   0.048408   0.732 0.464198    
+EXP.NESTHeated  0.026494   0.048181   0.550 0.582400    
+SEXM            0.013200   0.017918   0.737 0.461307    
+BS_sc          -0.006688   0.023485  -0.285 0.775811    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -806,12 +732,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="whole-period-growth">Whole-period growth</h3>
 <section id="dependent-variable-5" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-5">Dependent variable</h4>
-<p><code>Growth</code>: Does treatment and measured temperature explain whole-period growth?</p>
+<p><code>Growth</code>: Do incubation-stage and nestling-stage warming affect whole-period growth?</p>
 </section>
 <section id="model-5" class="level4">
 <h4 class="anchored" data-anchor-id="model-5">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>Growth ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
 <strong>Sample size:</strong> <code>664</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -830,52 +756,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">1.065</td>
-<td style="text-align: left;">0.022</td>
-<td style="text-align: left;">48.725</td>
+<td style="text-align: left;">1.070</td>
+<td style="text-align: left;">0.028</td>
+<td style="text-align: left;">38.836</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.027</td>
-<td style="text-align: left;">0.024</td>
-<td style="text-align: left;">-1.112</td>
-<td style="text-align: left;">0.2660</td>
+<td style="text-align: left;">-0.028</td>
+<td style="text-align: left;">0.025</td>
+<td style="text-align: left;">-1.130</td>
+<td style="text-align: left;">0.2583</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.049</td>
-<td style="text-align: left;">0.013</td>
-<td style="text-align: left;">-3.698</td>
-<td style="text-align: left;">0.0002</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">-0.005</td>
-<td style="text-align: left;">0.024</td>
-<td style="text-align: left;">-0.220</td>
-<td style="text-align: left;">0.8257</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.011</td>
-<td style="text-align: left;">0.013</td>
-<td style="text-align: left;">-0.909</td>
-<td style="text-align: left;">0.3632</td>
+<td style="text-align: left;">-0.006</td>
+<td style="text-align: left;">0.025</td>
+<td style="text-align: left;">-0.236</td>
+<td style="text-align: left;">0.8137</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
 <td style="text-align: left;">0.019</td>
 <td style="text-align: left;">0.007</td>
-<td style="text-align: left;">2.508</td>
-<td style="text-align: left;">0.0121</td>
+<td style="text-align: left;">2.519</td>
+<td style="text-align: left;">0.0118</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.006</td>
-<td style="text-align: left;">0.011</td>
-<td style="text-align: left;">-0.512</td>
-<td style="text-align: left;">0.6086</td>
+<td style="text-align: left;">-0.004</td>
+<td style="text-align: left;">0.012</td>
+<td style="text-align: left;">-0.331</td>
+<td style="text-align: left;">0.7410</td>
 </tr>
 </tbody>
 </table>
@@ -890,33 +802,30 @@ Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-Growth ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  -1021.7    -976.7     520.9   -1041.7       654 
+    -1014      -978       515     -1030       656 
 
 Random effects:
 
 Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 1.850e-02 1.360e-01
- YEAR     (Intercept) 1.942e-11 4.407e-06
- Residual             7.180e-03 8.474e-02
+ Groups   Name        Variance  Std.Dev.
+ F_RING   (Intercept) 0.0197612 0.14057 
+ YEAR     (Intercept) 0.0009999 0.03162 
+ Residual             0.0071733 0.08470 
 Number of obs: 664, groups:  F_RING, 140; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.00718 
+Dispersion estimate for gaussian family (sigma^2): 0.00717 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                1.065398   0.021865   48.73  &lt; 2e-16 ***
-EXP.INCHeated             -0.026903   0.024185   -1.11 0.265979    
-incubation_temperature_sc -0.048618   0.013148   -3.70 0.000218 ***
-EXP.NESTHeated            -0.005314   0.024132   -0.22 0.825710    
-nestling_temperature_sc   -0.011468   0.012613   -0.91 0.363223    
-SEXM                       0.018657   0.007440    2.51 0.012148 *  
-BS_sc                     -0.005863   0.011450   -0.51 0.608584    
+                Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)     1.070461   0.027563   38.84   &lt;2e-16 ***
+EXP.INCHeated  -0.028333   0.025064   -1.13   0.2583    
+EXP.NESTHeated -0.005877   0.024945   -0.24   0.8137    
+SEXM            0.018745   0.007441    2.52   0.0118 *  
+BS_sc          -0.003836   0.011607   -0.33   0.7410    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -936,12 +845,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="day-12-scaled-mass-index">Day-12 scaled mass index</h3>
 <section id="dependent-variable-6" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-6">Dependent variable</h4>
-<p><code>D12_SMI</code>: Does treatment and measured temperature explain day-12 scaled mass index?</p>
+<p><code>D12_SMI</code>: Do incubation-stage and nestling-stage warming affect day-12 scaled mass index?</p>
 </section>
 <section id="model-6" class="level4">
 <h4 class="anchored" data-anchor-id="model-6">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>D12_SMI ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>D12_SMI ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
 <strong>Sample size:</strong> <code>679</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -960,52 +869,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">13.783</td>
-<td style="text-align: left;">0.213</td>
-<td style="text-align: left;">64.618</td>
+<td style="text-align: left;">13.781</td>
+<td style="text-align: left;">0.223</td>
+<td style="text-align: left;">61.747</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">0.079</td>
-<td style="text-align: left;">0.213</td>
-<td style="text-align: left;">0.371</td>
-<td style="text-align: left;">0.7109</td>
+<td style="text-align: left;">0.078</td>
+<td style="text-align: left;">0.212</td>
+<td style="text-align: left;">0.367</td>
+<td style="text-align: left;">0.7135</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">0.020</td>
-<td style="text-align: left;">0.150</td>
-<td style="text-align: left;">0.131</td>
-<td style="text-align: left;">0.8961</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.124</td>
-<td style="text-align: left;">0.213</td>
-<td style="text-align: left;">0.580</td>
-<td style="text-align: left;">0.5619</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">0.056</td>
-<td style="text-align: left;">0.253</td>
-<td style="text-align: left;">0.221</td>
-<td style="text-align: left;">0.8248</td>
+<td style="text-align: left;">0.127</td>
+<td style="text-align: left;">0.212</td>
+<td style="text-align: left;">0.598</td>
+<td style="text-align: left;">0.5498</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">0.271</td>
+<td style="text-align: left;">0.270</td>
 <td style="text-align: left;">0.087</td>
-<td style="text-align: left;">3.097</td>
+<td style="text-align: left;">3.093</td>
 <td style="text-align: left;">0.0020</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">-0.179</td>
-<td style="text-align: left;">0.104</td>
-<td style="text-align: left;">-1.717</td>
-<td style="text-align: left;">0.0860</td>
+<td style="text-align: left;">-0.184</td>
+<td style="text-align: left;">0.101</td>
+<td style="text-align: left;">-1.819</td>
+<td style="text-align: left;">0.0690</td>
 </tr>
 </tbody>
 </table>
@@ -1020,33 +915,30 @@ Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-D12_SMI ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+D12_SMI ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2245.3    2290.5   -1112.6    2225.3       669 
+   2241.3    2277.5   -1112.7    2225.3       671 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 1.3350   1.1554  
- YEAR     (Intercept) 0.0334   0.1827  
- Residual             1.0375   1.0186  
+ F_RING   (Intercept) 1.32441  1.1508  
+ YEAR     (Intercept) 0.05372  0.2318  
+ Residual             1.03768  1.0187  
 Number of obs: 679, groups:  F_RING, 141; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 1.04 
 
 Conditional model:
-                          Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)               13.78306    0.21330   64.62  &lt; 2e-16 ***
-EXP.INCHeated              0.07895    0.21301    0.37  0.71091    
-incubation_temperature_sc  0.01963    0.15033    0.13  0.89613    
-EXP.NESTHeated             0.12361    0.21311    0.58  0.56188    
-nestling_temperature_sc    0.05608    0.25328    0.22  0.82478    
-SEXM                       0.27085    0.08746    3.10  0.00196 ** 
-BS_sc                     -0.17916    0.10436   -1.72  0.08604 .  
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    13.78096    0.22319   61.75  &lt; 2e-16 ***
+EXP.INCHeated   0.07791    0.21222    0.37  0.71354    
+EXP.NESTHeated  0.12676    0.21193    0.60  0.54976    
+SEXM            0.27049    0.08744    3.09  0.00198 ** 
+BS_sc          -0.18415    0.10126   -1.82  0.06898 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -1066,12 +958,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="day-12-tarsus-length">Day-12 tarsus length</h3>
 <section id="dependent-variable-7" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-7">Dependent variable</h4>
-<p><code>D12_RTARS</code>: Does treatment and measured temperature explain day-12 tarsus length?</p>
+<p><code>D12_RTARS</code>: Do incubation-stage and nestling-stage warming affect day-12 tarsus length?</p>
 </section>
 <section id="model-7" class="level4">
 <h4 class="anchored" data-anchor-id="model-7">Model</h4>
 <p><strong>Primary model:</strong> <code>gaussian_mean</code><br>
-<strong>Formula:</strong> <code>D12_RTARS ~ EXP.INC + incubation_temperature_sc + EXP.NEST +      nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)</code><br>
+<strong>Formula:</strong> <code>D12_RTARS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR)</code><br>
 <strong>Sample size:</strong> <code>680</code><br>
 <strong>Dispersion formula:</strong> <code>~1</code></p>
 </section>
@@ -1090,52 +982,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">16.883</td>
-<td style="text-align: left;">0.085</td>
-<td style="text-align: left;">199.323</td>
+<td style="text-align: left;">16.893</td>
+<td style="text-align: left;">0.136</td>
+<td style="text-align: left;">124.443</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
 <td style="text-align: left;">-0.155</td>
 <td style="text-align: left;">0.094</td>
-<td style="text-align: left;">-1.650</td>
-<td style="text-align: left;">0.0989</td>
+<td style="text-align: left;">-1.643</td>
+<td style="text-align: left;">0.1004</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-0.136</td>
-<td style="text-align: left;">0.052</td>
-<td style="text-align: left;">-2.628</td>
-<td style="text-align: left;">0.0086</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.042</td>
+<td style="text-align: left;">0.034</td>
 <td style="text-align: left;">0.094</td>
-<td style="text-align: left;">0.449</td>
-<td style="text-align: left;">0.6533</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.181</td>
-<td style="text-align: left;">0.050</td>
-<td style="text-align: left;">-3.619</td>
-<td style="text-align: left;">0.0003</td>
+<td style="text-align: left;">0.362</td>
+<td style="text-align: left;">0.7174</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">-0.049</td>
+<td style="text-align: left;">-0.048</td>
 <td style="text-align: left;">0.037</td>
-<td style="text-align: left;">-1.326</td>
-<td style="text-align: left;">0.1848</td>
+<td style="text-align: left;">-1.290</td>
+<td style="text-align: left;">0.1972</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">0.045</td>
-<td style="text-align: left;">0.045</td>
-<td style="text-align: left;">0.988</td>
-<td style="text-align: left;">0.3232</td>
+<td style="text-align: left;">0.057</td>
+<td style="text-align: left;">0.046</td>
+<td style="text-align: left;">1.236</td>
+<td style="text-align: left;">0.2166</td>
 </tr>
 </tbody>
 </table>
@@ -1149,33 +1027,31 @@ Diagnostic PDF: <a href="models/diagnostics/diagnostic_D12_RTARS_gaussian_mean.p
 Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
-Formula:          D12_RTARS ~ EXP.INC + incubation_temperature_sc + EXP.NEST +  
-    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Formula:          
+D12_RTARS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1086.7    1131.9    -533.3    1066.7       670 
+   1090.3    1126.5    -537.2    1074.3       672 
 
 Random effects:
 
 Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 2.668e-01 5.165e-01
- YEAR     (Intercept) 1.723e-09 4.151e-05
- Residual             1.848e-01 4.298e-01
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 0.26540  0.5152  
+ YEAR     (Intercept) 0.04485  0.2118  
+ Residual             0.18515  0.4303  
 Number of obs: 680, groups:  F_RING, 141; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 0.185 
 
 Conditional model:
-                          Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)               16.88284    0.08470  199.32  &lt; 2e-16 ***
-EXP.INCHeated             -0.15543    0.09419   -1.65 0.098925 .  
-incubation_temperature_sc -0.13623    0.05184   -2.63 0.008598 ** 
-EXP.NESTHeated             0.04231    0.09417    0.45 0.653264    
-nestling_temperature_sc   -0.18122    0.05007   -3.62 0.000295 ***
-SEXM                      -0.04890    0.03687   -1.33 0.184757    
-BS_sc                      0.04477    0.04532    0.99 0.323229    
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    16.89257    0.13575  124.44   &lt;2e-16 ***
+EXP.INCHeated  -0.15506    0.09437   -1.64    0.100    
+EXP.NESTHeated  0.03409    0.09418    0.36    0.717    
+SEXM           -0.04759    0.03691   -1.29    0.197    
+BS_sc           0.05738    0.04644    1.24    0.217    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
@@ -1195,12 +1071,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 class="anchored" data-anchor-id="day-12-survival">Day-12 survival</h3>
 <section id="dependent-variable-8" class="level4">
 <h4 class="anchored" data-anchor-id="dependent-variable-8">Dependent variable</h4>
-<p><code>D12_SURV</code>: Does treatment and measured temperature explain survival to day 12?</p>
+<p><code>D12_SURV</code>: Do incubation-stage and nestling-stage warming affect survival to day 12?</p>
 </section>
 <section id="model-8" class="level4">
 <h4 class="anchored" data-anchor-id="model-8">Model</h4>
 <p><strong>Primary model:</strong> <code>binomial</code><br>
-<strong>Formula:</strong> <code>D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc +      SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code><br>
+<strong>Formula:</strong> <code>D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR)</code><br>
 <strong>Sample size:</strong> <code>883</code></p>
 </section>
 <section id="fixed-effect-estimates-8" class="level4">
@@ -1218,52 +1094,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">4.174</td>
-<td style="text-align: left;">0.863</td>
-<td style="text-align: left;">4.836</td>
+<td style="text-align: left;">7.733</td>
+<td style="text-align: left;">1.078</td>
+<td style="text-align: left;">7.175</td>
 <td style="text-align: left;">0.0000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EXP.INCHeated</td>
-<td style="text-align: left;">-0.464</td>
-<td style="text-align: left;">0.785</td>
-<td style="text-align: left;">-0.591</td>
-<td style="text-align: left;">0.5547</td>
+<td style="text-align: left;">-0.198</td>
+<td style="text-align: left;">0.932</td>
+<td style="text-align: left;">-0.213</td>
+<td style="text-align: left;">0.8313</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">EXP.NESTHeated</td>
-<td style="text-align: left;">0.911</td>
-<td style="text-align: left;">0.788</td>
-<td style="text-align: left;">1.156</td>
-<td style="text-align: left;">0.2476</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: left;">-2.651</td>
-<td style="text-align: left;">0.514</td>
-<td style="text-align: left;">-5.156</td>
-<td style="text-align: left;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: left;">-0.395</td>
-<td style="text-align: left;">0.401</td>
-<td style="text-align: left;">-0.985</td>
-<td style="text-align: left;">0.3247</td>
+<td style="text-align: left;">0.041</td>
+<td style="text-align: left;">0.929</td>
+<td style="text-align: left;">0.045</td>
+<td style="text-align: left;">0.9644</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEXM</td>
-<td style="text-align: left;">0.091</td>
-<td style="text-align: left;">0.322</td>
-<td style="text-align: left;">0.282</td>
-<td style="text-align: left;">0.7776</td>
+<td style="text-align: left;">0.231</td>
+<td style="text-align: left;">0.335</td>
+<td style="text-align: left;">0.690</td>
+<td style="text-align: left;">0.4901</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BS_sc</td>
-<td style="text-align: left;">0.071</td>
-<td style="text-align: left;">0.361</td>
-<td style="text-align: left;">0.197</td>
-<td style="text-align: left;">0.8436</td>
+<td style="text-align: left;">0.203</td>
+<td style="text-align: left;">0.392</td>
+<td style="text-align: left;">0.516</td>
+<td style="text-align: left;">0.6058</td>
 </tr>
 </tbody>
 </table>
@@ -1277,31 +1139,28 @@ Diagnostic PDF: <a href="models/diagnostics/diagnostic_D12_SURV_binomial.pdf">di
 Show saved model summary
 </summary>
 <pre class="text"><code> Family: binomial  ( logit )
-Formula:          
-D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Formula:          D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +  
+    (1 | YEAR)
 Data: surv_dat
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    481.4     524.0    -231.7     463.4       831 
+    566.6     600.1    -276.3     552.6       876 
 
 Random effects:
 
 Conditional model:
  Groups Name        Variance  Std.Dev. 
- F_RING (Intercept) 1.541e+01 3.926e+00
- YEAR   (Intercept) 2.469e-09 4.969e-05
-Number of obs: 840, groups:  F_RING, 161; YEAR, 4
+ F_RING (Intercept) 9.391e+01 9.6906055
+ YEAR   (Intercept) 1.420e-08 0.0001192
+Number of obs: 883, groups:  F_RING, 169; YEAR, 4
 
 Conditional model:
-                          Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                4.17383    0.86308   4.836 1.32e-06 ***
-EXP.INCHeated             -0.46390    0.78523  -0.591    0.555    
-EXP.NESTHeated             0.91084    0.78775   1.156    0.248    
-incubation_temperature_sc -2.65064    0.51405  -5.156 2.52e-07 ***
-nestling_temperature_sc   -0.39513    0.40123  -0.985    0.325    
-SEXM                       0.09102    0.32221   0.282    0.778    
-BS_sc                      0.07122    0.36092   0.197    0.844    
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)     7.73315    1.07785   7.175 7.25e-13 ***
+EXP.INCHeated  -0.19840    0.93153  -0.213    0.831    
+EXP.NESTHeated  0.04142    0.92887   0.045    0.964    
+SEXM            0.23129    0.33513   0.690    0.490    
+BS_sc           0.20250    0.39244   0.516    0.606    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>

@@ -1,29 +1,26 @@
  Family: gaussian  ( identity )
-Formula:          
-D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc +  
-    (1 | F_RING) + (1 | YEAR)
+Formula:          D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1628.1    1666.1    -806.1    1612.1       850 
+   1631.9    1665.1    -808.9    1617.9       851 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.201171 0.44852 
- YEAR     (Intercept) 0.002827 0.05316 
- Residual             0.286199 0.53498 
+ F_RING   (Intercept) 0.2039   0.4516  
+ YEAR     (Intercept) 0.0195   0.1396  
+ Residual             0.2862   0.5350  
 Number of obs: 858, groups:  F_RING, 165; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 0.286 
 
 Conditional model:
-                           Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                3.188934   0.066717   47.80  < 2e-16 ***
-EXP.INCHeated             -0.009709   0.080146   -0.12  0.90358    
-incubation_temperature_sc  0.147440   0.049292    2.99  0.00278 ** 
-SEXM                      -0.023082   0.039841   -0.58  0.56235    
-BS_sc                      0.072712   0.039383    1.85  0.06485 .  
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    3.170625   0.093401   33.95   <2e-16 ***
+EXP.INCHeated -0.004349   0.080563   -0.05    0.957    
+SEXM          -0.022812   0.039852   -0.57    0.567    
+BS_sc          0.061993   0.038834    1.60    0.110    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

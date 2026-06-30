@@ -1,0 +1,26 @@
+ Family: binomial  ( logit )
+Formula:          
+D12_SURV_bin ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +  
+    (1 | YEAR)
+Data: surv_dat
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    566.6     600.1    -276.3     552.6       876 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance  Std.Dev. 
+ F_RING (Intercept) 9.391e+01 9.6906055
+ YEAR   (Intercept) 1.420e-08 0.0001192
+Number of obs: 883, groups:  F_RING, 169; YEAR, 4
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     7.73315    1.07785   7.175 7.25e-13 ***
+EXP.INCHeated  -0.19840    0.93153  -0.213    0.831    
+EXP.NESTHeated  0.04142    0.92887   0.045    0.964    
+SEXM            0.23129    0.33513   0.690    0.490    
+BS_sc           0.20250    0.39244   0.516    0.606    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

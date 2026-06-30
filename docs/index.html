@@ -147,12 +147,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Distribution sensitivity</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04_temperature_interaction_sensitivity.html"> 
-<span class="menu-text">Temperature interaction</span></a>
+    <a class="nav-link" href="./05_results.html"> 
+<span class="menu-text">Experiment results</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./05_results.html"> 
-<span class="menu-text">Results</span></a>
+    <a class="nav-link" href="./06_experiment_interactions.html"> 
+<span class="menu-text">Experiment interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07_temperature_models.html"> 
+<span class="menu-text">External temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -206,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (<em>Ficedula albicollis</em>). Using a fully factorial 2 x 2 design, we independently warmed nests during incubation and during the nestling period. This created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.</p>
 <p>We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.</p>
-<p>Our models test the main effects of incubation-stage warming and nestling-stage warming, as well as their interaction. The interaction is biologically important because it asks whether thermal conditions experienced during embryonic development modify later responses to nestling-stage warming. For example, incubation warming may have carry-over effects on nestling growth, body size, mass, or survival, even if the nestling environment itself is not warmed. Conversely, the effect of nestling-stage warming may depend on whether chicks previously experienced warmed or ambient conditions as embryos.</p>
+<p>The analyses separate two related questions. The primary results test whether the experimental warming treatments affect offspring traits and survival. Additional model pages test whether the two experimental stages interact, and whether measured external temperature during incubation and the nestling period is associated with the same responses.</p>
 <section id="study-system" class="level2">
 <h2 class="anchored" data-anchor-id="study-system">Study system</h2>
 <p>The study was conducted on collared flycatchers (<em>Ficedula albicollis</em>) breeding in nest boxes on Gotland. The dataset currently covers four breeding seasons, 2022-2025. The experiment manipulated the thermal environment of nest boxes during incubation and/or the nestling period, allowing comparison of heated and control nests.</p>
@@ -233,11 +237,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="workflow" class="level2">
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <p>The website documents the full analytical workflow, from data preparation and treatment coding to response-variable construction, model fitting, diagnostics, sensitivity analyses, prediction plots, and biological interpretation.</p>
-<p>The workflow is organised around four steps:</p>
+<p>The workflow is organised around five steps:</p>
 <ul>
 <li>data import from the raw workbook,</li>
 <li>creation of the analysis dataset after removing later broods from repeated females,</li>
-<li>fitting Gaussian primary models and Student-t robustness models with <code>glmmTMB</code>,</li>
+<li>fitting primary experiment models with <code>glmmTMB</code>,</li>
+<li>fitting separate interaction models for experimental treatments and measured external temperature,</li>
 <li>generating model summaries, diagnostics, and publication figures.</li>
 </ul>
 </section>
