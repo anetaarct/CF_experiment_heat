@@ -1,11 +1,11 @@
-# External-temperature models
+# Ambient-temperature interaction models
 
-This page addresses a separate question from the primary experiment results: whether measured external temperature is associated with offspring traits and survival.
+This page addresses a separate question from the primary experiment results: whether measured ambient temperature is associated with offspring traits and survival.
 
-The aim is not to replace the experimental treatment models, but to show whether natural variation in external temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period temperature:
+The aim is not to replace the experimental treatment models, but to show whether natural variation in ambient temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period ambient temperature:
 
 ```{r}
-#| label: external-temperature-formula
+#| label: ambient-temperature-formula
 #| echo: false
 cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
@@ -14,10 +14,10 @@ Day-2 mass is not included because it occurs before most of the nestling-period 
 
 ## Collinearity check
 
-Before interpreting the temperature-interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.
+Before interpreting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.
 
 ```{r}
-#| label: temperature-collinearity
+#| label: ambient-temperature-collinearity
 #| echo: false
 #| message: false
 #| warning: false
@@ -25,6 +25,7 @@ Before interpreting the temperature-interaction models, we check whether the two
 library(dplyr)
 library(readr)
 library(knitr)
+library(glue)
 
 correlation_file <- "models/collinearity/temperature_correlation.csv"
 vif_file <- "models/collinearity/temperature_model_vif.csv"
@@ -38,12 +39,12 @@ if (file.exists(correlation_file) && file.exists(vif_file)) {
     round(temperature_correlation$pearson_r[1], 3),
     "` based on `n = ",
     temperature_correlation$n_complete[1],
-    "` complete records. This indicates no strong linear correlation between the two measured temperature variables.\n\n",
+    "` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.\n\n",
     sep = ""
   )
 
   cat(
-    "The largest VIF in the temperature-interaction models is `",
+    "The largest VIF in the ambient-temperature interaction models is `",
     round(max(vif_table$VIF, na.rm = TRUE), 2),
     "`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.\n\n",
     sep = ""
@@ -62,17 +63,13 @@ if (file.exists(correlation_file) && file.exists(vif_file)) {
 }
 ```
 
-## Temperature-interaction terms
+## Interaction terms
 
 ```{r}
-#| label: temperature-interaction-terms
+#| label: ambient-temperature-interaction-terms
 #| echo: false
 #| message: false
 #| warning: false
-
-library(dplyr)
-library(readr)
-library(knitr)
 
 interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
 
@@ -87,65 +84,69 @@ if (file.exists(interaction_file)) {
     select(response_label, term, estimate, std_error, statistic, p_value) |>
     kable(col.names = c("Response", "Interaction term", "Estimate", "SE", "z", "p"))
 } else {
-  cat("Temperature-interaction results are not available yet.")
+  cat("Ambient-temperature interaction results are not available yet.")
 }
 ```
 
-## Prediction figures
+## Response-level models
+
+For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation: lines show population-level predicted values across incubation-period ambient temperature at low, average, and high nestling-period ambient temperature; ribbons are 95% confidence intervals; pale points show original observations when readable.
 
 ```{r}
-#| label: temperature-interaction-figures
+#| label: ambient-temperature-response-level
 #| echo: false
 #| message: false
 #| warning: false
 #| results: asis
 
-library(glue)
-
-figures <- list.files(
-  "figures/temperature_interactions",
-  pattern = "^temperature_interaction_.*\\.png$",
-  full.names = TRUE
+response_labels <- c(
+  D8_MASS = "Day-8 body mass",
+  D12_MASS = "Day-12 body mass",
+  Early.g = "Early growth",
+  Late.g = "Late growth",
+  Growth = "Whole-period growth",
+  D12_SMI = "Day-12 scaled mass index",
+  D12_RTARS = "Day-12 tarsus length",
+  D12_SURV = "Day-12 survival"
 )
 
-if (length(figures) > 0) {
-  for (fig in sort(figures)) {
-    response <- sub("^temperature_interaction_", "", tools::file_path_sans_ext(basename(fig)))
-    cat("\n\n### ", response, "\n\n", sep = "")
-    cat("Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.\n\n")
-    cat(glue("![]({fig})"), "\n\n")
-  }
-} else {
-  cat("Temperature-interaction figures are not available yet.")
-}
-```
+responses <- names(response_labels)
 
-## Saved model summaries
+formula_text <- "response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)"
 
-```{r}
-#| label: temperature-interaction-summaries
-#| echo: false
-#| message: false
-#| warning: false
-#| results: asis
+for (response in responses) {
+  response_label <- response_labels[[response]]
+  summary_file <- file.path(
+    "models",
+    "sensitivity_temperature_interaction",
+    paste0("summary_", response, ifelse(response == "D12_SURV", "_interaction_binomial.txt", "_interaction_gaussian.txt"))
+  )
+  figure_file <- file.path(
+    "figures",
+    "temperature_interactions",
+    paste0("temperature_interaction_", response, ".png")
+  )
 
-summary_files <- list.files(
-  "models/sensitivity_temperature_interaction",
-  pattern = "^summary_.*interaction.*\\.txt$",
-  full.names = TRUE
-)
+  cat("\n\n### ", response_label, "\n\n", sep = "")
+  cat("**Model:** `", sub("^response", response, formula_text), "`\n\n", sep = "")
 
-if (length(summary_files) > 0) {
-  for (summary_file in sort(summary_files)) {
-    cat("\n\n### ", tools::file_path_sans_ext(basename(summary_file)), "\n\n", sep = "")
+  cat("#### Saved model summary\n\n")
+  if (file.exists(summary_file)) {
     cat("<details>\n")
     cat("<summary>Show saved model summary</summary>\n\n")
     cat("```text\n")
     cat(paste(readLines(summary_file, warn = FALSE), collapse = "\n"))
     cat("\n```\n")
-    cat("</details>\n")
+    cat("</details>\n\n")
+  } else {
+    cat("Saved model summary is not available for this response.\n\n")
   }
-} else {
-  cat("Saved temperature-interaction summaries are not available yet.")
+
+  cat("#### Prediction figure\n\n")
+  if (file.exists(figure_file)) {
+    cat(glue("![]({figure_file})"), "\n\n")
+  } else {
+    cat("Prediction figure is not available for this response.\n\n")
+  }
 }
 ```

@@ -121,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./07_temperature_models.html" aria-current="page"> 
-<span class="menu-text">External temperature</span></a>
+<span class="menu-text">Ambient temperature</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06_figures.html"> 
@@ -143,31 +143,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#external-temperature-models" id="toc-external-temperature-models" class="nav-link active" data-scroll-target="#external-temperature-models">External-temperature models</a>
+  <li><a href="#ambient-temperature-interaction-models" id="toc-ambient-temperature-interaction-models" class="nav-link active" data-scroll-target="#ambient-temperature-interaction-models">Ambient-temperature interaction models</a>
   <ul class="collapse">
   <li><a href="#collinearity-check" id="toc-collinearity-check" class="nav-link" data-scroll-target="#collinearity-check">Collinearity check</a></li>
-  <li><a href="#temperature-interaction-terms" id="toc-temperature-interaction-terms" class="nav-link" data-scroll-target="#temperature-interaction-terms">Temperature-interaction terms</a></li>
-  <li><a href="#prediction-figures" id="toc-prediction-figures" class="nav-link" data-scroll-target="#prediction-figures">Prediction figures</a>
+  <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms">Interaction terms</a></li>
+  <li><a href="#response-level-models" id="toc-response-level-models" class="nav-link" data-scroll-target="#response-level-models">Response-level models</a>
   <ul class="collapse">
-  <li><a href="#d12_mass" id="toc-d12_mass" class="nav-link" data-scroll-target="#d12_mass">D12_MASS</a></li>
-  <li><a href="#d12_rtars" id="toc-d12_rtars" class="nav-link" data-scroll-target="#d12_rtars">D12_RTARS</a></li>
-  <li><a href="#d12_smi" id="toc-d12_smi" class="nav-link" data-scroll-target="#d12_smi">D12_SMI</a></li>
-  <li><a href="#d12_surv" id="toc-d12_surv" class="nav-link" data-scroll-target="#d12_surv">D12_SURV</a></li>
-  <li><a href="#d8_mass" id="toc-d8_mass" class="nav-link" data-scroll-target="#d8_mass">D8_MASS</a></li>
-  <li><a href="#early.g" id="toc-early.g" class="nav-link" data-scroll-target="#early.g">Early.g</a></li>
-  <li><a href="#growth" id="toc-growth" class="nav-link" data-scroll-target="#growth">Growth</a></li>
-  <li><a href="#late.g" id="toc-late.g" class="nav-link" data-scroll-target="#late.g">Late.g</a></li>
-  </ul></li>
-  <li><a href="#saved-model-summaries" id="toc-saved-model-summaries" class="nav-link" data-scroll-target="#saved-model-summaries">Saved model summaries</a>
-  <ul class="collapse">
-  <li><a href="#summary_d12_mass_interaction_gaussian" id="toc-summary_d12_mass_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_mass_interaction_gaussian">summary_D12_MASS_interaction_gaussian</a></li>
-  <li><a href="#summary_d12_rtars_interaction_gaussian" id="toc-summary_d12_rtars_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_rtars_interaction_gaussian">summary_D12_RTARS_interaction_gaussian</a></li>
-  <li><a href="#summary_d12_smi_interaction_gaussian" id="toc-summary_d12_smi_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_smi_interaction_gaussian">summary_D12_SMI_interaction_gaussian</a></li>
-  <li><a href="#summary_d12_surv_interaction_binomial" id="toc-summary_d12_surv_interaction_binomial" class="nav-link" data-scroll-target="#summary_d12_surv_interaction_binomial">summary_D12_SURV_interaction_binomial</a></li>
-  <li><a href="#summary_d8_mass_interaction_gaussian" id="toc-summary_d8_mass_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d8_mass_interaction_gaussian">summary_D8_MASS_interaction_gaussian</a></li>
-  <li><a href="#summary_early.g_interaction_gaussian" id="toc-summary_early.g_interaction_gaussian" class="nav-link" data-scroll-target="#summary_early.g_interaction_gaussian">summary_Early.g_interaction_gaussian</a></li>
-  <li><a href="#summary_growth_interaction_gaussian" id="toc-summary_growth_interaction_gaussian" class="nav-link" data-scroll-target="#summary_growth_interaction_gaussian">summary_Growth_interaction_gaussian</a></li>
-  <li><a href="#summary_late.g_interaction_gaussian" id="toc-summary_late.g_interaction_gaussian" class="nav-link" data-scroll-target="#summary_late.g_interaction_gaussian">summary_Late.g_interaction_gaussian</a></li>
+  <li><a href="#day-8-body-mass" id="toc-day-8-body-mass" class="nav-link" data-scroll-target="#day-8-body-mass">Day-8 body mass</a></li>
+  <li><a href="#day-12-body-mass" id="toc-day-12-body-mass" class="nav-link" data-scroll-target="#day-12-body-mass">Day-12 body mass</a></li>
+  <li><a href="#early-growth" id="toc-early-growth" class="nav-link" data-scroll-target="#early-growth">Early growth</a></li>
+  <li><a href="#late-growth" id="toc-late-growth" class="nav-link" data-scroll-target="#late-growth">Late growth</a></li>
+  <li><a href="#whole-period-growth" id="toc-whole-period-growth" class="nav-link" data-scroll-target="#whole-period-growth">Whole-period growth</a></li>
+  <li><a href="#day-12-scaled-mass-index" id="toc-day-12-scaled-mass-index" class="nav-link" data-scroll-target="#day-12-scaled-mass-index">Day-12 scaled mass index</a></li>
+  <li><a href="#day-12-tarsus-length" id="toc-day-12-tarsus-length" class="nav-link" data-scroll-target="#day-12-tarsus-length">Day-12 tarsus length</a></li>
+  <li><a href="#day-12-survival" id="toc-day-12-survival" class="nav-link" data-scroll-target="#day-12-survival">Day-12 survival</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -179,10 +168,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="external-temperature-models" class="level1">
-<h1>External-temperature models</h1>
-<p>This page addresses a separate question from the primary experiment results: whether measured external temperature is associated with offspring traits and survival.</p>
-<p>The aim is not to replace the experimental treatment models, but to show whether natural variation in external temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period temperature:</p>
+<section id="ambient-temperature-interaction-models" class="level1">
+<h1>Ambient-temperature interaction models</h1>
+<p>This page addresses a separate question from the primary experiment results: whether measured ambient temperature is associated with offspring traits and survival.</p>
+<p>The aim is not to replace the experimental treatment models, but to show whether natural variation in ambient temperature during incubation and the nestling period is related to the same responses. These models include the treatment predictors and then add the interaction between measured incubation-period and nestling-period ambient temperature:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
@@ -191,12 +180,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Day-2 mass is not included because it occurs before most of the nestling-period treatment.</p>
 <section id="collinearity-check" class="level2">
 <h2 class="anchored" data-anchor-id="collinearity-check">Collinearity check</h2>
-<p>Before interpreting the temperature-interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.</p>
+<p>Before interpreting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 840` complete records. This indicates no strong linear correlation between the two measured temperature variables.
+<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 840` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
 
-The largest VIF in the temperature-interaction models is `4.29`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
+The largest VIF in the ambient-temperature interaction models is `4.29`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
 </div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -364,8 +353,8 @@ The largest VIF in the temperature-interaction models is `4.29`. The highest val
 </div>
 </div>
 </section>
-<section id="temperature-interaction-terms" class="level2">
-<h2 class="anchored" data-anchor-id="temperature-interaction-terms">Temperature-interaction terms</h2>
+<section id="interaction-terms" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-terms">Interaction terms</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -457,245 +446,14 @@ The largest VIF in the temperature-interaction models is `4.29`. The highest val
 </div>
 </div>
 </section>
-<section id="prediction-figures" class="level2">
-<h2 class="anchored" data-anchor-id="prediction-figures">Prediction figures</h2>
-<section id="d12_mass" class="level3">
-<h3 class="anchored" data-anchor-id="d12_mass">D12_MASS</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_D12_MASS.png" class="img-fluid"></p>
-</section>
-<section id="d12_rtars" class="level3">
-<h3 class="anchored" data-anchor-id="d12_rtars">D12_RTARS</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_D12_RTARS.png" class="img-fluid"></p>
-</section>
-<section id="d12_smi" class="level3">
-<h3 class="anchored" data-anchor-id="d12_smi">D12_SMI</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_D12_SMI.png" class="img-fluid"></p>
-</section>
-<section id="d12_surv" class="level3">
-<h3 class="anchored" data-anchor-id="d12_surv">D12_SURV</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_D12_SURV.png" class="img-fluid"></p>
-</section>
-<section id="d8_mass" class="level3">
-<h3 class="anchored" data-anchor-id="d8_mass">D8_MASS</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_D8_MASS.png" class="img-fluid"></p>
-</section>
-<section id="early.g" class="level3">
-<h3 class="anchored" data-anchor-id="early.g">Early.g</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_Early.g.png" class="img-fluid"></p>
-</section>
-<section id="growth" class="level3">
-<h3 class="anchored" data-anchor-id="growth">Growth</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_Growth.png" class="img-fluid"></p>
-</section>
-<section id="late.g" class="level3">
-<h3 class="anchored" data-anchor-id="late.g">Late.g</h3>
-<p>Lines show predicted values across incubation-period external temperature at low, average, and high nestling-period external temperature. Ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
-<p><img src="figures/temperature_interactions/temperature_interaction_Late.g.png" class="img-fluid"></p>
-</section>
-</section>
-<section id="saved-model-summaries" class="level2">
-<h2 class="anchored" data-anchor-id="saved-model-summaries">Saved model summaries</h2>
-<section id="summary_d12_mass_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_d12_mass_interaction_gaussian">summary_D12_MASS_interaction_gaussian</h3>
-<details>
-<summary>
-Show saved model summary
-</summary>
-<pre class="text"><code> Family: gaussian  ( identity )
-Formula:          
-D12_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
-Data: model_data
-
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   2084.4    2134.3   -1031.2    2062.4       676 
-
-Random effects:
-
-Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 1.554e+00 1.247e+00
- YEAR     (Intercept) 2.906e-09 5.391e-05
- Residual             7.178e-01 8.472e-01
-Number of obs: 687, groups:  F_RING, 144; YEAR, 4
-
-Dispersion estimate for gaussian family (sigma^2): 0.718 
-
-Conditional model:
-                                                  Estimate Std. Error z value
-(Intercept)                                       13.84816    0.19861   69.72
-EXP.INCHeated                                     -0.21055    0.22033   -0.96
-EXP.NESTHeated                                     0.09643    0.21994    0.44
-incubation_temperature_sc                         -0.63057    0.19752   -3.19
-nestling_temperature_sc                           -0.51806    0.17321   -2.99
-SEXM                                               0.13953    0.07294    1.91
-BS_sc                                             -0.02678    0.10537   -0.25
-incubation_temperature_sc:nestling_temperature_sc -0.63144    0.25718   -2.46
-                                                  Pr(&gt;|z|)    
-(Intercept)                                        &lt; 2e-16 ***
-EXP.INCHeated                                      0.33927    
-EXP.NESTHeated                                     0.66108    
-incubation_temperature_sc                          0.00141 ** 
-nestling_temperature_sc                            0.00278 ** 
-SEXM                                               0.05575 .  
-BS_sc                                              0.79936    
-incubation_temperature_sc:nestling_temperature_sc  0.01408 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</details>
-</section>
-<section id="summary_d12_rtars_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_d12_rtars_interaction_gaussian">summary_D12_RTARS_interaction_gaussian</h3>
-<details>
-<summary>
-Show saved model summary
-</summary>
-<pre class="text"><code> Family: gaussian  ( identity )
-Formula:          D12_RTARS ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
-    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
-Data: model_data
-
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   1087.5    1137.2    -532.7    1065.5       669 
-
-Random effects:
-
-Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 2.627e-01 5.126e-01
- YEAR     (Intercept) 5.344e-10 2.312e-05
- Residual             1.850e-01 4.301e-01
-Number of obs: 680, groups:  F_RING, 141; YEAR, 4
-
-Dispersion estimate for gaussian family (sigma^2): 0.185 
-
-Conditional model:
-                                                  Estimate Std. Error z value
-(Intercept)                                       16.89000    0.08443  200.05
-EXP.INCHeated                                     -0.16191    0.09377   -1.73
-EXP.NESTHeated                                     0.03982    0.09359    0.43
-incubation_temperature_sc                         -0.06368    0.08412   -0.76
-nestling_temperature_sc                           -0.12206    0.07360   -1.66
-SEXM                                              -0.04796    0.03690   -1.30
-BS_sc                                              0.04841    0.04516    1.07
-incubation_temperature_sc:nestling_temperature_sc  0.11954    0.10966    1.09
-                                                  Pr(&gt;|z|)    
-(Intercept)                                         &lt;2e-16 ***
-EXP.INCHeated                                       0.0842 .  
-EXP.NESTHeated                                      0.6705    
-incubation_temperature_sc                           0.4490    
-nestling_temperature_sc                             0.0973 .  
-SEXM                                                0.1936    
-BS_sc                                               0.2838    
-incubation_temperature_sc:nestling_temperature_sc   0.2757    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</details>
-</section>
-<section id="summary_d12_smi_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_d12_smi_interaction_gaussian">summary_D12_SMI_interaction_gaussian</h3>
-<details>
-<summary>
-Show saved model summary
-</summary>
-<pre class="text"><code> Family: gaussian  ( identity )
-Formula:          
-D12_SMI ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
-    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
-Data: model_data
-
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   2236.0    2285.7   -1107.0    2214.0       668 
-
-Random effects:
-
-Conditional model:
- Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 1.233e+00 1.110e+00
- YEAR     (Intercept) 4.151e-09 6.443e-05
- Residual             1.038e+00 1.019e+00
-Number of obs: 679, groups:  F_RING, 141; YEAR, 4
-
-Dispersion estimate for gaussian family (sigma^2): 1.04 
-
-Conditional model:
-                                                  Estimate Std. Error z value
-(Intercept)                                       13.74329    0.18599   73.89
-EXP.INCHeated                                      0.13263    0.20595    0.64
-EXP.NESTHeated                                     0.13163    0.20554    0.64
-incubation_temperature_sc                         -0.49180    0.18491   -2.66
-nestling_temperature_sc                           -0.26480    0.16180   -1.64
-SEXM                                               0.26489    0.08736    3.03
-BS_sc                                             -0.19269    0.09948   -1.94
-incubation_temperature_sc:nestling_temperature_sc -0.83581    0.24107   -3.47
-                                                  Pr(&gt;|z|)    
-(Intercept)                                        &lt; 2e-16 ***
-EXP.INCHeated                                     0.519575    
-EXP.NESTHeated                                    0.521922    
-incubation_temperature_sc                         0.007823 ** 
-nestling_temperature_sc                           0.101725    
-SEXM                                              0.002427 ** 
-BS_sc                                             0.052757 .  
-incubation_temperature_sc:nestling_temperature_sc 0.000526 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</details>
-</section>
-<section id="summary_d12_surv_interaction_binomial" class="level3">
-<h3 class="anchored" data-anchor-id="summary_d12_surv_interaction_binomial">summary_D12_SURV_interaction_binomial</h3>
-<details>
-<summary>
-Show saved model summary
-</summary>
-<pre class="text"><code> Family: binomial  ( logit )
-Formula:          
-D12_SURV_bin ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
-    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
-Data: surv_dat
-
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    482.6     529.9    -231.3     462.6       830 
-
-Random effects:
-
-Conditional model:
- Groups Name        Variance  Std.Dev. 
- F_RING (Intercept) 1.604e+01 4.0055158
- YEAR   (Intercept) 2.238e-09 0.0000473
-Number of obs: 840, groups:  F_RING, 161; YEAR, 4
-
-Conditional model:
-                                                  Estimate Std. Error z value
-(Intercept)                                        4.14837    0.84955   4.883
-EXP.INCHeated                                     -0.49323    0.78823  -0.626
-EXP.NESTHeated                                     0.91115    0.79083   1.152
-incubation_temperature_sc                         -2.82874    0.54840  -5.158
-nestling_temperature_sc                           -0.36724    0.39777  -0.923
-SEXM                                               0.10704    0.32455   0.330
-BS_sc                                              0.09768    0.36541   0.267
-incubation_temperature_sc:nestling_temperature_sc -0.38196    0.44142  -0.865
-                                                  Pr(&gt;|z|)    
-(Intercept)                                       1.04e-06 ***
-EXP.INCHeated                                        0.531    
-EXP.NESTHeated                                       0.249    
-incubation_temperature_sc                         2.49e-07 ***
-nestling_temperature_sc                              0.356    
-SEXM                                                 0.742    
-BS_sc                                                0.789    
-incubation_temperature_sc:nestling_temperature_sc    0.387    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</details>
-</section>
-<section id="summary_d8_mass_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_d8_mass_interaction_gaussian">summary_D8_MASS_interaction_gaussian</h3>
+<section id="response-level-models" class="level2">
+<h2 class="anchored" data-anchor-id="response-level-models">Response-level models</h2>
+<p>For each response, the section below shows the fitted ambient-temperature interaction model, the saved model summary, and the corresponding prediction figure. The prediction figure is the main visual interpretation: lines show population-level predicted values across incubation-period ambient temperature at low, average, and high nestling-period ambient temperature; ribbons are 95% confidence intervals; pale points show original observations when readable.</p>
+<section id="day-8-body-mass" class="level3">
+<h3 class="anchored" data-anchor-id="day-8-body-mass">Day-8 body mass</h3>
+<p><strong>Model:</strong> <code>D8_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary">Saved model summary</h4>
 <details>
 <summary>
 Show saved model summary
@@ -743,8 +501,73 @@ incubation_temperature_sc:nestling_temperature_sc   0.0156 *
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
 </section>
-<section id="summary_early.g_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_early.g_interaction_gaussian">summary_Early.g_interaction_gaussian</h3>
+<section id="prediction-figure" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_D8_MASS.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="day-12-body-mass" class="level3">
+<h3 class="anchored" data-anchor-id="day-12-body-mass">Day-12 body mass</h3>
+<p><strong>Model:</strong> <code>D12_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-1" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-1">Saved model summary</h4>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+D12_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2084.4    2134.3   -1031.2    2062.4       676 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.554e+00 1.247e+00
+ YEAR     (Intercept) 2.906e-09 5.391e-05
+ Residual             7.178e-01 8.472e-01
+Number of obs: 687, groups:  F_RING, 144; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.718 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       13.84816    0.19861   69.72
+EXP.INCHeated                                     -0.21055    0.22033   -0.96
+EXP.NESTHeated                                     0.09643    0.21994    0.44
+incubation_temperature_sc                         -0.63057    0.19752   -3.19
+nestling_temperature_sc                           -0.51806    0.17321   -2.99
+SEXM                                               0.13953    0.07294    1.91
+BS_sc                                             -0.02678    0.10537   -0.25
+incubation_temperature_sc:nestling_temperature_sc -0.63144    0.25718   -2.46
+                                                  Pr(&gt;|z|)    
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                      0.33927    
+EXP.NESTHeated                                     0.66108    
+incubation_temperature_sc                          0.00141 ** 
+nestling_temperature_sc                            0.00278 ** 
+SEXM                                               0.05575 .  
+BS_sc                                              0.79936    
+incubation_temperature_sc:nestling_temperature_sc  0.01408 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="prediction-figure-1" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-1">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_MASS.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="early-growth" class="level3">
+<h3 class="anchored" data-anchor-id="early-growth">Early growth</h3>
+<p><strong>Model:</strong> <code>Early.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-2" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-2">Saved model summary</h4>
 <details>
 <summary>
 Show saved model summary
@@ -792,8 +615,73 @@ incubation_temperature_sc:nestling_temperature_sc  0.06235 .
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
 </section>
-<section id="summary_growth_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_growth_interaction_gaussian">summary_Growth_interaction_gaussian</h3>
+<section id="prediction-figure-2" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-2">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_Early.g.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="late-growth" class="level3">
+<h3 class="anchored" data-anchor-id="late-growth">Late growth</h3>
+<p><strong>Model:</strong> <code>Late.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-3" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-3">Saved model summary</h4>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+Late.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    115.9     165.6     -46.9      93.9       666 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 0.067899 0.26057 
+ YEAR     (Intercept) 0.003599 0.05999 
+ Residual             0.043291 0.20807 
+Number of obs: 677, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.0433 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                        0.26279    0.05238   5.017
+EXP.INCHeated                                      0.04094    0.04777   0.857
+EXP.NESTHeated                                     0.02547    0.04734   0.538
+incubation_temperature_sc                         -0.18680    0.05369  -3.479
+nestling_temperature_sc                           -0.03890    0.04954  -0.785
+SEXM                                               0.01295    0.01791   0.723
+BS_sc                                             -0.01337    0.02315  -0.578
+incubation_temperature_sc:nestling_temperature_sc -0.11277    0.06532  -1.727
+                                                  Pr(&gt;|z|)    
+(Intercept)                                       5.26e-07 ***
+EXP.INCHeated                                     0.391394    
+EXP.NESTHeated                                    0.590611    
+incubation_temperature_sc                         0.000503 ***
+nestling_temperature_sc                           0.432322    
+SEXM                                              0.469732    
+BS_sc                                             0.563485    
+incubation_temperature_sc:nestling_temperature_sc 0.084238 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="prediction-figure-3" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-3">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_Late.g.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="whole-period-growth" class="level3">
+<h3 class="anchored" data-anchor-id="whole-period-growth">Whole-period growth</h3>
+<p><strong>Model:</strong> <code>Growth ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-4" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-4">Saved model summary</h4>
 <details>
 <summary>
 Show saved model summary
@@ -841,56 +729,179 @@ incubation_temperature_sc:nestling_temperature_sc   0.0120 *
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
 </section>
-<section id="summary_late.g_interaction_gaussian" class="level3">
-<h3 class="anchored" data-anchor-id="summary_late.g_interaction_gaussian">summary_Late.g_interaction_gaussian</h3>
+<section id="prediction-figure-4" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-4">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_Growth.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="day-12-scaled-mass-index" class="level3">
+<h3 class="anchored" data-anchor-id="day-12-scaled-mass-index">Day-12 scaled mass index</h3>
+<p><strong>Model:</strong> <code>D12_SMI ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-5" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-5">Saved model summary</h4>
 <details>
 <summary>
 Show saved model summary
 </summary>
 <pre class="text"><code> Family: gaussian  ( identity )
 Formula:          
-Late.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+D12_SMI ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
     SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    115.9     165.6     -46.9      93.9       666 
+   2236.0    2285.7   -1107.0    2214.0       668 
 
 Random effects:
 
 Conditional model:
- Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.067899 0.26057 
- YEAR     (Intercept) 0.003599 0.05999 
- Residual             0.043291 0.20807 
-Number of obs: 677, groups:  F_RING, 141; YEAR, 4
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.233e+00 1.110e+00
+ YEAR     (Intercept) 4.151e-09 6.443e-05
+ Residual             1.038e+00 1.019e+00
+Number of obs: 679, groups:  F_RING, 141; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.0433 
+Dispersion estimate for gaussian family (sigma^2): 1.04 
 
 Conditional model:
                                                   Estimate Std. Error z value
-(Intercept)                                        0.26279    0.05238   5.017
-EXP.INCHeated                                      0.04094    0.04777   0.857
-EXP.NESTHeated                                     0.02547    0.04734   0.538
-incubation_temperature_sc                         -0.18680    0.05369  -3.479
-nestling_temperature_sc                           -0.03890    0.04954  -0.785
-SEXM                                               0.01295    0.01791   0.723
-BS_sc                                             -0.01337    0.02315  -0.578
-incubation_temperature_sc:nestling_temperature_sc -0.11277    0.06532  -1.727
+(Intercept)                                       13.74329    0.18599   73.89
+EXP.INCHeated                                      0.13263    0.20595    0.64
+EXP.NESTHeated                                     0.13163    0.20554    0.64
+incubation_temperature_sc                         -0.49180    0.18491   -2.66
+nestling_temperature_sc                           -0.26480    0.16180   -1.64
+SEXM                                               0.26489    0.08736    3.03
+BS_sc                                             -0.19269    0.09948   -1.94
+incubation_temperature_sc:nestling_temperature_sc -0.83581    0.24107   -3.47
                                                   Pr(&gt;|z|)    
-(Intercept)                                       5.26e-07 ***
-EXP.INCHeated                                     0.391394    
-EXP.NESTHeated                                    0.590611    
-incubation_temperature_sc                         0.000503 ***
-nestling_temperature_sc                           0.432322    
-SEXM                                              0.469732    
-BS_sc                                             0.563485    
-incubation_temperature_sc:nestling_temperature_sc 0.084238 .  
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                     0.519575    
+EXP.NESTHeated                                    0.521922    
+incubation_temperature_sc                         0.007823 ** 
+nestling_temperature_sc                           0.101725    
+SEXM                                              0.002427 ** 
+BS_sc                                             0.052757 .  
+incubation_temperature_sc:nestling_temperature_sc 0.000526 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details>
+</section>
+<section id="prediction-figure-5" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-5">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_SMI.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="day-12-tarsus-length" class="level3">
+<h3 class="anchored" data-anchor-id="day-12-tarsus-length">Day-12 tarsus length</h3>
+<p><strong>Model:</strong> <code>D12_RTARS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-6" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-6">Saved model summary</h4>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          D12_RTARS ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
+    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1087.5    1137.2    -532.7    1065.5       669 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 2.627e-01 5.126e-01
+ YEAR     (Intercept) 5.344e-10 2.312e-05
+ Residual             1.850e-01 4.301e-01
+Number of obs: 680, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.185 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       16.89000    0.08443  200.05
+EXP.INCHeated                                     -0.16191    0.09377   -1.73
+EXP.NESTHeated                                     0.03982    0.09359    0.43
+incubation_temperature_sc                         -0.06368    0.08412   -0.76
+nestling_temperature_sc                           -0.12206    0.07360   -1.66
+SEXM                                              -0.04796    0.03690   -1.30
+BS_sc                                              0.04841    0.04516    1.07
+incubation_temperature_sc:nestling_temperature_sc  0.11954    0.10966    1.09
+                                                  Pr(&gt;|z|)    
+(Intercept)                                         &lt;2e-16 ***
+EXP.INCHeated                                       0.0842 .  
+EXP.NESTHeated                                      0.6705    
+incubation_temperature_sc                           0.4490    
+nestling_temperature_sc                             0.0973 .  
+SEXM                                                0.1936    
+BS_sc                                               0.2838    
+incubation_temperature_sc:nestling_temperature_sc   0.2757    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="prediction-figure-6" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-6">Prediction figure</h4>
+<p><img src="figures/temperature_interactions/temperature_interaction_D12_RTARS.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="day-12-survival" class="level3">
+<h3 class="anchored" data-anchor-id="day-12-survival">Day-12 survival</h3>
+<p><strong>Model:</strong> <code>D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></p>
+<section id="saved-model-summary-7" class="level4">
+<h4 class="anchored" data-anchor-id="saved-model-summary-7">Saved model summary</h4>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: binomial  ( logit )
+Formula:          
+D12_SURV_bin ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
+    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Data: surv_dat
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    482.6     529.9    -231.3     462.6       830 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance  Std.Dev. 
+ F_RING (Intercept) 1.604e+01 4.0055158
+ YEAR   (Intercept) 2.238e-09 0.0000473
+Number of obs: 840, groups:  F_RING, 161; YEAR, 4
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                        4.14837    0.84955   4.883
+EXP.INCHeated                                     -0.49323    0.78823  -0.626
+EXP.NESTHeated                                     0.91115    0.79083   1.152
+incubation_temperature_sc                         -2.82874    0.54840  -5.158
+nestling_temperature_sc                           -0.36724    0.39777  -0.923
+SEXM                                               0.10704    0.32455   0.330
+BS_sc                                              0.09768    0.36541   0.267
+incubation_temperature_sc:nestling_temperature_sc -0.38196    0.44142  -0.865
+                                                  Pr(&gt;|z|)    
+(Intercept)                                       1.04e-06 ***
+EXP.INCHeated                                        0.531    
+EXP.NESTHeated                                       0.249    
+incubation_temperature_sc                         2.49e-07 ***
+nestling_temperature_sc                              0.356    
+SEXM                                                 0.742    
+BS_sc                                                0.789    
+incubation_temperature_sc:nestling_temperature_sc    0.387    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="prediction-figure-7" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-figure-7">Prediction figure</h4>
+<p>Prediction figure is not available for this response.</p>
 
 
+</section>
 </section>
 </section>
 </section>
