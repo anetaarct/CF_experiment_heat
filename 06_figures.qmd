@@ -1,0 +1,222 @@
+# Figure code
+
+This chapter documents how the figures are generated. The code blocks are not evaluated during website rendering; they show the exact plotting logic. Final figures are called from the saved PDF files in `figures/raw_distributions/` and `figures/model_effects/`.
+
+## Figure setup
+
+```{r}
+#| label: figure-setup-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show figure setup code"
+
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(ggeffects)
+
+dat <- readRDS("data/prepared_nestlings.rds")
+selected_models <- read_csv("models/selected_models.csv", show_col_types = FALSE)
+
+trait_labels <- c(
+  D2_MASS = "Body mass day 2",
+  D8_MASS = "Body mass day 8",
+  D12_MASS = "Body mass day 12",
+  D12_RTARS = "Tarsus length day 12",
+  Early.g = "Early growth",
+  Late.g = "Late growth",
+  Growth = "Whole-period growth",
+  D12_SMI = "Scaled mass index day 12",
+  D12_SURV = "Survival to day 12"
+)
+```
+
+## Raw-data distributions
+
+These figures show the raw response distributions before model interpretation. For continuous responses, the box centre line is the median, the box spans the interquartile range, and pale points are individual nestlings.
+
+```{r}
+#| label: raw-distribution-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show raw-distribution code"
+
+plot_raw_distribution <- function(response) {
+  plot_data <- dat |>
+    filter(!is.na(.data[[response]]))
+  y_label <- trait_labels[[response]] %||% response
+
+  if (response == "D2_MASS") {
+    p <- ggplot(plot_data, aes(x = EXP.INC, y = .data[[response]], fill = EXP.INC)) +
+      geom_boxplot(alpha = 0.72, outlier.alpha = 0.25) +
+      geom_jitter(width = 0.12, alpha = 0.22, size = 1) +
+      labs(x = "Incubation treatment", y = y_label)
+  } else {
+    p <- ggplot(plot_data, aes(x = EXP.INC, y = .data[[response]], fill = EXP.INC)) +
+      geom_boxplot(alpha = 0.72, outlier.alpha = 0.25) +
+      geom_jitter(width = 0.12, alpha = 0.22, size = 1) +
+      facet_wrap(~ EXP.NEST) +
+      labs(x = "Incubation treatment", y = y_label, fill = "Incubation")
+  }
+
+  p <- p +
+    scale_fill_manual(values = c("#476F67", "#C98C1E", "#8FAEA3", "#6E93A2")) +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+
+  ggsave(file.path("figures", "raw_distributions", paste0("raw_", response, ".pdf")),
+         p, width = 7.2, height = 4.8)
+}
+```
+
+## Model-effect figures for continuous responses
+
+These figures use model predictions as the main signal. Dark points and lines show fitted means from the selected mixed model, vertical intervals are 95% confidence intervals, and pale jittered points show original observations in the background.
+
+```{r}
+#| label: continuous-model-effect-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show continuous model-effect code"
+
+plot_continuous_model_effect <- function(response) {
+  fit <- readRDS(file.path("models", paste0("best_model_", response, ".rds")))
+  y_label <- trait_labels[[response]] %||% response
+
+  if (response == "D2_MASS") {
+    raw_data <- dat |>
+      filter(!is.na(.data[[response]]), !is.na(EXP.INC))
+    pred <- ggpredict(fit, terms = "EXP.INC")
+
+    p <- ggplot() +
+      geom_jitter(
+        data = raw_data,
+        aes(x = EXP.INC, y = .data[[response]]),
+        width = 0.12,
+        alpha = 0.16,
+        size = 1,
+        color = "grey35"
+      ) +
+      geom_pointrange(
+        data = pred,
+        aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high),
+        size = 0.62,
+        linewidth = 0.55,
+        color = "#1F3A3D"
+      ) +
+      labs(x = "Incubation treatment", y = paste("Predicted", y_label))
+  } else {
+    raw_data <- dat |>
+      filter(!is.na(.data[[response]]), !is.na(EXP.INC), !is.na(EXP.NEST))
+    pred <- ggpredict(fit, terms = c("EXP.INC", "EXP.NEST"))
+
+    p <- ggplot() +
+      geom_jitter(
+        data = raw_data,
+        aes(x = EXP.INC, y = .data[[response]]),
+        width = 0.13,
+        alpha = 0.13,
+        size = 0.9,
+        color = "grey35"
+      ) +
+      geom_line(
+        data = pred,
+        aes(x = x, y = predicted, color = group, group = group),
+        linewidth = 0.85
+      ) +
+      geom_pointrange(
+        data = pred,
+        aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high, color = group, group = group),
+        size = 0.58,
+        linewidth = 0.5,
+        position = position_dodge(width = 0.18)
+      ) +
+      facet_wrap(~ EXP.NEST) +
+      labs(x = "Incubation treatment", y = paste("Predicted", y_label), color = "Nestling treatment")
+  }
+
+  p <- p +
+    scale_color_manual(values = c("#476F67", "#C98C1E", "#6E93A2", "#8FAEA3")) +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+
+  ggsave(file.path("figures", "model_effects", paste0("model_effect_", response, ".pdf")),
+         p, width = 7.2, height = 4.8)
+}
+```
+
+## Survival figures
+
+For survival, the model-effect figure combines observed survival proportions in the background with predicted survival probabilities and 95% confidence intervals from the selected binomial mixed model.
+
+```{r}
+#| label: survival-figure-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show survival figure code"
+
+plot_survival_model_effect <- function() {
+  fit <- readRDS("models/best_model_D12_SURV.rds")
+
+  raw_prop <- dat |>
+    filter(!is.na(D12_SURV), !is.na(EXP.INC), !is.na(EXP.NEST)) |>
+    mutate(D12_SURV_num = as.numeric(as.character(D12_SURV))) |>
+    group_by(EXP.INC, EXP.NEST) |>
+    summarise(observed_survival = mean(D12_SURV_num, na.rm = TRUE), .groups = "drop")
+
+  pred <- ggpredict(fit, terms = c("EXP.INC", "EXP.NEST"))
+
+  p <- ggplot() +
+    geom_col(
+      data = raw_prop,
+      aes(x = EXP.INC, y = observed_survival, fill = EXP.NEST),
+      position = position_dodge(width = 0.45),
+      width = 0.32,
+      alpha = 0.18,
+      color = NA
+    ) +
+    geom_line(
+      data = pred,
+      aes(x = x, y = predicted, color = group, group = group),
+      linewidth = 0.85
+    ) +
+    geom_pointrange(
+      data = pred,
+      aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high, color = group, group = group),
+      size = 0.58,
+      linewidth = 0.5,
+      position = position_dodge(width = 0.18)
+    ) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
+    labs(x = "Incubation treatment", y = "Predicted survival", color = "Nestling treatment") +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+
+  ggsave("figures/model_effects/model_effect_D12_SURV.pdf", p, width = 7.2, height = 4.8)
+}
+```
+
+## Figure PDFs
+
+The final figures are saved as PDF files and can be opened directly from the website.
+
+```{r}
+#| label: figure-pdf-links
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+library(glue)
+
+figure_pdfs <- c(
+  list.files("figures/raw_distributions", pattern = "\\.pdf$", full.names = TRUE),
+  list.files("figures/model_effects", pattern = "\\.pdf$", full.names = TRUE)
+)
+
+if (length(figure_pdfs) > 0) {
+  for (fig in sort(figure_pdfs)) {
+    cat(glue("- [{basename(fig)}]({fig})\n"))
+  }
+}
+```

@@ -1,0 +1,34 @@
+response,response_label,model_name,selected_model,summary_txt,summary_pdf,diagnostic_pdf
+D2_MASS,Day-2 body mass,gaussian_mean,TRUE,models/summary_D2_MASS_gaussian_mean.txt,models/summary_pdf/summary_D2_MASS_gaussian_mean.pdf,models/diagnostics/diagnostic_D2_MASS_gaussian_mean.pdf
+D2_MASS,Day-2 body mass,gaussian_scale,FALSE,models/summary_D2_MASS_gaussian_scale.txt,models/summary_pdf/summary_D2_MASS_gaussian_scale.pdf,models/diagnostics/diagnostic_D2_MASS_gaussian_scale.pdf
+D2_MASS,Day-2 body mass,student_mean,FALSE,models/summary_D2_MASS_student_mean.txt,models/summary_pdf/summary_D2_MASS_student_mean.pdf,models/diagnostics/diagnostic_D2_MASS_student_mean.pdf
+D2_MASS,Day-2 body mass,student_scale,FALSE,models/summary_D2_MASS_student_scale.txt,models/summary_pdf/summary_D2_MASS_student_scale.pdf,models/diagnostics/diagnostic_D2_MASS_student_scale.pdf
+D8_MASS,Day-8 body mass,gaussian_mean,TRUE,models/summary_D8_MASS_gaussian_mean.txt,models/summary_pdf/summary_D8_MASS_gaussian_mean.pdf,models/diagnostics/diagnostic_D8_MASS_gaussian_mean.pdf
+D8_MASS,Day-8 body mass,gaussian_scale,FALSE,models/summary_D8_MASS_gaussian_scale.txt,models/summary_pdf/summary_D8_MASS_gaussian_scale.pdf,models/diagnostics/diagnostic_D8_MASS_gaussian_scale.pdf
+D8_MASS,Day-8 body mass,student_mean,FALSE,models/summary_D8_MASS_student_mean.txt,models/summary_pdf/summary_D8_MASS_student_mean.pdf,models/diagnostics/diagnostic_D8_MASS_student_mean.pdf
+D8_MASS,Day-8 body mass,student_scale,FALSE,models/summary_D8_MASS_student_scale.txt,models/summary_pdf/summary_D8_MASS_student_scale.pdf,models/diagnostics/diagnostic_D8_MASS_student_scale.pdf
+D12_MASS,Day-12 body mass,gaussian_mean,TRUE,models/summary_D12_MASS_gaussian_mean.txt,models/summary_pdf/summary_D12_MASS_gaussian_mean.pdf,models/diagnostics/diagnostic_D12_MASS_gaussian_mean.pdf
+D12_MASS,Day-12 body mass,gaussian_scale,FALSE,models/summary_D12_MASS_gaussian_scale.txt,models/summary_pdf/summary_D12_MASS_gaussian_scale.pdf,models/diagnostics/diagnostic_D12_MASS_gaussian_scale.pdf
+D12_MASS,Day-12 body mass,student_mean,FALSE,models/summary_D12_MASS_student_mean.txt,models/summary_pdf/summary_D12_MASS_student_mean.pdf,models/diagnostics/diagnostic_D12_MASS_student_mean.pdf
+D12_MASS,Day-12 body mass,student_scale,FALSE,models/summary_D12_MASS_student_scale.txt,models/summary_pdf/summary_D12_MASS_student_scale.pdf,models/diagnostics/diagnostic_D12_MASS_student_scale.pdf
+Early.g,Early growth,gaussian_mean,TRUE,models/summary_Early.g_gaussian_mean.txt,models/summary_pdf/summary_Early.g_gaussian_mean.pdf,models/diagnostics/diagnostic_Early.g_gaussian_mean.pdf
+Early.g,Early growth,gaussian_scale,FALSE,models/summary_Early.g_gaussian_scale.txt,models/summary_pdf/summary_Early.g_gaussian_scale.pdf,models/diagnostics/diagnostic_Early.g_gaussian_scale.pdf
+Early.g,Early growth,student_mean,FALSE,models/summary_Early.g_student_mean.txt,models/summary_pdf/summary_Early.g_student_mean.pdf,models/diagnostics/diagnostic_Early.g_student_mean.pdf
+Early.g,Early growth,student_scale,FALSE,models/summary_Early.g_student_scale.txt,models/summary_pdf/summary_Early.g_student_scale.pdf,models/diagnostics/diagnostic_Early.g_student_scale.pdf
+Late.g,Late growth,gaussian_mean,TRUE,models/summary_Late.g_gaussian_mean.txt,models/summary_pdf/summary_Late.g_gaussian_mean.pdf,models/diagnostics/diagnostic_Late.g_gaussian_mean.pdf
+Late.g,Late growth,gaussian_scale,FALSE,models/summary_Late.g_gaussian_scale.txt,models/summary_pdf/summary_Late.g_gaussian_scale.pdf,models/diagnostics/diagnostic_Late.g_gaussian_scale.pdf
+Late.g,Late growth,student_mean,FALSE,models/summary_Late.g_student_mean.txt,models/summary_pdf/summary_Late.g_student_mean.pdf,models/diagnostics/diagnostic_Late.g_student_mean.pdf
+Late.g,Late growth,student_scale,FALSE,models/summary_Late.g_student_scale.txt,models/summary_pdf/summary_Late.g_student_scale.pdf,models/diagnostics/diagnostic_Late.g_student_scale.pdf
+Growth,Whole-period growth,gaussian_mean,TRUE,models/summary_Growth_gaussian_mean.txt,models/summary_pdf/summary_Growth_gaussian_mean.pdf,models/diagnostics/diagnostic_Growth_gaussian_mean.pdf
+Growth,Whole-period growth,gaussian_scale,FALSE,models/summary_Growth_gaussian_scale.txt,models/summary_pdf/summary_Growth_gaussian_scale.pdf,models/diagnostics/diagnostic_Growth_gaussian_scale.pdf
+Growth,Whole-period growth,student_mean,FALSE,models/summary_Growth_student_mean.txt,models/summary_pdf/summary_Growth_student_mean.pdf,models/diagnostics/diagnostic_Growth_student_mean.pdf
+Growth,Whole-period growth,student_scale,FALSE,models/summary_Growth_student_scale.txt,models/summary_pdf/summary_Growth_student_scale.pdf,models/diagnostics/diagnostic_Growth_student_scale.pdf
+D12_SMI,Day-12 scaled mass index,gaussian_mean,TRUE,models/summary_D12_SMI_gaussian_mean.txt,models/summary_pdf/summary_D12_SMI_gaussian_mean.pdf,models/diagnostics/diagnostic_D12_SMI_gaussian_mean.pdf
+D12_SMI,Day-12 scaled mass index,gaussian_scale,FALSE,models/summary_D12_SMI_gaussian_scale.txt,models/summary_pdf/summary_D12_SMI_gaussian_scale.pdf,models/diagnostics/diagnostic_D12_SMI_gaussian_scale.pdf
+D12_SMI,Day-12 scaled mass index,student_mean,FALSE,models/summary_D12_SMI_student_mean.txt,models/summary_pdf/summary_D12_SMI_student_mean.pdf,models/diagnostics/diagnostic_D12_SMI_student_mean.pdf
+D12_SMI,Day-12 scaled mass index,student_scale,FALSE,models/summary_D12_SMI_student_scale.txt,models/summary_pdf/summary_D12_SMI_student_scale.pdf,models/diagnostics/diagnostic_D12_SMI_student_scale.pdf
+D12_RTARS,Day-12 tarsus length,gaussian_mean,TRUE,models/summary_D12_RTARS_gaussian_mean.txt,models/summary_pdf/summary_D12_RTARS_gaussian_mean.pdf,models/diagnostics/diagnostic_D12_RTARS_gaussian_mean.pdf
+D12_RTARS,Day-12 tarsus length,gaussian_scale,FALSE,models/summary_D12_RTARS_gaussian_scale.txt,models/summary_pdf/summary_D12_RTARS_gaussian_scale.pdf,models/diagnostics/diagnostic_D12_RTARS_gaussian_scale.pdf
+D12_RTARS,Day-12 tarsus length,student_mean,FALSE,models/summary_D12_RTARS_student_mean.txt,models/summary_pdf/summary_D12_RTARS_student_mean.pdf,models/diagnostics/diagnostic_D12_RTARS_student_mean.pdf
+D12_RTARS,Day-12 tarsus length,student_scale,FALSE,models/summary_D12_RTARS_student_scale.txt,models/summary_pdf/summary_D12_RTARS_student_scale.pdf,models/diagnostics/diagnostic_D12_RTARS_student_scale.pdf
+D12_SURV,Day-12 survival,binomial,TRUE,models/summary_D12_SURV_binomial.txt,models/summary_pdf/summary_D12_SURV_binomial.pdf,models/diagnostics/diagnostic_D12_SURV_binomial.pdf

@@ -1,0 +1,5 @@
+response,response_label,model_name,model_family,dispersion_formula,AIC,delta_AIC,selected_model
+D12_RTARS,Day-12 tarsus length,student_mean,Student-t,~ 1,1057.0436869662678,0,FALSE
+D12_RTARS,Day-12 tarsus length,student_scale,Student-t,~EXP.INC + EXP.NEST,1059.0602942437774,2.0166072775095927,FALSE
+D12_RTARS,Day-12 tarsus length,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,1084.4850858853783,27.441398919110497,FALSE
+D12_RTARS,Day-12 tarsus length,gaussian_mean,Gaussian,~ 1,1086.6718976082689,29.628210642001022,TRUE

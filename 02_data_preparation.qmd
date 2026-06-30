@@ -1,0 +1,239 @@
+# Data preparation
+
+This chapter documents how the nestling-level dataset was prepared before model fitting. Each step below gives the purpose of the operation, a foldable code block showing the exact procedure, and the resulting dataset state.
+
+## Source data
+
+The nestling-level workflow starts from one raw workbook, `CF_exp_all_2026.xlsx`, using the sheet `CF_exp.nestlings_analysis`. This raw sheet is not treated as the final analysis file because repeated females are removed in a later preparation step. Only variables used later in the analysis are retained at import.
+
+```{r}
+#| label: prep-source-data-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show source-data code"
+
+raw_nestlings <- read_excel(
+  "CF_exp_all_2026.xlsx",
+  sheet = "CF_exp.nestlings_analysis",
+  na = c("NA", "", "na", "NaN")
+)
+
+analysis_vars <- c(
+  "F_RING", "LD", "INC", "CS", "BS", "HD", "SEX", "YEAR",
+  "EXP.INC", "EXP.NEST",
+  "D2_MASS", "D8_MASS", "D12_MASS", "D12_RTARS", "Early.g", "Late.g", "Growth",
+  "LOGMEAN_INCUBATION", "LOGMEAN_NESTLING", "D12_SURV", "GROUP", "BOX", "TEMP.BOX",
+  "TEMP.BOX.ENV", "BLOCK"
+)
+
+nestlings_selected <- raw_nestlings |>
+  dplyr::select(dplyr::all_of(analysis_vars))
+```
+
+Result: the source sheet contains 934 nestling records before filtering.
+
+## Variable types
+
+Continuous measurement variables are converted to numeric values. Treatment, identity, year, sex, survival, box, and block variables are converted to factors.
+
+```{r}
+#| label: prep-variable-types-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show variable-type code"
+
+numeric_vars <- c(
+  "LD", "INC", "CS", "BS", "HD", "Growth", "Early.g", "Late.g",
+  "D2_MASS", "D8_MASS", "D12_RTARS", "D12_MASS",
+  "LOGMEAN_INCUBATION", "LOGMEAN_NESTLING", "TEMP.BOX", "TEMP.BOX.ENV"
+)
+
+factor_vars <- c(
+  "F_RING", "SEX", "YEAR", "EXP.INC", "EXP.NEST", "D12_SURV", "GROUP", "BOX", "BLOCK"
+)
+
+nestlings_typed <- nestlings_selected |>
+  dplyr::mutate(
+    dplyr::across(dplyr::any_of(c("SEX", "EXP.INC", "EXP.NEST", "GROUP")),
+                  ~ stringr::str_squish(as.character(.x))),
+    dplyr::across(dplyr::any_of(numeric_vars), ~ suppressWarnings(as.numeric(.x))),
+    dplyr::across(dplyr::any_of(factor_vars), as.factor)
+  )
+```
+
+Result: variables have the classes required by the mixed models.
+
+## Sex filter
+
+The analysis is restricted to nestlings sexed as `F` or `M`. Records with missing or other sex codes are removed before model fitting.
+
+```{r}
+#| label: prep-sex-filter-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show sex-filter code"
+
+nestlings_typed <- nestlings_typed |>
+  dplyr::filter(SEX %in% c("F", "M")) |>
+  dplyr::mutate(SEX = droplevels(SEX))
+```
+
+Result: 885 sexed nestling records are retained.
+
+## Repeated females
+
+The analysis keeps one experimental brood per female. Broods are identified by `F_RING`, `YEAR`, `BOX`, and `LD`. If a female appears in more than one brood, the first brood after sorting by `YEAR`, `LD`, and `BOX` is retained, and later broods from the same female are removed.
+
+```{r}
+#| label: prep-repeated-females-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show repeated-female code"
+
+brood_order <- nestlings_typed |>
+  dplyr::distinct(F_RING, YEAR, BOX, LD, .keep_all = FALSE) |>
+  dplyr::arrange(F_RING, YEAR, LD, BOX) |>
+  dplyr::group_by(F_RING) |>
+  dplyr::mutate(female_brood_order = dplyr::row_number()) |>
+  dplyr::ungroup()
+
+repeated_females <- brood_order |>
+  dplyr::count(F_RING, name = "n_broods") |>
+  dplyr::filter(n_broods > 1)
+
+retained_broods <- brood_order |>
+  dplyr::filter(female_brood_order == 1) |>
+  dplyr::transmute(F_RING, YEAR, BOX, LD, retained_brood = TRUE)
+
+prepared_nestlings <- nestlings_typed |>
+  dplyr::inner_join(retained_broods, by = c("F_RING", "YEAR", "BOX", "LD")) |>
+  dplyr::select(-retained_brood) |>
+  droplevels()
+```
+
+Result: one female had repeated brood records. Removing the later brood reduced the dataset from 885 to 883 nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.
+
+## Standardised predictors
+
+Brood size, hatching date, and measured temperatures are standardised before modelling. The original temperature columns `LOGMEAN_INCUBATION` and `LOGMEAN_NESTLING` are used to create clearer scaled-variable names; the final analysis file keeps the scaled variables used by the models.
+
+```{r}
+#| label: prep-standardised-predictors-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show standardisation code"
+
+prepared_nestlings <- prepared_nestlings |>
+  dplyr::mutate(
+    HD_sc = as.numeric(scale(HD)),
+    BS_sc = as.numeric(scale(BS)),
+    incubation_temperature_sc = as.numeric(scale(LOGMEAN_INCUBATION)),
+    nestling_temperature_sc = as.numeric(scale(LOGMEAN_NESTLING))
+  )
+```
+
+Result: the model covariates are `BS_sc`, `HD_sc`, `incubation_temperature_sc`, and `nestling_temperature_sc`.
+
+## Scaled mass index
+
+Day-12 scaled mass index is calculated from day-12 body mass and day-12 tarsus length:
+
+\[
+SMI = M_i \left(\frac{L_0}{L_i}\right)^b
+\]
+
+where `M_i` is day-12 mass, `L_i` is day-12 tarsus length, `L_0` is the mean tarsus length, and `b` is the standard-major-axis slope approximated as the ratio of standard deviations of log mass and log tarsus.
+
+```{r}
+#| label: prep-smi-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show SMI code"
+
+smi_base <- prepared_nestlings |>
+  tidyr::drop_na(D12_MASS, D12_RTARS) |>
+  dplyr::filter(D12_MASS > 0, D12_RTARS > 0) |>
+  dplyr::mutate(
+    log_mass_n = log(D12_MASS),
+    log_tars_n = log(D12_RTARS)
+  )
+
+b_sma_chicks <- sd(smi_base$log_mass_n, na.rm = TRUE) / sd(smi_base$log_tars_n, na.rm = TRUE)
+L0_chicks <- mean(smi_base$D12_RTARS, na.rm = TRUE)
+
+prepared_nestlings <- prepared_nestlings |>
+  dplyr::mutate(
+    D12_SMI = dplyr::if_else(
+      !is.na(D12_MASS) & !is.na(D12_RTARS) & D12_MASS > 0 & D12_RTARS > 0,
+      D12_MASS * (L0_chicks / D12_RTARS)^b_sma_chicks,
+      NA_real_
+    )
+  )
+```
+
+Result: day-12 scaled mass index is available for 679 nestlings.
+
+## Treatment counts
+
+The retained data are summarised by the four treatment combinations. Both the number of retained nests and the number of retained nestling records are shown.
+
+```{r}
+#| label: prep-treatment-counts-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show treatment-count code"
+
+treatment_counts <- prepared_nestlings |>
+  dplyr::count(EXP.INC, EXP.NEST, GROUP, name = "nestling_records") |>
+  dplyr::left_join(
+    prepared_nestlings |>
+      dplyr::distinct(F_RING, YEAR, BOX, LD, EXP.INC, EXP.NEST, GROUP) |>
+      dplyr::count(EXP.INC, EXP.NEST, GROUP, name = "nests"),
+    by = c("EXP.INC", "EXP.NEST", "GROUP")
+  ) |>
+  dplyr::select(EXP.INC, EXP.NEST, GROUP, nests, nestling_records)
+```
+
+```{r}
+#| label: prep-treatment-counts-result
+#| echo: false
+#| message: false
+#| warning: false
+
+library(readr)
+library(knitr)
+
+counts_file <- "data/treatment_counts.csv"
+
+if (file.exists(counts_file)) {
+  read_csv(counts_file, show_col_types = FALSE) |>
+    kable()
+}
+```
+
+## Final analysis dataset
+
+After the preparation checks and treatment counts are created, the file used for modelling is reduced to the columns needed for the analyses. This prevents the shared analysis file from carrying unused raw or intermediate variables.
+
+```{r}
+#| label: prep-final-analysis-columns-code
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show final-column selection code"
+
+analysis_columns <- c(
+  "F_RING", "YEAR", "SEX",
+  "EXP.INC", "EXP.NEST", "GROUP",
+  "D2_MASS", "D8_MASS", "D12_MASS", "D12_RTARS",
+  "Early.g", "Late.g", "Growth", "D12_SMI", "D12_SURV",
+  "BS_sc", "incubation_temperature_sc", "nestling_temperature_sc"
+)
+
+analysis_nestlings <- prepared_nestlings |>
+  dplyr::select(dplyr::all_of(analysis_columns))
+
+saveRDS(analysis_nestlings, "data/prepared_nestlings.rds")
+readr::write_csv(analysis_nestlings, "data/prepared_nestlings.csv")
+```
+
+Result: the final analysis dataset contains 883 nestling records and 18 columns.

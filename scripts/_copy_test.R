@@ -1,0 +1,7 @@
+dst <- file.path(tempdir(), "CF_exp_all_2026.xlsx")
+print(getwd())
+print(dst)
+print(file.copy("CF_exp_all_2026.xlsx", dst, overwrite = TRUE))
+print(file.exists(dst))
+print(file.info(dst))
+print(utils::unzip(dst, list = TRUE)[1:3, ])

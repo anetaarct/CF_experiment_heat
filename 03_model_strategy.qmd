@@ -1,0 +1,65 @@
+# Model strategy
+
+The analysis uses one common mixed-model structure across nestling-level responses. The same biological predictors are used wherever they are relevant, so the interpretation of treatment and measured-temperature effects is comparable across traits.
+
+## Response variables
+
+The dependent variables are:
+
+- day-2 body mass (`D2_MASS`),
+- day-8 body mass (`D8_MASS`),
+- day-12 body mass (`D12_MASS`),
+- early growth (`Early.g`),
+- late growth (`Late.g`),
+- whole-period growth (`Growth`),
+- day-12 scaled mass index (`D12_SMI`),
+- day-12 tarsus length (`D12_RTARS`),
+- day-12 survival (`D12_SURV`).
+
+Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period conditions.
+
+## Distributional strategy
+
+For continuous nestling traits, Gaussian mixed models are used as the primary models. This choice is based on interpretability and on the fact that the response distributions do not show strong departures from normality. Student-t models are still fitted because AIC often favours heavier-tailed error distributions, but they are treated as robustness checks rather than as an automatic replacement for the Gaussian models.
+
+AIC values are reported descriptively in the distributional sensitivity analysis. Effects that are consistent between Gaussian and Student-t models are interpreted as more robust. Effects that appear only under one distributional assumption are treated cautiously.
+
+For day-12 survival, the primary model uses a binomial error distribution.
+
+## Main model
+
+For day-2 body mass, the main model includes incubation treatment, measured incubation temperature, sex, brood size, female identity, and year:
+
+```{r}
+#| label: d2-main-model
+#| echo: false
+cat("D2_MASS ~ EXP.INC + incubation_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+For later continuous traits, the main model is:
+
+```{r}
+#| label: later-main-model
+#| echo: false
+cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+For day-12 survival, the same fixed-effect structure is fitted with a binomial error distribution:
+
+```{r}
+#| label: survival-main-model
+#| echo: false
+cat("D12_SURV ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+## Temperature-interaction sensitivity analysis
+
+The main model assumes that measured incubation temperature and measured nestling-period temperature have additive effects. As a sensitivity analysis, later responses are also evaluated with an interaction between the two measured-temperature variables:
+
+```{r}
+#| label: temperature-interaction-sensitivity-model
+#| echo: false
+cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+This sensitivity model asks whether the association between incubation-period temperature and the response changes depending on nestling-period temperature. Day-2 mass is not included in this temperature-interaction sensitivity analysis because it precedes most of the nestling-period treatment. The full interaction analysis is shown on a separate page.

@@ -1,0 +1,31 @@
+ Family: gaussian  ( identity )
+Formula:          
+Growth ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1021.7    -976.7     520.9   -1041.7       654 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.850e-02 1.360e-01
+ YEAR     (Intercept) 1.942e-11 4.407e-06
+ Residual             7.180e-03 8.474e-02
+Number of obs: 664, groups:  F_RING, 140; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.00718 
+
+Conditional model:
+                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                1.065398   0.021865   48.73  < 2e-16 ***
+EXP.INCHeated             -0.026903   0.024185   -1.11 0.265979    
+incubation_temperature_sc -0.048618   0.013148   -3.70 0.000218 ***
+EXP.NESTHeated            -0.005314   0.024132   -0.22 0.825710    
+nestling_temperature_sc   -0.011468   0.012613   -0.91 0.363223    
+SEXM                       0.018657   0.007440    2.51 0.012148 *  
+BS_sc                     -0.005863   0.011450   -0.51 0.608584    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

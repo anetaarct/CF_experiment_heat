@@ -1,0 +1,87 @@
+# Sensitivity interaction analysis
+
+The primary models use `GROUP` to represent the four experimental combinations. This is clean for presentation, but it does not directly test whether incubation treatment interacts with the nestling-phase treatment. Therefore, a sensitivity analysis decomposes `GROUP` into its two experimental phases.
+
+## Biological question
+
+This sensitivity analysis asks whether effects associated with incubation and incubation-period ambient temperature depend on conditions during the nestling phase. In other words, it tests whether early thermal conditions and later nestling-phase conditions combine additively or interactively when predicting fitness-related nestling traits.
+
+## Model structure
+
+For later nestling traits, the additive sensitivity model is:
+
+```{r}
+#| label: sensitivity-additive-formula
+#| echo: false
+cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_sc + SEX + BLOCK + (1|F_RING) + (1|YEAR)")
+```
+
+The interaction sensitivity model is:
+
+```{r}
+#| label: sensitivity-interaction-formula
+#| echo: false
+cat("response ~ EXP.INC * EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BLOCK + (1|F_RING) + (1|YEAR)")
+```
+
+For continuous traits, both mean-only and location-scale versions are fitted. In the location-scale models, residual dispersion is allowed to vary by the interaction between incubation and nestling treatment:
+
+```{r}
+#| label: sensitivity-dispformula
+#| echo: false
+cat("dispformula = ~ EXP.INC * EXP.NEST")
+```
+
+Day-2 mass is not included in this interaction sensitivity set because day-2 mass precedes most of the nestling-phase treatment and therefore is not the right response for testing incubation-by-nestling-phase interactions.
+
+## Candidate-model comparisons
+
+```{r}
+#| label: sensitivity-comparison-files
+#| echo: false
+#| message: false
+#| warning: false
+
+library(readr)
+library(dplyr)
+library(knitr)
+
+comparison_files <- list.files(
+  "models/sensitivity_interactions",
+  pattern = "^sensitivity_interaction_comparison_.*\\.csv$",
+  full.names = TRUE
+)
+
+if (length(comparison_files) > 0) {
+  comparisons <- lapply(comparison_files, read_csv, show_col_types = FALSE) |>
+    bind_rows()
+
+  comparisons |>
+    select(any_of(c("response", "candidate_model", "AIC", "AIC_wt", "BIC", "RMSE", "n_observations"))) |>
+    kable()
+} else {
+  cat("Sensitivity interaction comparisons will appear here after running scripts/04_fit_sensitivity_interactions.R.")
+}
+```
+
+## Model summaries
+
+```{r}
+#| label: sensitivity-summary-files
+#| echo: false
+#| message: false
+#| warning: false
+
+summary_files <- list.files(
+  "models/sensitivity_interactions",
+  pattern = "^summary_.*\\.txt$",
+  full.names = TRUE
+)
+
+if (length(summary_files) > 0) {
+  tibble::tibble(summary_file = summary_files) |>
+    kable()
+} else {
+  cat("Sensitivity model summaries will appear here after running scripts/04_fit_sensitivity_interactions.R.")
+}
+```

@@ -1,0 +1,37 @@
+ Family: gaussian  ( identity )
+Formula:          D12_RTARS ~ EXP.INC + incubation_temperature_sc + EXP.NEST +  
+    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Dispersion:                 ~EXP.INC + EXP.NEST
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1084.5    1138.8    -530.2    1060.5       668 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 2.638e-01 5.136e-01
+ YEAR     (Intercept) 1.365e-09 3.694e-05
+ Residual                    NA        NA
+Number of obs: 680, groups:  F_RING, 141; YEAR, 4
+
+Conditional model:
+                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               16.88890    0.08358  202.06  < 2e-16 ***
+EXP.INCHeated             -0.15460    0.09369   -1.65 0.098911 .  
+incubation_temperature_sc -0.13692    0.05162   -2.65 0.007991 ** 
+EXP.NESTHeated             0.04300    0.09365    0.46 0.646119    
+nestling_temperature_sc   -0.18112    0.04974   -3.64 0.000271 ***
+SEXM                      -0.06161    0.03687   -1.67 0.094732 .  
+BS_sc                      0.04605    0.04509    1.02 0.307172    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Dispersion model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -0.95420    0.05300 -18.003   <2e-16 ***
+EXP.INCHeated   0.07151    0.06140   1.165   0.2441    
+EXP.NESTHeated  0.13323    0.06145   2.168   0.0302 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

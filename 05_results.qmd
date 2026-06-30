@@ -1,0 +1,150 @@
+# Results
+
+This chapter presents the fitted models response by response. For each dependent variable, the page shows what is being tested, the primary model, the saved model summary, and the corresponding figures.
+
+```{r}
+#| label: results-setup
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+library(glue)
+
+selected_file <- "models/selected_models.csv"
+coef_file <- "models/model_coefficients.csv"
+artifact_file <- "models/model_artifacts.csv"
+
+if (file.exists(selected_file) && file.exists(coef_file) && file.exists(artifact_file)) {
+  selected_models <- read_csv(selected_file, show_col_types = FALSE)
+  model_coefficients <- read_csv(coef_file, show_col_types = FALSE)
+  model_artifacts <- read_csv(artifact_file, show_col_types = FALSE)
+} else {
+  selected_models <- tibble()
+  model_coefficients <- tibble()
+  model_artifacts <- tibble()
+}
+
+fmt_num <- function(x, digits = 3) ifelse(is.na(x), NA, formatC(x, digits = digits, format = "f"))
+link_path <- function(path, text = basename(path)) {
+  if (length(path) == 0 || is.na(path) || !file.exists(path)) return("")
+  glue("[{text}]({path})")
+}
+
+response_question <- function(response, response_label) {
+  questions <- c(
+    D2_MASS = "Does incubation treatment and measured incubation-period temperature explain body mass at day 2?",
+    D8_MASS = "Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 8?",
+    D12_MASS = "Does treatment during incubation and the nestling period, together with measured temperatures, explain body mass at day 12?",
+    Early.g = "Does treatment and measured temperature explain early nestling growth?",
+    Late.g = "Does treatment and measured temperature explain late nestling growth?",
+    Growth = "Does treatment and measured temperature explain whole-period growth?",
+    D12_SMI = "Does treatment and measured temperature explain day-12 scaled mass index?",
+    D12_RTARS = "Does treatment and measured temperature explain day-12 tarsus length?",
+    D12_SURV = "Does treatment and measured temperature explain survival to day 12?"
+  )
+  if (!is.na(questions[[response]])) questions[[response]] else paste("Model for", response_label)
+}
+
+print_saved_summary <- function(summary_file) {
+  if (length(summary_file) == 0 || is.na(summary_file) || !file.exists(summary_file)) {
+    cat("Saved summary file not found.\n\n")
+    return(invisible(NULL))
+  }
+  summary_lines <- readLines(summary_file, warn = FALSE)
+  cat("<details>\n")
+  cat("<summary>Show saved model summary</summary>\n\n")
+  cat("```text\n")
+  cat(paste(summary_lines, collapse = "\n"))
+  cat("\n```\n")
+  cat("</details>\n\n")
+}
+```
+
+## Response-level results
+
+```{r}
+#| label: response-level-results
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+#| fig-width: 7.2
+#| fig-height: 4.8
+
+if (nrow(selected_models) > 0) {
+  for (i in seq_len(nrow(selected_models))) {
+    response <- selected_models$response[i]
+    response_label <- selected_models$response_label[i]
+    selected_name <- selected_models$selected_model[i]
+
+    artifact <- model_artifacts |>
+      filter(response == !!response, selected_model) |>
+      slice(1)
+
+    cat("\n\n### ", response_label, "\n\n", sep = "")
+
+    cat("#### Dependent variable\n\n")
+    cat("`", response, "`: ", response_question(response, response_label), "\n\n", sep = "")
+
+    cat("#### Model\n\n")
+    cat("**Primary model:** `", selected_name, "`  \n", sep = "")
+    cat("**Formula:** `", selected_models$formula[i], "`  \n", sep = "")
+    cat("**Sample size:** `", selected_models$n[i], "`  \n", sep = "")
+    if (!is.na(selected_models$dispersion_formula[i]) && selected_models$dispersion_formula[i] != "not used") {
+      cat("**Dispersion formula:** `", selected_models$dispersion_formula[i], "`  \n", sep = "")
+    }
+    cat("\n")
+
+    cat("#### Fixed-effect estimates\n\n")
+    model_coefficients |>
+      filter(response == !!response, model_name == !!selected_name) |>
+      mutate(
+        estimate = fmt_num(estimate),
+        std_error = fmt_num(std_error),
+        statistic = fmt_num(statistic),
+        p_value = fmt_num(p_value, 4)
+      ) |>
+      select(term, estimate, std_error, statistic, p_value) |>
+      kable(col.names = c("Term", "Estimate", "SE", "z", "p")) |>
+      print()
+    cat("\n\n")
+
+    cat("#### Saved model summary\n\n")
+    if (nrow(artifact) == 1) {
+      cat("Summary PDF: ", link_path(artifact$summary_pdf[1]), "  \n", sep = "")
+      cat("Diagnostic PDF: ", link_path(artifact$diagnostic_pdf[1]), "\n\n", sep = "")
+      print_saved_summary(artifact$summary_txt[1])
+    } else {
+      cat("Saved summary files are not available for this response.\n\n")
+    }
+
+    raw_fig <- file.path("figures", "raw_distributions", paste0("raw_", response, ".png"))
+    effect_fig <- file.path("figures", "model_effects", paste0("model_effect_", response, ".png"))
+
+    if (file.exists(effect_fig)) {
+      cat("#### Model prediction figure\n\n")
+      if (response == "D12_SURV") {
+        cat("This plot uses model predictions as the main signal. Dark points and lines show predicted survival probability from the primary binomial mixed model, vertical intervals are 95% confidence intervals, and pale bars in the background show observed survival proportions.\n\n")
+      } else {
+        cat("This plot uses model predictions as the main signal. Dark points and lines show fitted means from the primary mixed model, vertical intervals are 95% confidence intervals, and pale jittered points in the background show the original observations.\n\n")
+      }
+      cat(glue("![]({effect_fig})"), "\n\n")
+    }
+
+    if (file.exists(raw_fig)) {
+      cat("#### Raw-data distribution\n\n")
+      if (response == "D12_SURV") {
+        cat("This raw-data plot shows observed survival proportions within each treatment combination. Bars are proportions of nestlings classified as dead or survived; no model-based uncertainty interval is shown.\n\n")
+      } else {
+        cat("This raw-data plot shows the response distribution within treatment groups. The box centre line is the median, the box spans the interquartile range (25th-75th percentiles), whiskers show the boxplot range, and points are individual nestling observations.\n\n")
+      }
+      cat(glue("![]({raw_fig})"), "\n\n")
+    }
+  }
+} else {
+  cat("Saved model-result files are not available yet.\n")
+}
+```

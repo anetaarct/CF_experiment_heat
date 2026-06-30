@@ -1,0 +1,9 @@
+response,response_label,model_name,term,estimate,std_error,statistic,p_value
+D8_MASS,Day-8 body mass,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,0.3820578549770846,0.15802805069016362,2.4176584682814517,0.015620730621775878
+D12_MASS,Day-12 body mass,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,-0.6314415442417205,0.25717899641182534,-2.4552609390798845,0.014078235604894308
+Early.g,Early growth,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,0.038461550586408697,0.020636262457643276,1.8637847170897595,0.06235194278804939
+Late.g,Late growth,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,-0.11277498628512324,0.06531591446125046,-1.726608089549577,0.08423807211535488
+Growth,Whole-period growth,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,-0.06978346131802668,0.02776602257578748,-2.513268190557449,0.011961836126074819
+D12_SMI,Day-12 scaled mass index,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,-0.8358058786541177,0.24107165684228782,-3.467043324802437,5.262170667040823e-4
+D12_RTARS,Day-12 tarsus length,interaction_gaussian,incubation_temperature_sc:nestling_temperature_sc,0.1195361864774987,0.1096563299345152,1.090098369596024,0.2756698144292608
+D12_SURV,Day-12 survival,interaction_binomial,incubation_temperature_sc:nestling_temperature_sc,-0.3819632952128156,0.44141974682351054,-0.8653063166327559,0.386870684764814

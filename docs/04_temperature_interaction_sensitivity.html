@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>temperature_interaction_sensitivity – Nest heating experiment in collared flycatchers</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Nest heating experiment in collared flycatchers</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./01_data_overview.html"> 
+<span class="menu-text">Data overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./02_data_preparation.html"> 
+<span class="menu-text">Data preparation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./03_model_strategy.html"> 
+<span class="menu-text">Model strategy</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./04_distribution_sensitivity.html"> 
+<span class="menu-text">Distribution sensitivity</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./04_temperature_interaction_sensitivity.html" aria-current="page"> 
+<span class="menu-text">Temperature interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./05_results.html"> 
+<span class="menu-text">Results</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./06_figures.html"> 
+<span class="menu-text">Figures</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#temperature-interaction-sensitivity-analysis" id="toc-temperature-interaction-sensitivity-analysis" class="nav-link active" data-scroll-target="#temperature-interaction-sensitivity-analysis">Temperature-interaction sensitivity analysis</a>
+  <ul class="collapse">
+  <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms">Interaction terms</a></li>
+  <li><a href="#saved-model-summaries" id="toc-saved-model-summaries" class="nav-link" data-scroll-target="#saved-model-summaries">Saved model summaries</a>
+  <ul class="collapse">
+  <li><a href="#summary_d12_mass_interaction_gaussian" id="toc-summary_d12_mass_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_mass_interaction_gaussian">summary_D12_MASS_interaction_gaussian</a></li>
+  <li><a href="#summary_d12_rtars_interaction_gaussian" id="toc-summary_d12_rtars_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_rtars_interaction_gaussian">summary_D12_RTARS_interaction_gaussian</a></li>
+  <li><a href="#summary_d12_smi_interaction_gaussian" id="toc-summary_d12_smi_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d12_smi_interaction_gaussian">summary_D12_SMI_interaction_gaussian</a></li>
+  <li><a href="#summary_d12_surv_interaction_binomial" id="toc-summary_d12_surv_interaction_binomial" class="nav-link" data-scroll-target="#summary_d12_surv_interaction_binomial">summary_D12_SURV_interaction_binomial</a></li>
+  <li><a href="#summary_d8_mass_interaction_gaussian" id="toc-summary_d8_mass_interaction_gaussian" class="nav-link" data-scroll-target="#summary_d8_mass_interaction_gaussian">summary_D8_MASS_interaction_gaussian</a></li>
+  <li><a href="#summary_early.g_interaction_gaussian" id="toc-summary_early.g_interaction_gaussian" class="nav-link" data-scroll-target="#summary_early.g_interaction_gaussian">summary_Early.g_interaction_gaussian</a></li>
+  <li><a href="#summary_growth_interaction_gaussian" id="toc-summary_growth_interaction_gaussian" class="nav-link" data-scroll-target="#summary_growth_interaction_gaussian">summary_Growth_interaction_gaussian</a></li>
+  <li><a href="#summary_late.g_interaction_gaussian" id="toc-summary_late.g_interaction_gaussian" class="nav-link" data-scroll-target="#summary_late.g_interaction_gaussian">summary_Late.g_interaction_gaussian</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="temperature-interaction-sensitivity-analysis" class="level1">
+<h1>Temperature-interaction sensitivity analysis</h1>
+<p>The main models treat measured incubation-period temperature and measured nestling-period temperature as additive predictors. As a sensitivity analysis, we also fitted models with an interaction between these two measured-temperature variables:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+</div>
+</div>
+<p>For day-12 survival, the same fixed-effect structure was fitted with a binomial error distribution. Day-2 mass is not included because it occurs before most of the nestling-period treatment.</p>
+<p>These models are shown as a sensitivity analysis rather than as the primary results. They are used to check whether the additive temperature structure of the main models is sufficient, while the main interpretation remains based on the primary additive models.</p>
+<section id="interaction-terms" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-terms">Interaction terms</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 48%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Interaction term</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">z</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">0.382</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">2.418</td>
+<td style="text-align: right;">0.0156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 body mass</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">-0.631</td>
+<td style="text-align: right;">0.257</td>
+<td style="text-align: right;">-2.455</td>
+<td style="text-align: right;">0.0141</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">0.038</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: right;">1.864</td>
+<td style="text-align: right;">0.0624</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">-0.113</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">-1.727</td>
+<td style="text-align: right;">0.0842</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">-0.070</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">-2.513</td>
+<td style="text-align: right;">0.0120</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 scaled mass index</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">-0.836</td>
+<td style="text-align: right;">0.241</td>
+<td style="text-align: right;">-3.467</td>
+<td style="text-align: right;">0.0005</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-12 tarsus length</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">0.120</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">1.090</td>
+<td style="text-align: right;">0.2757</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-12 survival</td>
+<td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
+<td style="text-align: right;">-0.382</td>
+<td style="text-align: right;">0.441</td>
+<td style="text-align: right;">-0.865</td>
+<td style="text-align: right;">0.3869</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="saved-model-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="saved-model-summaries">Saved model summaries</h2>
+<section id="summary_d12_mass_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_d12_mass_interaction_gaussian">summary_D12_MASS_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+D12_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2084.4    2134.3   -1031.2    2062.4       676 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.554e+00 1.247e+00
+ YEAR     (Intercept) 2.906e-09 5.391e-05
+ Residual             7.178e-01 8.472e-01
+Number of obs: 687, groups:  F_RING, 144; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.718 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       13.84816    0.19861   69.72
+EXP.INCHeated                                     -0.21055    0.22033   -0.96
+EXP.NESTHeated                                     0.09643    0.21994    0.44
+incubation_temperature_sc                         -0.63057    0.19752   -3.19
+nestling_temperature_sc                           -0.51806    0.17321   -2.99
+SEXM                                               0.13953    0.07294    1.91
+BS_sc                                             -0.02678    0.10537   -0.25
+incubation_temperature_sc:nestling_temperature_sc -0.63144    0.25718   -2.46
+                                                  Pr(&gt;|z|)    
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                      0.33927    
+EXP.NESTHeated                                     0.66108    
+incubation_temperature_sc                          0.00141 ** 
+nestling_temperature_sc                            0.00278 ** 
+SEXM                                               0.05575 .  
+BS_sc                                              0.79936    
+incubation_temperature_sc:nestling_temperature_sc  0.01408 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_d12_rtars_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_d12_rtars_interaction_gaussian">summary_D12_RTARS_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          D12_RTARS ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
+    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1087.5    1137.2    -532.7    1065.5       669 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 2.627e-01 5.126e-01
+ YEAR     (Intercept) 5.344e-10 2.312e-05
+ Residual             1.850e-01 4.301e-01
+Number of obs: 680, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.185 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       16.89000    0.08443  200.05
+EXP.INCHeated                                     -0.16191    0.09377   -1.73
+EXP.NESTHeated                                     0.03982    0.09359    0.43
+incubation_temperature_sc                         -0.06368    0.08412   -0.76
+nestling_temperature_sc                           -0.12206    0.07360   -1.66
+SEXM                                              -0.04796    0.03690   -1.30
+BS_sc                                              0.04841    0.04516    1.07
+incubation_temperature_sc:nestling_temperature_sc  0.11954    0.10966    1.09
+                                                  Pr(&gt;|z|)    
+(Intercept)                                         &lt;2e-16 ***
+EXP.INCHeated                                       0.0842 .  
+EXP.NESTHeated                                      0.6705    
+incubation_temperature_sc                           0.4490    
+nestling_temperature_sc                             0.0973 .  
+SEXM                                                0.1936    
+BS_sc                                               0.2838    
+incubation_temperature_sc:nestling_temperature_sc   0.2757    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_d12_smi_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_d12_smi_interaction_gaussian">summary_D12_SMI_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+D12_SMI ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2236.0    2285.7   -1107.0    2214.0       668 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.233e+00 1.110e+00
+ YEAR     (Intercept) 4.151e-09 6.443e-05
+ Residual             1.038e+00 1.019e+00
+Number of obs: 679, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 1.04 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       13.74329    0.18599   73.89
+EXP.INCHeated                                      0.13263    0.20595    0.64
+EXP.NESTHeated                                     0.13163    0.20554    0.64
+incubation_temperature_sc                         -0.49180    0.18491   -2.66
+nestling_temperature_sc                           -0.26480    0.16180   -1.64
+SEXM                                               0.26489    0.08736    3.03
+BS_sc                                             -0.19269    0.09948   -1.94
+incubation_temperature_sc:nestling_temperature_sc -0.83581    0.24107   -3.47
+                                                  Pr(&gt;|z|)    
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                     0.519575    
+EXP.NESTHeated                                    0.521922    
+incubation_temperature_sc                         0.007823 ** 
+nestling_temperature_sc                           0.101725    
+SEXM                                              0.002427 ** 
+BS_sc                                             0.052757 .  
+incubation_temperature_sc:nestling_temperature_sc 0.000526 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_d12_surv_interaction_binomial" class="level3">
+<h3 class="anchored" data-anchor-id="summary_d12_surv_interaction_binomial">summary_D12_SURV_interaction_binomial</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: binomial  ( logit )
+Formula:          
+D12_SURV_bin ~ EXP.INC + EXP.NEST + incubation_temperature_sc *  
+    nestling_temperature_sc + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
+Data: surv_dat
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    482.6     529.9    -231.3     462.6       830 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance  Std.Dev. 
+ F_RING (Intercept) 1.604e+01 4.0055158
+ YEAR   (Intercept) 2.238e-09 0.0000473
+Number of obs: 840, groups:  F_RING, 161; YEAR, 4
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                        4.14837    0.84955   4.883
+EXP.INCHeated                                     -0.49323    0.78823  -0.626
+EXP.NESTHeated                                     0.91115    0.79083   1.152
+incubation_temperature_sc                         -2.82874    0.54840  -5.158
+nestling_temperature_sc                           -0.36724    0.39777  -0.923
+SEXM                                               0.10704    0.32455   0.330
+BS_sc                                              0.09768    0.36541   0.267
+incubation_temperature_sc:nestling_temperature_sc -0.38196    0.44142  -0.865
+                                                  Pr(&gt;|z|)    
+(Intercept)                                       1.04e-06 ***
+EXP.INCHeated                                        0.531    
+EXP.NESTHeated                                       0.249    
+incubation_temperature_sc                         2.49e-07 ***
+nestling_temperature_sc                              0.356    
+SEXM                                                 0.742    
+BS_sc                                                0.789    
+incubation_temperature_sc:nestling_temperature_sc    0.387    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_d8_mass_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_d8_mass_interaction_gaussian">summary_D8_MASS_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+D8_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2563.5    2614.3   -1270.8    2541.5       735 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.955e+00 1.3981199
+ YEAR     (Intercept) 1.423e-08 0.0001193
+ Residual             1.137e+00 1.0661745
+Number of obs: 746, groups:  F_RING, 148; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 1.14 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                       12.55664    0.21768   57.68
+EXP.INCHeated                                     -0.52524    0.24533   -2.14
+EXP.NESTHeated                                     0.04632    0.24508    0.19
+incubation_temperature_sc                          0.03611    0.16250    0.22
+nestling_temperature_sc                           -0.21519    0.13011   -1.65
+SEXM                                               0.06985    0.08652    0.81
+BS_sc                                             -0.06567    0.11761   -0.56
+incubation_temperature_sc:nestling_temperature_sc  0.38206    0.15803    2.42
+                                                  Pr(&gt;|z|)    
+(Intercept)                                         &lt;2e-16 ***
+EXP.INCHeated                                       0.0323 *  
+EXP.NESTHeated                                      0.8501    
+incubation_temperature_sc                           0.8242    
+nestling_temperature_sc                             0.0981 .  
+SEXM                                                0.4195    
+BS_sc                                               0.5766    
+incubation_temperature_sc:nestling_temperature_sc   0.0156 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_early.g_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_early.g_interaction_gaussian">summary_Early.g_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+Early.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -543.1    -492.6     282.6    -565.1       717 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 5.071e-02 2.252e-01
+ YEAR     (Intercept) 3.778e-11 6.146e-06
+ Residual             1.541e-02 1.241e-01
+Number of obs: 728, groups:  F_RING, 145; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.0154 
+
+Conditional model:
+                                                   Estimate Std. Error z value
+(Intercept)                                        1.564038   0.034518   45.31
+EXP.INCHeated                                     -0.099505   0.038857   -2.56
+EXP.NESTHeated                                    -0.009072   0.038787   -0.23
+incubation_temperature_sc                         -0.041860   0.024094   -1.74
+nestling_temperature_sc                           -0.027398   0.018653   -1.47
+SEXM                                               0.028410   0.010267    2.77
+BS_sc                                             -0.016419   0.018412   -0.89
+incubation_temperature_sc:nestling_temperature_sc  0.038462   0.020636    1.86
+                                                  Pr(&gt;|z|)    
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                      0.01044 *  
+EXP.NESTHeated                                     0.81507    
+incubation_temperature_sc                          0.08232 .  
+nestling_temperature_sc                            0.14188    
+SEXM                                               0.00565 ** 
+BS_sc                                              0.37251    
+incubation_temperature_sc:nestling_temperature_sc  0.06235 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_growth_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_growth_interaction_gaussian">summary_Growth_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+Growth ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1025.9    -976.5     524.0   -1047.9       653 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance  Std.Dev. 
+ F_RING   (Intercept) 1.776e-02 1.333e-01
+ YEAR     (Intercept) 1.156e-11 3.401e-06
+ Residual             7.166e-03 8.465e-02
+Number of obs: 664, groups:  F_RING, 140; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.00717 
+
+Conditional model:
+                                                   Estimate Std. Error z value
+(Intercept)                                        1.062512   0.021502   49.41
+EXP.INCHeated                                     -0.025486   0.023746   -1.07
+EXP.NESTHeated                                    -0.004167   0.023692   -0.18
+incubation_temperature_sc                         -0.091101   0.021267   -4.28
+nestling_temperature_sc                           -0.046733   0.018705   -2.50
+SEXM                                               0.018365   0.007430    2.47
+BS_sc                                             -0.008471   0.011290   -0.75
+incubation_temperature_sc:nestling_temperature_sc -0.069783   0.027766   -2.51
+                                                  Pr(&gt;|z|)    
+(Intercept)                                        &lt; 2e-16 ***
+EXP.INCHeated                                       0.2832    
+EXP.NESTHeated                                      0.8604    
+incubation_temperature_sc                         1.84e-05 ***
+nestling_temperature_sc                             0.0125 *  
+SEXM                                                0.0134 *  
+BS_sc                                               0.4531    
+incubation_temperature_sc:nestling_temperature_sc   0.0120 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+</section>
+<section id="summary_late.g_interaction_gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="summary_late.g_interaction_gaussian">summary_Late.g_interaction_gaussian</h3>
+<details>
+<summary>
+Show saved model summary
+</summary>
+<pre class="text"><code> Family: gaussian  ( identity )
+Formula:          
+Late.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    115.9     165.6     -46.9      93.9       666 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 0.067899 0.26057 
+ YEAR     (Intercept) 0.003599 0.05999 
+ Residual             0.043291 0.20807 
+Number of obs: 677, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 0.0433 
+
+Conditional model:
+                                                  Estimate Std. Error z value
+(Intercept)                                        0.26279    0.05238   5.017
+EXP.INCHeated                                      0.04094    0.04777   0.857
+EXP.NESTHeated                                     0.02547    0.04734   0.538
+incubation_temperature_sc                         -0.18680    0.05369  -3.479
+nestling_temperature_sc                           -0.03890    0.04954  -0.785
+SEXM                                               0.01295    0.01791   0.723
+BS_sc                                             -0.01337    0.02315  -0.578
+incubation_temperature_sc:nestling_temperature_sc -0.11277    0.06532  -1.727
+                                                  Pr(&gt;|z|)    
+(Intercept)                                       5.26e-07 ***
+EXP.INCHeated                                     0.391394    
+EXP.NESTHeated                                    0.590611    
+incubation_temperature_sc                         0.000503 ***
+nestling_temperature_sc                           0.432322    
+SEXM                                              0.469732    
+BS_sc                                             0.563485    
+incubation_temperature_sc:nestling_temperature_sc 0.084238 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</details>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

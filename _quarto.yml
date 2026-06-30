@@ -1,0 +1,59 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - 01_data_overview.qmd
+    - 02_data_preparation.qmd
+    - 03_model_strategy.qmd
+    - 04_distribution_sensitivity.qmd
+    - 04_temperature_interaction_sensitivity.qmd
+    - 05_results.qmd
+    - 06_figures.qmd
+
+website:
+  title: "Nest heating experiment in collared flycatchers"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: 01_data_overview.qmd
+        text: Data overview
+      - href: 02_data_preparation.qmd
+        text: Data preparation
+      - href: 03_model_strategy.qmd
+        text: Model strategy
+      - href: 04_distribution_sensitivity.qmd
+        text: Distribution sensitivity
+      - href: 04_temperature_interaction_sensitivity.qmd
+        text: Temperature interaction
+      - href: 05_results.qmd
+        text: Results
+      - href: 06_figures.qmd
+        text: Figures
+
+resources:
+  - data/prepared_nestlings.csv
+  - data/prepared_nestlings.rds
+  - CF_exp_all_2026.xlsx
+  - models/summary_pdf/*.pdf
+  - models/diagnostics/*.pdf
+  - figures/model_effects/*
+  - figures/raw_distributions/*
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    code-fold: true
+    code-summary: "Show code"
+    page-layout: full
+    execute:
+      warning: false
+      message: false
+
+execute:
+  freeze: auto
+

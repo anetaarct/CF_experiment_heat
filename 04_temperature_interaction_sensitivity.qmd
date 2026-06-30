@@ -1,0 +1,72 @@
+# Temperature-interaction sensitivity analysis
+
+The main models treat measured incubation-period temperature and measured nestling-period temperature as additive predictors. As a sensitivity analysis, we also fitted models with an interaction between these two measured-temperature variables:
+
+```{r}
+#| label: temperature-interaction-formula
+#| echo: false
+cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+For day-12 survival, the same fixed-effect structure was fitted with a binomial error distribution. Day-2 mass is not included because it occurs before most of the nestling-period treatment.
+
+These models are shown as a sensitivity analysis rather than as the primary results. They are used to check whether the additive temperature structure of the main models is sufficient, while the main interpretation remains based on the primary additive models.
+
+## Interaction terms
+
+```{r}
+#| label: temperature-interaction-terms
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+
+interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
+
+if (file.exists(interaction_file)) {
+  read_csv(interaction_file, show_col_types = FALSE) |>
+    mutate(
+      estimate = round(estimate, 3),
+      std_error = round(std_error, 3),
+      statistic = round(statistic, 3),
+      p_value = round(p_value, 4)
+    ) |>
+    select(response_label, term, estimate, std_error, statistic, p_value) |>
+    kable(col.names = c("Response", "Interaction term", "Estimate", "SE", "z", "p"))
+} else {
+  cat("Temperature-interaction results are not available yet.")
+}
+```
+
+## Saved model summaries
+
+```{r}
+#| label: temperature-interaction-summaries
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+summary_files <- list.files(
+  "models/sensitivity_temperature_interaction",
+  pattern = "^summary_.*interaction.*\\.txt$",
+  full.names = TRUE
+)
+
+if (length(summary_files) > 0) {
+  for (summary_file in sort(summary_files)) {
+    cat("\n\n### ", tools::file_path_sans_ext(basename(summary_file)), "\n\n", sep = "")
+    cat("<details>\n")
+    cat("<summary>Show saved model summary</summary>\n\n")
+    cat("```text\n")
+    cat(paste(readLines(summary_file, warn = FALSE), collapse = "\n"))
+    cat("\n```\n")
+    cat("</details>\n")
+  }
+} else {
+  cat("Saved interaction-model summaries are not available yet.")
+}
+```

@@ -1,0 +1,37 @@
+ Family: t  ( identity )
+Formula:          
+D12_MASS ~ EXP.INC + incubation_temperature_sc + EXP.NEST + nestling_temperature_sc +  
+    SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Dispersion:                ~EXP.INC + EXP.NEST
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+       NA        NA        NA        NA       674 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ F_RING (Intercept)  1.325   1.151   
+ YEAR   (Intercept) 58.642   7.658   
+Number of obs: 687, groups:  F_RING, 144; YEAR, 4
+
+Conditional model:
+                          Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                1.19957        NaN     NaN      NaN  
+EXP.INCHeated             -0.01834    0.22292  -0.082   0.9344  
+incubation_temperature_sc  0.55526    0.28565   1.944   0.0519 .
+EXP.NESTHeated             0.26913    0.19638   1.370   0.1705  
+nestling_temperature_sc    0.05359    0.26293   0.204   0.8385  
+SEXM                       0.14899    0.05962   2.499   0.0125 *
+BS_sc                      0.05068    0.05745   0.882   0.3777  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Dispersion model:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -0.517378   0.086531  -5.979 2.24e-09 ***
+EXP.INCHeated   0.007226   0.080413   0.090   0.9284    
+EXP.NESTHeated -0.152849   0.071840  -2.128   0.0334 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

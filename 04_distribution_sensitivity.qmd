@@ -1,0 +1,66 @@
+# Distributional sensitivity analysis
+
+For continuous nestling traits, the primary models use Gaussian errors. Student-t models are fitted as robustness checks because AIC can favour heavier-tailed distributions even when the observed trait distributions do not strongly depart from normality.
+
+AIC is therefore reported here as descriptive model-comparison information, not as the sole criterion for choosing the biological model. The main interpretation remains based on the Gaussian mixed models; Student-t results are used to check whether effect directions and support are robust to the distributional assumption.
+
+## Candidate model set
+
+```{r}
+#| label: distributional-candidate-models
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(readr)
+library(knitr)
+
+comparison_file <- "models/model_comparisons.csv"
+
+if (file.exists(comparison_file)) {
+  read_csv(comparison_file, show_col_types = FALSE) |>
+    filter(response != "D12_SURV") |>
+    mutate(
+      role = if_else(selected_model, "Primary Gaussian model", "Sensitivity model"),
+      AIC = round(AIC, 2),
+      delta_AIC = round(delta_AIC, 2)
+    ) |>
+    arrange(response_label, AIC) |>
+    select(response_label, model_name, model_family, dispersion_formula, AIC, delta_AIC, role) |>
+    kable(col.names = c("Response", "Model", "Family", "Dispersion", "AIC", "Delta AIC", "Role"))
+} else {
+  cat("Distributional model-comparison table is not available yet.")
+}
+```
+
+## Gaussian versus Student-t coefficients
+
+The table below compares the primary Gaussian mean model with the Student-t mean model for the same fixed-effect structure. This is the clearest robustness check for whether conclusions depend on the assumed error distribution.
+
+```{r}
+#| label: distributional-coefficient-comparison
+#| echo: false
+#| message: false
+#| warning: false
+
+coef_file <- "models/model_coefficients.csv"
+
+if (file.exists(coef_file)) {
+  read_csv(coef_file, show_col_types = FALSE) |>
+    filter(response != "D12_SURV", model_name %in% c("gaussian_mean", "student_mean")) |>
+    mutate(
+      estimate = round(estimate, 3),
+      p_value = round(p_value, 4)
+    ) |>
+    select(response_label, model_name, term, estimate, p_value) |>
+    arrange(response_label, term, model_name) |>
+    kable(col.names = c("Response", "Model", "Term", "Estimate", "p"))
+} else {
+  cat("Distributional coefficient table is not available yet.")
+}
+```
+
+## Interpretation rule
+
+Effects that show the same direction and similar support in Gaussian and Student-t models are treated as robust. Effects that appear only under the Gaussian model, or only under the Student-t model, are interpreted cautiously as distribution-sensitive results.

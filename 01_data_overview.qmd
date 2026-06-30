@@ -1,0 +1,70 @@
+# Data overview
+
+## Data load
+
+The analysis dataset loaded below is the prepared nestling-level file used by all model-fitting and figure-generation scripts.
+
+```{r}
+#| label: data-overview-load
+#| echo: true
+#| message: false
+#| warning: false
+
+analysis_file <- "data/prepared_nestlings.rds"
+analysis_data <- readRDS(analysis_file)
+
+data.frame(
+  file = analysis_file,
+  rows = nrow(analysis_data),
+  columns = ncol(analysis_data)
+)
+```
+
+## Variable names in the analysis file
+
+The table below documents the variables retained in the prepared analysis dataset. Variables inherited from the original workbook use descriptions from the `ABBREVIATIONS` sheet; derived variables are described according to the preparation step that created them.
+
+```{r}
+#| label: overview-variable-dictionary
+#| echo: false
+#| message: false
+#| warning: false
+
+library(readxl)
+library(dplyr)
+library(knitr)
+
+analysis_file <- "data/prepared_nestlings.rds"
+analysis_data <- readRDS(analysis_file)
+
+abbreviations_raw <- read_excel(
+  "CF_exp_all_2026.xlsx",
+  sheet = "ABBREVIATIONS",
+  col_names = FALSE
+)
+
+source_dictionary <- data.frame(
+  variable = abbreviations_raw[[1]],
+  meaning = abbreviations_raw[[3]],
+  check.names = FALSE
+) |>
+  filter(!is.na(variable))
+
+derived_dictionary <- data.frame(
+  variable = c("BS_sc", "incubation_temperature_sc", "nestling_temperature_sc", "D12_SMI"),
+  meaning = c(
+    "Standardised brood size used as a covariate in the mixed models.",
+    "Standardised measured incubation-period temperature, derived from LOGMEAN_INCUBATION.",
+    "Standardised measured nestling-period temperature, derived from LOGMEAN_NESTLING.",
+    "Day-12 scaled mass index derived from day-12 body mass and day-12 tarsus length."
+  ),
+  check.names = FALSE
+)
+
+variable_dictionary <- data.frame(variable = names(analysis_data), check.names = FALSE) |>
+  left_join(source_dictionary, by = "variable") |>
+  rows_update(derived_dictionary, by = "variable", unmatched = "ignore") |>
+  mutate(meaning = if_else(is.na(meaning), "Not described in the source abbreviations sheet.", meaning))
+
+kable(variable_dictionary, col.names = c("Variable name", "Meaning"))
+```

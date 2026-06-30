@@ -1,0 +1,5 @@
+response,response_label,model_name,model_family,dispersion_formula,AIC,delta_AIC,selected_model
+Growth,Whole-period growth,student_mean,Student-t,~ 1,-1050.6485807490342,0,FALSE
+Growth,Whole-period growth,student_scale,Student-t,~EXP.INC + EXP.NEST,-1049.5427076557294,1.1058730933048082,FALSE
+Growth,Whole-period growth,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,-1024.9108932634015,25.737687485632705,FALSE
+Growth,Whole-period growth,gaussian_mean,Gaussian,~ 1,-1021.7134276464185,28.935153102615686,TRUE
