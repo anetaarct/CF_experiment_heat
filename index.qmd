@@ -12,7 +12,7 @@ This website documents a reproducible analysis workflow for the nest-heating exp
 knitr::include_graphics("figures/overview/collared_flycatcher_nest_heating_overview.png")
 ```
 
-This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (*Ficedula albicollis*). Using a fully factorial 2 × 2 design, we independently warmed nest boxes during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.
+This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (*Ficedula albicollis*). Using a fully factorial 2 x 2 design, we independently warmed nest boxes during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.
 
 We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.
 
@@ -26,8 +26,10 @@ The study was conducted on collared flycatchers (*Ficedula albicollis*) breeding
 
 The experiment includes two treatment variables:
 
-- `EXP.INC`: incubation-period treatment, coded as heated or control.
-- `EXP.NEST`: nestling-period treatment, coded as heated or control.
+| Variable | Description | Levels |
+| --- | --- | --- |
+| `EXP.INC` | Incubation-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during incubation or remained unheated as a control. | `Control` / `Heated` |
+| `EXP.NEST` | Nestling-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during the nestling period or remained unheated as a control. | `Control` / `Heated` |
 
 The combined treatment group is stored as `GROUP`, with four combinations: `CONCON`, `CONEXP`, `EXPCON`, and `EXPEXP`. Nests were paired into blocks according to clutch/egg number and hatching date, and this paired structure is represented by `BLOCK` in the source dataset.
 
@@ -50,7 +52,7 @@ The workflow is organised around five steps:
 - data import from the raw workbook,
 - creation of the analysis dataset after removing later broods from repeated females,
 - fitting primary experiment models with `glmmTMB`,
-- fitting separate interaction models for experimental treatments and measured external temperature,
+- fitting separate interaction models for experimental treatments and measured nest temperatures,
 - generating model summaries, diagnostics, and publication figures.
 
 ## Files needed to reproduce the analyses

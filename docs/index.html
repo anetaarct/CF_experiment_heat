@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (<em>Ficedula albicollis</em>). Using a fully factorial 2 × 2 design, we independently warmed nest boxes during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.</p>
+<p>This project tests how experimentally increased nest temperature affects reproductive performance and offspring development in a wild population of collared flycatchers (<em>Ficedula albicollis</em>). Using a fully factorial 2 x 2 design, we independently warmed nest boxes during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to separate thermal effects acting before hatching from those acting after hatching.</p>
 <p>We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.</p>
 <p>The analyses separate two related questions. The primary results test whether the experimental thermal treatments affect offspring traits and survival. Additional model pages test whether incubation-stage and nestling-stage warming interact, and whether measured nest temperatures during incubation and the nestling period are associated with the same responses.</p>
 <section id="study-system" class="level2">
@@ -218,10 +218,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="experimental-design" class="level2">
 <h2 class="anchored" data-anchor-id="experimental-design">Experimental design</h2>
 <p>The experiment includes two treatment variables:</p>
-<ul>
-<li><code>EXP.INC</code>: incubation-period treatment, coded as heated or control.</li>
-<li><code>EXP.NEST</code>: nestling-period treatment, coded as heated or control.</li>
-</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+<th>Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>EXP.INC</code></td>
+<td>Incubation-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during incubation or remained unheated as a control.</td>
+<td><code>Control</code> / <code>Heated</code></td>
+</tr>
+<tr class="even">
+<td><code>EXP.NEST</code></td>
+<td>Nestling-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during the nestling period or remained unheated as a control.</td>
+<td><code>Control</code> / <code>Heated</code></td>
+</tr>
+</tbody>
+</table>
 <p>The combined treatment group is stored as <code>GROUP</code>, with four combinations: <code>CONCON</code>, <code>CONEXP</code>, <code>EXPCON</code>, and <code>EXPEXP</code>. Nests were paired into blocks according to clutch/egg number and hatching date, and this paired structure is represented by <code>BLOCK</code> in the source dataset.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -242,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>data import from the raw workbook,</li>
 <li>creation of the analysis dataset after removing later broods from repeated females,</li>
 <li>fitting primary experiment models with <code>glmmTMB</code>,</li>
-<li>fitting separate interaction models for experimental treatments and measured external temperature,</li>
+<li>fitting separate interaction models for experimental treatments and measured nest temperatures,</li>
 <li>generating model summaries, diagnostics, and publication figures.</li>
 </ul>
 </section>
