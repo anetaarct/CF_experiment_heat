@@ -121,3 +121,5 @@ if (file.exists(comparison_file)) {
 ## Interpretation rule
 
 Effects that show the same direction in Gaussian and Student-t models are treated as directionally robust. The asterisk indicates whether the effect also has statistical support (`p < 0.05`). Effects that change direction, or have support only under one distributional assumption, are interpreted cautiously as distribution-sensitive results.
+
+When the estimated effect changed direction between Gaussian and Student-t models, this indicates that the result was sensitive to distributional assumptions. We therefore do not interpret this effect as robust evidence for a biological relationship.

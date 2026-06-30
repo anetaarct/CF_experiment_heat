@@ -12,6 +12,7 @@ library(dplyr)
 library(readr)
 library(knitr)
 library(glue)
+library(tidyr)
 
 selected_file <- "models/selected_models.csv"
 coef_file <- "models/model_coefficients.csv"
@@ -26,6 +27,19 @@ if (file.exists(selected_file) && file.exists(coef_file) && file.exists(artifact
   model_coefficients <- tibble()
   model_artifacts <- tibble()
 }
+
+distribution_sensitive_terms <- model_coefficients |>
+  filter(
+    response != "D12_SURV",
+    model_name %in% c("gaussian_mean", "student_mean"),
+    grepl("^EXP\\.", term),
+    !is.na(estimate)
+  ) |>
+  mutate(direction = sign(estimate)) |>
+  select(response, term, model_name, direction) |>
+  tidyr::pivot_wider(names_from = model_name, values_from = direction) |>
+  filter(!is.na(gaussian_mean), !is.na(student_mean), gaussian_mean != student_mean) |>
+  select(response, term)
 
 fmt_num <- function(x, digits = 3) ifelse(is.na(x), NA, formatC(x, digits = digits, format = "f"))
 link_path <- function(path, text = basename(path)) {
@@ -99,9 +113,18 @@ if (nrow(selected_models) > 0) {
     cat("\n")
 
     cat("#### Fixed-effect estimates\n\n")
+    sensitive_terms <- distribution_sensitive_terms |>
+      filter(response == !!response)
+
     model_coefficients |>
       filter(response == !!response, model_name == !!selected_name) |>
+      left_join(
+        sensitive_terms |> mutate(distribution_sensitive = TRUE),
+        by = c("response", "term")
+      ) |>
       mutate(
+        distribution_sensitive = if_else(is.na(distribution_sensitive), FALSE, distribution_sensitive),
+        term = if_else(distribution_sensitive, paste0(term, "*"), term),
         estimate = fmt_num(estimate),
         std_error = fmt_num(std_error),
         statistic = fmt_num(statistic),
@@ -111,6 +134,10 @@ if (nrow(selected_models) > 0) {
       kable(col.names = c("Term", "Estimate", "SE", "z", "p")) |>
       print()
     cat("\n\n")
+
+    if (nrow(sensitive_terms) > 0) {
+      cat("*The marked experimental effect changed direction between Gaussian and Student-t models. This result is treated as distribution-sensitive and is not interpreted here as robust biological evidence; see the Distribution sensitivity section.*\n\n")
+    }
 
     cat("#### Saved model summary\n\n")
     if (nrow(artifact) == 1) {
