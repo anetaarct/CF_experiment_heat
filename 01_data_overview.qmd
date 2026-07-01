@@ -52,6 +52,8 @@ source_dictionary <- data.frame(
 
 derived_dictionary <- data.frame(
   variable = c(
+    "EXP.INC",
+    "EXP.NEST",
     "BS_sc",
     "incubation_temperature_sc",
     "nestling_temperature_sc",
@@ -61,6 +63,8 @@ derived_dictionary <- data.frame(
     "D12_SMI"
   ),
   meaning = c(
+    "Incubation-period heating status: Control = nest box not heated during incubation; Heated = nest box experimentally heated during incubation.",
+    "Nestling-period heating status: Control = nest box not heated during the nestling period; Heated = nest box experimentally heated during the nestling period.",
     "Standardised brood size used as a covariate in the mixed models.",
     "Standardised incubation-period temperature measured by temperature loggers, derived from LOGMEAN_INCUBATION.",
     "Standardised nestling-period temperature measured by temperature loggers, derived from LOGMEAN_NESTLING.",

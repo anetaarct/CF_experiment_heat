@@ -22,6 +22,22 @@ library(tidyr)
 coef_file <- "models/model_coefficients.csv"
 
 if (file.exists(coef_file)) {
+  response_display_label <- function(response, fallback = response) {
+    labels <- c(
+      D2_MASS = "Body mass at day 2 (D2_MASS)",
+      D8_MASS = "Body mass at day 8 (D8_MASS)",
+      D12_MASS = "Body mass at day 12 (D12_MASS)",
+      Early.g = "Early growth (Early.g)",
+      Late.g = "Late growth (Late.g)",
+      Growth = "Whole-period growth (Growth)",
+      D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+      D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+      D12_SURV = "Survival to day 12 (D12_SURV)"
+    )
+    label <- labels[[response]]
+    if (is.null(label) || is.na(label)) fallback else label
+  }
+
   direction_label <- function(estimate, p_value) {
     direction <- case_when(
       is.na(estimate) ~ "not estimable",
@@ -53,6 +69,7 @@ if (file.exists(coef_file)) {
       direction = direction_label(estimate, p_value),
       supported = !is.na(p_value) & p_value < 0.05
     ) |>
+    mutate(response_label = mapply(response_display_label, response, response_label)) |>
     select(response_label, effect, model_name, direction, supported) |>
     pivot_wider(
       names_from = model_name,
@@ -103,9 +120,26 @@ The detailed AIC table is retained as background information. It is not used as 
 comparison_file <- "models/model_comparisons.csv"
 
 if (file.exists(comparison_file)) {
+  response_display_label <- function(response, fallback = response) {
+    labels <- c(
+      D2_MASS = "Body mass at day 2 (D2_MASS)",
+      D8_MASS = "Body mass at day 8 (D8_MASS)",
+      D12_MASS = "Body mass at day 12 (D12_MASS)",
+      Early.g = "Early growth (Early.g)",
+      Late.g = "Late growth (Late.g)",
+      Growth = "Whole-period growth (Growth)",
+      D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+      D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+      D12_SURV = "Survival to day 12 (D12_SURV)"
+    )
+    label <- labels[[response]]
+    if (is.null(label) || is.na(label)) fallback else label
+  }
+
   read_csv(comparison_file, show_col_types = FALSE) |>
     filter(response != "D12_SURV") |>
     mutate(
+      response_label = mapply(response_display_label, response, response_label),
       role = if_else(selected_model, "Primary Gaussian model", "Sensitivity model"),
       AIC = round(AIC, 2),
       delta_AIC = round(delta_AIC, 2)

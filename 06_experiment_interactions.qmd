@@ -26,8 +26,25 @@ library(knitr)
 
 interaction_file <- "models/experiment_interaction/experiment_interaction_terms.csv"
 
+response_display_label <- function(response, fallback = response) {
+  labels <- c(
+    D2_MASS = "Body mass at day 2 (D2_MASS)",
+    D8_MASS = "Body mass at day 8 (D8_MASS)",
+    D12_MASS = "Body mass at day 12 (D12_MASS)",
+    Early.g = "Early growth (Early.g)",
+    Late.g = "Late growth (Late.g)",
+    Growth = "Whole-period growth (Growth)",
+    D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+    D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+    D12_SURV = "Survival to day 12 (D12_SURV)"
+  )
+  label <- labels[[response]]
+  if (is.null(label) || is.na(label)) fallback else label
+}
+
 if (file.exists(interaction_file)) {
   read_csv(interaction_file, show_col_types = FALSE) |>
+    mutate(response_label = mapply(response_display_label, response, response_label)) |>
     mutate(
       estimate = round(estimate, 3),
       std_error = round(std_error, 3),

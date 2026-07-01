@@ -13,14 +13,14 @@ dat <- readRDS("data/prepared_nestlings.rds")
 selected_models <- read_csv("models/selected_models.csv", show_col_types = FALSE)
 
 trait_labels <- c(
-  D2_MASS = "Body mass day 2",
-  D8_MASS = "Body mass day 8",
-  D12_MASS = "Body mass day 12",
-  D12_RTARS = "Tarsus length day 12",
+  D2_MASS = "Body mass at day 2",
+  D8_MASS = "Body mass at day 8",
+  D12_MASS = "Body mass at day 12",
+  D12_RTARS = "Tarsus length at day 12",
   Early.g = "Early growth",
   Late.g = "Late growth",
   Growth = "Whole-period growth",
-  D12_SMI = "Scaled mass index day 12",
+  D12_SMI = "Scaled mass index at day 12",
   D12_SURV = "Survival to day 12"
 )
 

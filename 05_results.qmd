@@ -47,17 +47,32 @@ link_path <- function(path, text = basename(path)) {
   glue("[{text}]({path})")
 }
 
+response_display_label <- function(response, fallback = response) {
+  labels <- c(
+    D2_MASS = "Body mass at day 2 (D2_MASS)",
+    D8_MASS = "Body mass at day 8 (D8_MASS)",
+    D12_MASS = "Body mass at day 12 (D12_MASS)",
+    Early.g = "Early growth (Early.g)",
+    Late.g = "Late growth (Late.g)",
+    Growth = "Whole-period growth (Growth)",
+    D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+    D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+    D12_SURV = "Survival to day 12 (D12_SURV)"
+  )
+  labels[[response]] %||% fallback
+}
+
 response_question <- function(response, response_label) {
   questions <- c(
-    D2_MASS = "Does incubation-stage warming affect body mass at day 2?",
-    D8_MASS = "Do incubation-stage and nestling-stage warming affect body mass at day 8?",
-    D12_MASS = "Do incubation-stage and nestling-stage warming affect body mass at day 12?",
-    Early.g = "Do incubation-stage and nestling-stage warming affect early nestling growth?",
-    Late.g = "Do incubation-stage and nestling-stage warming affect late nestling growth?",
-    Growth = "Do incubation-stage and nestling-stage warming affect whole-period growth?",
-    D12_SMI = "Do incubation-stage and nestling-stage warming affect day-12 scaled mass index?",
-    D12_RTARS = "Do incubation-stage and nestling-stage warming affect day-12 tarsus length?",
-    D12_SURV = "Do incubation-stage and nestling-stage warming affect survival to day 12?"
+    D2_MASS = "Does incubation-stage warming affect nestling body mass at day 2?",
+    D8_MASS = "Do incubation-stage and nestling-stage warming affect nestling body mass at day 8?",
+    D12_MASS = "Do incubation-stage and nestling-stage warming affect nestling body mass at day 12?",
+    Early.g = "Do incubation-stage and nestling-stage warming affect early nestling growth between day 2 and day 8?",
+    Late.g = "Do incubation-stage and nestling-stage warming affect late nestling growth between day 8 and day 12?",
+    Growth = "Do incubation-stage and nestling-stage warming affect growth across the whole nestling period?",
+    D12_SMI = "Do incubation-stage and nestling-stage warming affect nestling body condition at day 12?",
+    D12_RTARS = "Do incubation-stage and nestling-stage warming affect nestling structural size at day 12?",
+    D12_SURV = "Do incubation-stage and nestling-stage warming affect nestling survival to day 12?"
   )
   if (!is.na(questions[[response]])) questions[[response]] else paste("Model for", response_label)
 }
@@ -80,7 +95,7 @@ significant_experiment_figures <- c("D8_MASS", "Early.g")
 
 experiment_figure_note <- function(response) {
   notes <- c(
-    D8_MASS = "The figure shows day-8 body mass by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes had lower predicted day-8 body mass.",
+    D8_MASS = "The figure shows body mass at day 8 by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes had lower predicted body mass at day 8.",
     Early.g = "The figure shows early growth rate between day 2 and day 8 by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes showed lower predicted early growth."
   )
   notes[[response]] %||% ""
@@ -104,16 +119,17 @@ if (nrow(selected_models) > 0) {
   for (i in seq_len(nrow(selected_models))) {
     response <- selected_models$response[i]
     response_label <- selected_models$response_label[i]
+    display_label <- response_display_label(response, response_label)
     selected_name <- selected_models$selected_model[i]
 
     artifact <- model_artifacts |>
       filter(response == !!response, selected_model) |>
       slice(1)
 
-    cat("\n\n### ", response_label, "\n\n", sep = "")
+    cat("\n\n### ", display_label, "\n\n", sep = "")
 
     cat("#### Dependent variable\n\n")
-    cat("`", response, "`: ", response_question(response, response_label), "\n\n", sep = "")
+    cat(response_question(response, response_label), "\n\n", sep = "")
 
     cat("#### Model\n\n")
     cat("**Primary model:** `", selected_name, "`  \n", sep = "")

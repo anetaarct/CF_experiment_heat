@@ -27,8 +27,25 @@ library(glue)
 
 interaction_file <- "models/sensitivity_temperature_interaction/temperature_interaction_terms.csv"
 
+response_display_label <- function(response, fallback = response) {
+  labels <- c(
+    D2_MASS = "Body mass at day 2 (D2_MASS)",
+    D8_MASS = "Body mass at day 8 (D8_MASS)",
+    D12_MASS = "Body mass at day 12 (D12_MASS)",
+    Early.g = "Early growth (Early.g)",
+    Late.g = "Late growth (Late.g)",
+    Growth = "Whole-period growth (Growth)",
+    D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+    D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+    D12_SURV = "Survival to day 12 (D12_SURV)"
+  )
+  label <- labels[[response]]
+  if (is.null(label) || is.na(label)) fallback else label
+}
+
 if (file.exists(interaction_file)) {
   read_csv(interaction_file, show_col_types = FALSE) |>
+    mutate(response_label = mapply(response_display_label, response, response_label)) |>
     mutate(
       estimate = round(estimate, 3),
       std_error = round(std_error, 3),
@@ -56,14 +73,14 @@ Prediction figures are shown only for interaction terms with statistical support
 #| results: asis
 
 response_labels <- c(
-  D8_MASS = "Day-8 body mass",
-  D12_MASS = "Day-12 body mass",
-  Early.g = "Early growth",
-  Late.g = "Late growth",
-  Growth = "Whole-period growth",
-  D12_SMI = "Day-12 scaled mass index",
-  D12_RTARS = "Day-12 tarsus length",
-  D12_SURV = "Day-12 survival"
+  D8_MASS = "Body mass at day 8 (D8_MASS)",
+  D12_MASS = "Body mass at day 12 (D12_MASS)",
+  Early.g = "Early growth (Early.g)",
+  Late.g = "Late growth (Late.g)",
+  Growth = "Whole-period growth (Growth)",
+  D12_SMI = "Scaled mass index at day 12 (D12_SMI)",
+  D12_RTARS = "Tarsus length at day 12 (D12_RTARS)",
+  D12_SURV = "Survival to day 12 (D12_SURV)"
 )
 
 responses <- names(response_labels)
