@@ -1,4 +1,5 @@
 response,response_label,model_name,selected_model,summary_txt,summary_pdf,diagnostic_pdf
+HATCHED,Hatchability,binomial,TRUE,models/summary_HATCHED_binomial.txt,models/summary_pdf/summary_HATCHED_binomial.pdf,models/diagnostics/diagnostic_HATCHED_binomial.pdf
 D2_MASS,Day-2 body mass,gaussian_mean,TRUE,models/summary_D2_MASS_gaussian_mean.txt,models/summary_pdf/summary_D2_MASS_gaussian_mean.pdf,models/diagnostics/diagnostic_D2_MASS_gaussian_mean.pdf
 D2_MASS,Day-2 body mass,gaussian_scale,FALSE,models/summary_D2_MASS_gaussian_scale.txt,models/summary_pdf/summary_D2_MASS_gaussian_scale.pdf,models/diagnostics/diagnostic_D2_MASS_gaussian_scale.pdf
 D2_MASS,Day-2 body mass,student_mean,FALSE,models/summary_D2_MASS_student_mean.txt,models/summary_pdf/summary_D2_MASS_student_mean.pdf,models/diagnostics/diagnostic_D2_MASS_student_mean.pdf

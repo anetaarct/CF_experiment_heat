@@ -27,6 +27,7 @@ if (file.exists(coef_file)) {
       D2_MASS = "Body mass at day 2 (D2_MASS)",
       D8_MASS = "Body mass at day 8 (D8_MASS)",
       D12_MASS = "Body mass at day 12 (D12_MASS)",
+      HATCHED = "Hatchability (HATCHED)",
       Early.g = "Early growth (Early.g)",
       Late.g = "Late growth (Late.g)",
       Growth = "Whole-period growth (Growth)",
@@ -55,7 +56,7 @@ if (file.exists(coef_file)) {
 
   read_csv(coef_file, show_col_types = FALSE) |>
     filter(
-      response != "D12_SURV",
+      !response %in% c("HATCHED", "D12_SURV"),
       model_name %in% c("gaussian_mean", "student_mean"),
       grepl("^EXP\\.", term)
     ) |>
@@ -125,6 +126,7 @@ if (file.exists(comparison_file)) {
       D2_MASS = "Body mass at day 2 (D2_MASS)",
       D8_MASS = "Body mass at day 8 (D8_MASS)",
       D12_MASS = "Body mass at day 12 (D12_MASS)",
+      HATCHED = "Hatchability (HATCHED)",
       Early.g = "Early growth (Early.g)",
       Late.g = "Late growth (Late.g)",
       Growth = "Whole-period growth (Growth)",
@@ -137,7 +139,7 @@ if (file.exists(comparison_file)) {
   }
 
   read_csv(comparison_file, show_col_types = FALSE) |>
-    filter(response != "D12_SURV") |>
+    filter(!response %in% c("HATCHED", "D12_SURV")) |>
     mutate(
       response_label = mapply(response_display_label, response, response_label),
       role = if_else(selected_model, "Primary Gaussian model", "Sensitivity model"),
@@ -157,3 +159,119 @@ if (file.exists(comparison_file)) {
 Effects that show the same direction in Gaussian and Student-t models are treated as directionally robust. The asterisk indicates whether the effect also has statistical support (`p < 0.05`). Effects that change direction, or have support only under one distributional assumption, are interpreted cautiously as distribution-sensitive results.
 
 When the estimated effect changed direction between Gaussian and Student-t models, this indicates that the result was sensitive to distributional assumptions. We therefore do not interpret this effect as robust evidence for a biological relationship.
+
+## Dispersion effects
+
+For continuous responses, we also fitted location-scale models in `glmmTMB`, allowing residual dispersion to differ between experimental treatments. These models ask whether the experiment affected not only the mean response, but also the variability of the trait. Dispersion effects are interpreted cautiously and separately from the primary mean effects.
+
+Positive dispersion estimates indicate higher residual variance relative to the reference group, whereas negative estimates indicate lower residual variance. The table below reports dispersion terms for scale models; the column `Best-supported scale model` marks responses for which a scale model had the lowest AIC among the candidate models.
+
+```{r}
+#| label: dispersion-effects-table
+#| echo: false
+#| message: false
+#| warning: false
+
+dispersion_file <- "models/dispersion_effects/dispersion_coefficients.csv"
+
+if (file.exists(dispersion_file)) {
+  read_csv(dispersion_file, show_col_types = FALSE) |>
+    filter(term != "(Intercept)", best_model_has_dispersion) |>
+    mutate(
+      estimate = round(estimate, 3),
+      std_error = round(std_error, 3),
+      statistic = round(statistic, 3),
+      p_value = round(p_value, 4),
+      direction = case_when(
+        estimate > 0 ~ "higher variance",
+        estimate < 0 ~ "lower variance",
+        TRUE ~ "no change"
+      )
+    ) |>
+    select(response_label, model_name, term, direction, estimate, std_error, statistic, p_value) |>
+    arrange(response_label, term) |>
+    kable(col.names = c("Response", "Scale model", "Dispersion term", "Direction", "Estimate", "SE", "z", "p"))
+} else {
+  cat("Dispersion-effect estimates are not available yet.")
+}
+```
+
+## Treatment-group contrasts
+
+As an additional sensitivity analysis, we also compare the four combined treatment groups (`CONCON`, `CONEXP`, `EXPCON`, and `EXPEXP`). These contrasts are descriptive and are used to make group-level differences easier to inspect. They do not replace the primary factorial models, which remain the main biological tests of incubation-stage warming, nestling-stage warming, and their interaction.
+
+For nestling traits, the sensitivity model is:
+
+```text
+response ~ GROUP + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+```
+
+For hatchability, the model is:
+
+```text
+HATCHED ~ GROUP + CS_sc + (1 | F_RING) + (1 | YEAR)
+```
+
+The hatchability group comparison is included only as a descriptive sensitivity check, because hatchability occurs before the nestling-stage treatment.
+
+```{r}
+#| label: treatment-group-estimated-means
+#| echo: false
+#| message: false
+#| warning: false
+
+group_means_file <- "models/group_contrasts/group_estimated_means.csv"
+
+if (file.exists(group_means_file)) {
+  read_csv(group_means_file, show_col_types = FALSE) |>
+    mutate(
+      estimate = if_else(is.na(prob), emmean, prob),
+      lower = asymp.LCL,
+      upper = asymp.UCL,
+      estimate = round(estimate, 3),
+      SE = round(SE, 3),
+      lower = round(lower, 3),
+      upper = round(upper, 3)
+    ) |>
+    select(response_label, GROUP, n, estimate, SE, lower, upper) |>
+    arrange(response_label, GROUP) |>
+    kable(col.names = c("Response", "Group", "N", "Estimated mean/probability", "SE", "Lower 95% CI", "Upper 95% CI"))
+} else {
+  cat("Treatment-group estimated means are not available yet.")
+}
+```
+
+```{r}
+#| label: treatment-group-pairwise-contrasts
+#| echo: false
+#| message: false
+#| warning: false
+#| results: asis
+
+group_contrasts_file <- "models/group_contrasts/group_pairwise_contrasts.csv"
+
+if (file.exists(group_contrasts_file)) {
+  contrast_table <- read_csv(group_contrasts_file, show_col_types = FALSE) |>
+    mutate(
+      estimate_display = if_else(is.na(odds.ratio), estimate, odds.ratio),
+      scale = if_else(is.na(odds.ratio), "difference", "odds ratio"),
+      estimate_display = round(estimate_display, 3),
+      SE = round(SE, 3),
+      p.value = round(p.value, 4)
+    ) |>
+    select(response_label, contrast, scale, estimate_display, SE, p.value) |>
+    arrange(response_label, p.value)
+
+  cat("<details>\n")
+  cat("<summary>Show all pairwise treatment-group contrasts</summary>\n\n")
+  print(
+    kable(
+      contrast_table,
+      col.names = c("Response", "Contrast", "Scale", "Estimate", "SE", "Tukey-adjusted p")
+    )
+  )
+  cat("\n</details>\n")
+} else {
+  cat("Treatment-group pairwise contrasts are not available yet.")
+}
+```

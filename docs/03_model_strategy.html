@@ -169,6 +169,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="response-variables">Response variables</h2>
 <p>The dependent variables are:</p>
 <ul>
+<li>hatchability (<code>HATCHED</code>),</li>
 <li>day-2 body mass (<code>D2_MASS</code>),</li>
 <li>day-8 body mass (<code>D8_MASS</code>),</li>
 <li>day-12 body mass (<code>D12_MASS</code>),</li>
@@ -179,16 +180,23 @@ ul.task-list li input[type="checkbox"] {
 <li>day-12 tarsus length (<code>D12_RTARS</code>),</li>
 <li>day-12 survival (<code>D12_SURV</code>).</li>
 </ul>
-<p>Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period predictors.</p>
+<p>Hatchability is modelled separately because it is an egg-level response that occurs before the nestling-period treatment. Day-2 body mass is also treated separately because it occurs before most of the nestling-period treatment. All later nestling responses can include both incubation-period and nestling-period predictors.</p>
 </section>
 <section id="distributional-strategy" class="level2">
 <h2 class="anchored" data-anchor-id="distributional-strategy">Distributional strategy</h2>
 <p>For continuous nestling traits, Gaussian mixed models are used as the primary models. This choice is based on interpretability and on the fact that the response distributions do not show strong departures from normality. Student-t models are still fitted because AIC often favours heavier-tailed error distributions, but they are treated as robustness checks rather than as an automatic replacement for the Gaussian models.</p>
 <p>AIC values are reported descriptively in the distributional sensitivity analysis. Effects that are consistent between Gaussian and Student-t models are interpreted as more robust. Effects that appear only under one distributional assumption are treated cautiously.</p>
-<p>For day-12 survival, the primary model uses a binomial error distribution.</p>
+<p>For hatchability and day-12 survival, the primary models use binomial error distributions.</p>
 </section>
 <section id="primary-experiment-models" class="level2">
 <h2 class="anchored" data-anchor-id="primary-experiment-models">Primary experiment models</h2>
+<p>For hatchability, the primary model tests whether incubation-stage treatment affects the probability that eggs hatch:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>HATCHED ~ EXP.INC + CS_sc + (1|F_RING) + (1|YEAR)</code></pre>
+</div>
+</div>
+<p><code>HATCHED</code> is coded as an egg-level binary response, where <code>1</code> means that the egg hatched and <code>0</code> means that it did not hatch. The model controls for clutch size (<code>CS_sc</code>) and includes female identity and year as random effects.</p>
 <p>For day-2 body mass, the primary model tests incubation-stage treatment only:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -220,13 +228,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ambient-temperature-models" class="level2">
 <h2 class="anchored" data-anchor-id="ambient-temperature-models">Ambient-temperature models</h2>
-<p>Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:</p>
+<p>Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature. These models test whether ambient temperature experienced during one breeding stage has carry-over effects on later responses, and whether the association with temperature during one stage depends on the thermal conditions experienced during the other stage:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)</code></pre>
 </div>
 </div>
-<p>These models ask whether natural variation in ambient temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.</p>
 
 
 </section>

@@ -13,6 +13,7 @@ dat <- readRDS("data/prepared_nestlings.rds")
 selected_models <- read_csv("models/selected_models.csv", show_col_types = FALSE)
 
 trait_labels <- c(
+  HATCHED = "Hatchability",
   D2_MASS = "Body mass at day 2",
   D8_MASS = "Body mass at day 8",
   D12_MASS = "Body mass at day 12",
@@ -24,7 +25,7 @@ trait_labels <- c(
   D12_SURV = "Survival to day 12"
 )
 
-continuous_responses <- setdiff(selected_models$response, "D12_SURV")
+continuous_responses <- setdiff(selected_models$response, c("HATCHED", "D12_SURV"))
 
 plot_raw_distribution <- function(response) {
   plot_data <- dat %>% filter(!is.na(.data[[response]]))

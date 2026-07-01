@@ -13,8 +13,10 @@ dir.create(file.path("models", "summary_pdf"), showWarnings = FALSE, recursive =
 dir.create(file.path("models", "diagnostics"), showWarnings = FALSE, recursive = TRUE)
 
 dat <- readRDS("data/prepared_nestlings.rds")
+hatch_dat <- readRDS("data/prepared_hatchability_eggs.rds")
 
 response_labels <- c(
+  HATCHED = "Hatchability",
   D2_MASS = "Day-2 body mass",
   D8_MASS = "Day-8 body mass",
   D12_MASS = "Day-12 body mass",
@@ -177,6 +179,48 @@ results <- lapply(seq_len(nrow(model_specs)), function(i) {
   )
 })
 
+hatch_dat <- hatch_dat %>%
+  filter(!is.na(HATCHED), !is.na(EXP.INC), !is.na(CS_sc), !is.na(F_RING), !is.na(YEAR)) %>%
+  mutate(HATCHED = as.integer(HATCHED)) %>%
+  droplevels()
+
+model_hatched <- glmmTMB(
+  HATCHED ~ EXP.INC + CS_sc + (1|F_RING) + (1|YEAR),
+  family = binomial(),
+  data = hatch_dat
+)
+
+saveRDS(model_hatched, "models/best_model_HATCHED.rds")
+hatch_artifacts <- capture_model_artifacts(model_hatched, "HATCHED", "binomial", response_labels[["HATCHED"]])
+hatch_coef <- fixed_effect_table(model_hatched, "HATCHED", "binomial", response_labels[["HATCHED"]], TRUE)
+hatch_selected <- tibble(
+  response = "HATCHED",
+  response_label = response_labels[["HATCHED"]],
+  selected_model = "binomial",
+  formula = paste(deparse(formula(model_hatched)), collapse = " "),
+  dispersion_formula = "not used",
+  n = nrow(hatch_dat)
+)
+hatch_artifact_row <- tibble(
+  response = "HATCHED",
+  response_label = response_labels[["HATCHED"]],
+  model_name = "binomial",
+  selected_model = TRUE,
+  summary_txt = hatch_artifacts$summary_txt,
+  summary_pdf = hatch_artifacts$summary_pdf,
+  diagnostic_pdf = hatch_artifacts$diagnostic_pdf
+)
+hatch_comparison <- tibble(
+  response = "HATCHED",
+  response_label = response_labels[["HATCHED"]],
+  model_name = "binomial",
+  model_family = "Binomial",
+  dispersion_formula = "not used",
+  AIC = AIC(model_hatched),
+  delta_AIC = 0,
+  selected_model = TRUE
+)
+
 surv_dat <- dat %>%
   filter(!is.na(D12_SURV)) %>%
   mutate(D12_SURV = factor(D12_SURV, levels = c(0, 1), labels = c("Dead", "Survived"))) %>%
@@ -219,10 +263,10 @@ surv_comparison <- tibble(
   selected_model = TRUE
 )
 
-model_comparisons <- bind_rows(lapply(results, `[[`, "comparison"), surv_comparison)
-model_artifacts <- bind_rows(lapply(results, `[[`, "artifacts"), surv_artifact_row)
-model_coefficients <- bind_rows(lapply(results, `[[`, "coefficients"), surv_coef)
-selected_models <- bind_rows(lapply(results, `[[`, "selected"), surv_selected)
+model_comparisons <- bind_rows(hatch_comparison, lapply(results, `[[`, "comparison"), surv_comparison)
+model_artifacts <- bind_rows(hatch_artifact_row, lapply(results, `[[`, "artifacts"), surv_artifact_row)
+model_coefficients <- bind_rows(hatch_coef, lapply(results, `[[`, "coefficients"), surv_coef)
+selected_models <- bind_rows(hatch_selected, lapply(results, `[[`, "selected"), surv_selected)
 
 write_csv(model_comparisons, "models/model_comparisons.csv")
 write_csv(model_artifacts, "models/model_artifacts.csv")

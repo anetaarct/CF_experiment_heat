@@ -148,6 +148,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sensitivity-summary" id="toc-sensitivity-summary" class="nav-link" data-scroll-target="#sensitivity-summary">Sensitivity summary</a></li>
   <li><a href="#candidate-model-set" id="toc-candidate-model-set" class="nav-link" data-scroll-target="#candidate-model-set">Candidate model set</a></li>
   <li><a href="#interpretation-rule" id="toc-interpretation-rule" class="nav-link" data-scroll-target="#interpretation-rule">Interpretation rule</a></li>
+  <li><a href="#dispersion-effects" id="toc-dispersion-effects" class="nav-link" data-scroll-target="#dispersion-effects">Dispersion effects</a></li>
+  <li><a href="#treatment-group-contrasts" id="toc-treatment-group-contrasts" class="nav-link" data-scroll-target="#treatment-group-contrasts">Treatment-group contrasts</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -636,6 +638,1025 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="interpretation-rule">Interpretation rule</h2>
 <p>Effects that show the same direction in Gaussian and Student-t models are treated as directionally robust. The asterisk indicates whether the effect also has statistical support (<code>p &lt; 0.05</code>). Effects that change direction, or have support only under one distributional assumption, are interpreted cautiously as distribution-sensitive results.</p>
 <p>When the estimated effect changed direction between Gaussian and Student-t models, this indicates that the result was sensitive to distributional assumptions. We therefore do not interpret this effect as robust evidence for a biological relationship.</p>
+</section>
+<section id="dispersion-effects" class="level2">
+<h2 class="anchored" data-anchor-id="dispersion-effects">Dispersion effects</h2>
+<p>For continuous responses, we also fitted location-scale models in <code>glmmTMB</code>, allowing residual dispersion to differ between experimental treatments. These models ask whether the experiment affected not only the mean response, but also the variability of the trait. Dispersion effects are interpreted cautiously and separately from the primary mean effects.</p>
+<p>Positive dispersion estimates indicate higher residual variance relative to the reference group, whereas negative estimates indicate lower residual variance. The table below reports dispersion terms for scale models; the column <code>Best-supported scale model</code> marks responses for which a scale model had the lowest AIC among the candidate models.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 16%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Scale model</th>
+<th style="text-align: left;">Dispersion term</th>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">z</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">student_scale</td>
+<td style="text-align: left;">EXP.INCHeated</td>
+<td style="text-align: left;">higher variance</td>
+<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.741</td>
+<td style="text-align: right;">0.4588</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.INCHeated</td>
+<td style="text-align: left;">higher variance</td>
+<td style="text-align: right;">0.060</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">1.061</td>
+<td style="text-align: right;">0.2887</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">student_scale</td>
+<td style="text-align: left;">EXP.NESTHeated</td>
+<td style="text-align: left;">lower variance</td>
+<td style="text-align: right;">-0.112</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">-1.415</td>
+<td style="text-align: right;">0.1571</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Day-8 body mass</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.NESTHeated</td>
+<td style="text-align: left;">lower variance</td>
+<td style="text-align: right;">-0.072</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">-1.265</td>
+<td style="text-align: right;">0.2058</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.INCHeated</td>
+<td style="text-align: left;">higher variance</td>
+<td style="text-align: right;">0.115</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">1.998</td>
+<td style="text-align: right;">0.0457</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.NESTHeated</td>
+<td style="text-align: left;">lower variance</td>
+<td style="text-align: right;">-0.069</td>
+<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">-1.192</td>
+<td style="text-align: right;">0.2331</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.INCHeated</td>
+<td style="text-align: left;">lower variance</td>
+<td style="text-align: right;">-0.141</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">-2.301</td>
+<td style="text-align: right;">0.0214</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">gaussian_scale</td>
+<td style="text-align: left;">EXP.NESTHeated</td>
+<td style="text-align: left;">lower variance</td>
+<td style="text-align: right;">-0.198</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">-3.214</td>
+<td style="text-align: right;">0.0013</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="treatment-group-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-group-contrasts">Treatment-group contrasts</h2>
+<p>As an additional sensitivity analysis, we also compare the four combined treatment groups (<code>CONCON</code>, <code>CONEXP</code>, <code>EXPCON</code>, and <code>EXPEXP</code>). These contrasts are descriptive and are used to make group-level differences easier to inspect. They do not replace the primary factorial models, which remain the main biological tests of incubation-stage warming, nestling-stage warming, and their interaction.</p>
+<p>For nestling traits, the sensitivity model is:</p>
+<pre class="text"><code>response ~ GROUP + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)</code></pre>
+<p>For hatchability, the model is:</p>
+<pre class="text"><code>HATCHED ~ GROUP + CS_sc + (1 | F_RING) + (1 | YEAR)</code></pre>
+<p>The hatchability group comparison is included only as a descriptive sensitivity check, because hatchability occurs before the nestling-stage treatment.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 27%">
+<col style="width: 6%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Group</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Estimated mean/probability</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">Lower 95% CI</th>
+<th style="text-align: right;">Upper 95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">689</td>
+<td style="text-align: right;">14.162</td>
+<td style="text-align: right;">0.229</td>
+<td style="text-align: right;">13.713</td>
+<td style="text-align: right;">14.612</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">689</td>
+<td style="text-align: right;">13.888</td>
+<td style="text-align: right;">0.234</td>
+<td style="text-align: right;">13.428</td>
+<td style="text-align: right;">14.347</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">689</td>
+<td style="text-align: right;">13.589</td>
+<td style="text-align: right;">0.233</td>
+<td style="text-align: right;">13.133</td>
+<td style="text-align: right;">14.046</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">689</td>
+<td style="text-align: right;">13.964</td>
+<td style="text-align: right;">0.222</td>
+<td style="text-align: right;">13.529</td>
+<td style="text-align: right;">14.398</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">860</td>
+<td style="text-align: right;">3.175</td>
+<td style="text-align: right;">0.108</td>
+<td style="text-align: right;">2.963</td>
+<td style="text-align: right;">3.386</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">860</td>
+<td style="text-align: right;">3.141</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">2.931</td>
+<td style="text-align: right;">3.351</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">860</td>
+<td style="text-align: right;">3.050</td>
+<td style="text-align: right;">0.109</td>
+<td style="text-align: right;">2.835</td>
+<td style="text-align: right;">3.265</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">860</td>
+<td style="text-align: right;">3.244</td>
+<td style="text-align: right;">0.104</td>
+<td style="text-align: right;">3.040</td>
+<td style="text-align: right;">3.449</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">777</td>
+<td style="text-align: right;">12.631</td>
+<td style="text-align: right;">0.344</td>
+<td style="text-align: right;">11.957</td>
+<td style="text-align: right;">13.305</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">777</td>
+<td style="text-align: right;">12.454</td>
+<td style="text-align: right;">0.344</td>
+<td style="text-align: right;">11.780</td>
+<td style="text-align: right;">13.128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">777</td>
+<td style="text-align: right;">11.975</td>
+<td style="text-align: right;">0.354</td>
+<td style="text-align: right;">11.281</td>
+<td style="text-align: right;">12.669</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">777</td>
+<td style="text-align: right;">12.095</td>
+<td style="text-align: right;">0.334</td>
+<td style="text-align: right;">11.440</td>
+<td style="text-align: right;">12.749</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">759</td>
+<td style="text-align: right;">1.585</td>
+<td style="text-align: right;">0.053</td>
+<td style="text-align: right;">1.481</td>
+<td style="text-align: right;">1.689</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">759</td>
+<td style="text-align: right;">1.549</td>
+<td style="text-align: right;">0.053</td>
+<td style="text-align: right;">1.445</td>
+<td style="text-align: right;">1.652</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">759</td>
+<td style="text-align: right;">1.472</td>
+<td style="text-align: right;">0.054</td>
+<td style="text-align: right;">1.366</td>
+<td style="text-align: right;">1.577</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">759</td>
+<td style="text-align: right;">1.471</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">1.372</td>
+<td style="text-align: right;">1.570</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">1170</td>
+<td style="text-align: right;">0.843</td>
+<td style="text-align: right;">0.042</td>
+<td style="text-align: right;">0.742</td>
+<td style="text-align: right;">0.909</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">1170</td>
+<td style="text-align: right;">0.835</td>
+<td style="text-align: right;">0.042</td>
+<td style="text-align: right;">0.734</td>
+<td style="text-align: right;">0.902</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">1170</td>
+<td style="text-align: right;">0.836</td>
+<td style="text-align: right;">0.044</td>
+<td style="text-align: right;">0.731</td>
+<td style="text-align: right;">0.906</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">1170</td>
+<td style="text-align: right;">0.891</td>
+<td style="text-align: right;">0.032</td>
+<td style="text-align: right;">0.811</td>
+<td style="text-align: right;">0.939</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">679</td>
+<td style="text-align: right;">0.282</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.129</td>
+<td style="text-align: right;">0.435</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">679</td>
+<td style="text-align: right;">0.317</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.163</td>
+<td style="text-align: right;">0.471</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">679</td>
+<td style="text-align: right;">0.326</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.170</td>
+<td style="text-align: right;">0.482</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">679</td>
+<td style="text-align: right;">0.344</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.192</td>
+<td style="text-align: right;">0.497</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">681</td>
+<td style="text-align: right;">14.085</td>
+<td style="text-align: right;">0.241</td>
+<td style="text-align: right;">13.612</td>
+<td style="text-align: right;">14.557</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">681</td>
+<td style="text-align: right;">13.843</td>
+<td style="text-align: right;">0.245</td>
+<td style="text-align: right;">13.363</td>
+<td style="text-align: right;">14.323</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">681</td>
+<td style="text-align: right;">13.790</td>
+<td style="text-align: right;">0.248</td>
+<td style="text-align: right;">13.305</td>
+<td style="text-align: right;">14.276</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">681</td>
+<td style="text-align: right;">14.286</td>
+<td style="text-align: right;">0.237</td>
+<td style="text-align: right;">13.821</td>
+<td style="text-align: right;">14.750</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">0.999</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.994</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">885</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">682</td>
+<td style="text-align: right;">16.865</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">16.587</td>
+<td style="text-align: right;">17.143</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">682</td>
+<td style="text-align: right;">16.911</td>
+<td style="text-align: right;">0.143</td>
+<td style="text-align: right;">16.630</td>
+<td style="text-align: right;">17.192</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">682</td>
+<td style="text-align: right;">16.724</td>
+<td style="text-align: right;">0.145</td>
+<td style="text-align: right;">16.441</td>
+<td style="text-align: right;">17.008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">682</td>
+<td style="text-align: right;">16.744</td>
+<td style="text-align: right;">0.141</td>
+<td style="text-align: right;">16.468</td>
+<td style="text-align: right;">17.020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONCON</td>
+<td style="text-align: right;">666</td>
+<td style="text-align: right;">1.091</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">1.032</td>
+<td style="text-align: right;">1.149</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONEXP</td>
+<td style="text-align: right;">666</td>
+<td style="text-align: right;">1.062</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1.121</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">EXPCON</td>
+<td style="text-align: right;">666</td>
+<td style="text-align: right;">1.041</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">0.982</td>
+<td style="text-align: right;">1.099</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">EXPEXP</td>
+<td style="text-align: right;">666</td>
+<td style="text-align: right;">1.056</td>
+<td style="text-align: right;">0.029</td>
+<td style="text-align: right;">0.999</td>
+<td style="text-align: right;">1.112</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<details>
+<summary>
+Show all pairwise treatment-group contrasts
+</summary>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Response</th>
+<th style="text-align: left;">Contrast</th>
+<th style="text-align: left;">Scale</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">Tukey-adjusted p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.573</td>
+<td style="text-align: right;">0.324</td>
+<td style="text-align: right;">0.2889</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.374</td>
+<td style="text-align: right;">0.320</td>
+<td style="text-align: right;">0.6471</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.299</td>
+<td style="text-align: right;">0.327</td>
+<td style="text-align: right;">0.7974</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.275</td>
+<td style="text-align: right;">0.324</td>
+<td style="text-align: right;">0.8317</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.199</td>
+<td style="text-align: right;">0.318</td>
+<td style="text-align: right;">0.9238</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 12</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.076</td>
+<td style="text-align: right;">0.321</td>
+<td style="text-align: right;">0.9954</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.194</td>
+<td style="text-align: right;">0.112</td>
+<td style="text-align: right;">0.3053</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.125</td>
+<td style="text-align: right;">0.115</td>
+<td style="text-align: right;">0.6989</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.103</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">0.7848</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.114</td>
+<td style="text-align: right;">0.8549</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.069</td>
+<td style="text-align: right;">0.111</td>
+<td style="text-align: right;">0.9245</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 2</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.034</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">0.9905</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.656</td>
+<td style="text-align: right;">0.357</td>
+<td style="text-align: right;">0.2558</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.536</td>
+<td style="text-align: right;">0.341</td>
+<td style="text-align: right;">0.3934</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.479</td>
+<td style="text-align: right;">0.357</td>
+<td style="text-align: right;">0.5370</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.359</td>
+<td style="text-align: right;">0.341</td>
+<td style="text-align: right;">0.7174</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.177</td>
+<td style="text-align: right;">0.349</td>
+<td style="text-align: right;">0.9573</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Body mass at day 8</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.120</td>
+<td style="text-align: right;">0.349</td>
+<td style="text-align: right;">0.9861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.114</td>
+<td style="text-align: right;">0.054</td>
+<td style="text-align: right;">0.1512</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.114</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">0.1865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.054</td>
+<td style="text-align: right;">0.4735</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.077</td>
+<td style="text-align: right;">0.056</td>
+<td style="text-align: right;">0.5182</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.056</td>
+<td style="text-align: right;">0.9140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Early growth</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.055</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONEXP / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">0.621</td>
+<td style="text-align: right;">0.194</td>
+<td style="text-align: right;">0.4208</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">EXPCON / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">0.628</td>
+<td style="text-align: right;">0.203</td>
+<td style="text-align: right;">0.4740</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONCON / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">0.660</td>
+<td style="text-align: right;">0.212</td>
+<td style="text-align: right;">0.5656</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONCON / CONEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.063</td>
+<td style="text-align: right;">0.328</td>
+<td style="text-align: right;">0.9973</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONCON / EXPCON</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.051</td>
+<td style="text-align: right;">0.334</td>
+<td style="text-align: right;">0.9987</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hatchability</td>
+<td style="text-align: left;">CONEXP / EXPCON</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">0.989</td>
+<td style="text-align: right;">0.308</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.062</td>
+<td style="text-align: right;">0.067</td>
+<td style="text-align: right;">0.7912</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.044</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.9193</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.035</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.9574</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.027</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.9780</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.018</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.9932</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Late growth</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.009</td>
+<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.9992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.495</td>
+<td style="text-align: right;">0.296</td>
+<td style="text-align: right;">0.3383</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.443</td>
+<td style="text-align: right;">0.296</td>
+<td style="text-align: right;">0.4397</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.294</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.7573</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.241</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.8490</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.201</td>
+<td style="text-align: right;">0.292</td>
+<td style="text-align: right;">0.9012</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scaled mass index at day 12</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.053</td>
+<td style="text-align: right;">0.302</td>
+<td style="text-align: right;">0.9981</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONCON / EXPCON</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.422</td>
+<td style="text-align: right;">1.933</td>
+<td style="text-align: right;">0.9939</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONEXP / EXPCON</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.282</td>
+<td style="text-align: right;">1.723</td>
+<td style="text-align: right;">0.9978</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">EXPCON / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">0.828</td>
+<td style="text-align: right;">1.103</td>
+<td style="text-align: right;">0.9990</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONCON / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.177</td>
+<td style="text-align: right;">1.518</td>
+<td style="text-align: right;">0.9993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONCON / CONEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.109</td>
+<td style="text-align: right;">1.438</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survival to day 12</td>
+<td style="text-align: left;">CONEXP / EXPEXP</td>
+<td style="text-align: left;">odds ratio</td>
+<td style="text-align: right;">1.061</td>
+<td style="text-align: right;">1.352</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.187</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">0.5122</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.167</td>
+<td style="text-align: right;">0.132</td>
+<td style="text-align: right;">0.5888</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.141</td>
+<td style="text-align: right;">0.134</td>
+<td style="text-align: right;">0.7182</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.121</td>
+<td style="text-align: right;">0.131</td>
+<td style="text-align: right;">0.7924</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.046</td>
+<td style="text-align: right;">0.133</td>
+<td style="text-align: right;">0.9857</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tarsus length at day 12</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">0.133</td>
+<td style="text-align: right;">0.9988</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONCON - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.050</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.4908</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.7471</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONCON - CONEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.8580</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONEXP - EXPCON</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.022</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.9286</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">EXPCON - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">-0.015</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.9729</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whole-period growth</td>
+<td style="text-align: left;">CONEXP - EXPEXP</td>
+<td style="text-align: left;">difference</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.9975</td>
+</tr>
+</tbody>
+</table>
+</details>
 
 
 </section>

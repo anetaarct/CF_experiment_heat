@@ -1,16 +1,18 @@
 # Experimental interaction models
 
-This page tests whether the effect of nestling-stage warming depends on incubation-stage warming. Biologically, this asks whether conditions experienced before hatching modify later responses to the nestling-period treatment.
+We initially tested whether the effect of nestling-stage warming depended on the thermal conditions experienced during incubation. Biologically, this tests whether exposure to warming before hatching modifies the response to warming during the nestling period. In other words, these models ask whether the effect of the nestling-period treatment differs between nests that were heated or not heated during incubation.
 
-The interaction model is:
+For each response variable, we fitted the following interaction model:
 
-```{r}
-#| label: experiment-interaction-formula
-#| echo: false
-cat("response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
+```text
+response ~ EXP.INC * EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
 ```
 
-Day-2 mass is not included here because it occurs before most of the nestling-stage treatment.
+where `EXP.INC` indicates whether the nest was heated during incubation, and `EXP.NEST` indicates whether the nest was heated during the nestling period.
+
+Across traits, the interaction between incubation-stage and nestling-stage warming was not statistically supported. We therefore present these models as planned interaction tests, while interpreting the main treatment effects from the primary models reported above.
+
+Day-2 body mass was not included in this set of interaction models because this measurement was taken before most of the nestling-stage treatment had occurred.
 
 ## Interaction terms
 

@@ -1,0 +1,22 @@
+ Family: binomial  ( logit )
+Formula:          HATCHED ~ EXP.INC + CS_sc + (1 | F_RING) + (1 | YEAR)
+Data: hatch_dat
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1060.3    1085.6    -525.2    1050.3      1165 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ F_RING (Intercept) 0.8691   0.9323  
+ YEAR   (Intercept) 0.1814   0.4259  
+Number of obs: 1170, groups:  F_RING, 178; YEAR, 4
+
+Conditional model:
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     1.6691     0.2681   6.226 4.77e-10 ***
+EXP.INCHeated   0.2212     0.2244   0.986    0.324    
+CS_sc          -0.1517     0.1191  -1.274    0.203    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

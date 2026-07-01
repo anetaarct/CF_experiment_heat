@@ -1,0 +1,22 @@
+
+Call:
+lm(formula = TEMP.BOX ~ EXP.INC + YEAR, data = broods)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.5324 -0.9271  0.1114  1.0950  4.4705 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    14.1338     0.3400  41.575  < 2e-16 ***
+EXP.INCHeated   2.9011     0.2736  10.604  < 2e-16 ***
+YEAR2023        1.9186     0.4105   4.674 6.08e-06 ***
+YEAR2024        2.7525     0.4079   6.748 2.39e-10 ***
+YEAR2025       -2.2834     0.4245  -5.379 2.51e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.782 on 166 degrees of freedom
+Multiple R-squared:  0.6675,	Adjusted R-squared:  0.6595 
+F-statistic: 83.33 on 4 and 166 DF,  p-value: < 2.2e-16
+

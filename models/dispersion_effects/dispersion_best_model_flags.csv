@@ -1,0 +1,11 @@
+response,best_model,best_model_has_dispersion
+D12_MASS,gaussian_mean,FALSE
+D12_RTARS,student_mean,FALSE
+D12_SMI,student_mean,FALSE
+D12_SURV,binomial,FALSE
+D2_MASS,student_mean,FALSE
+D8_MASS,student_scale,TRUE
+Early.g,gaussian_scale,TRUE
+Growth,student_mean,FALSE
+HATCHED,binomial,FALSE
+Late.g,gaussian_scale,TRUE

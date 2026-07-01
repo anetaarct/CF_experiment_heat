@@ -8,6 +8,7 @@ suppressPackageStartupMessages({
 
 source_file <- normalizePath("CF_exp_all_2026.xlsx", winslash = "\\", mustWork = TRUE)
 nestling_sheet <- "CF_exp.nestlings_analysis"
+brood_sheet <- "CF_exp.broods_analysis"
 source_file_for_readxl <- file.path(tempdir(), basename(source_file))
 if (file.exists(source_file_for_readxl)) {
   unlink(source_file_for_readxl)
@@ -28,6 +29,12 @@ dir.create("data", showWarnings = FALSE)
 raw_nestlings <- read_excel(
   source_file_for_readxl,
   sheet = nestling_sheet,
+  na = c("NA", "", "na", "NaN")
+)
+
+raw_broods <- read_excel(
+  source_file_for_readxl,
+  sheet = brood_sheet,
   na = c("NA", "", "na", "NaN")
 )
 
@@ -157,6 +164,41 @@ treatment_counts <- prepared_nestlings %>%
   ) %>%
   select(EXP.INC, EXP.NEST, GROUP, nests, nestling_records)
 
+hatchability_broods <- raw_broods %>%
+  select(F_RING, YEAR, BOX, LD, EXP.INC, GROUP, CS, BS) %>%
+  mutate(
+    across(any_of(c("F_RING", "YEAR", "BOX", "EXP.INC", "GROUP")), ~ str_squish(as.character(.x))),
+    across(any_of(c("LD", "CS", "BS")), ~ suppressWarnings(as.numeric(.x)))
+  ) %>%
+  filter(
+    !is.na(F_RING),
+    !is.na(YEAR),
+    !is.na(EXP.INC),
+    !is.na(CS),
+    !is.na(BS),
+    CS > 0,
+    BS >= 0,
+    BS <= CS
+  ) %>%
+  mutate(
+    YEAR = factor(YEAR),
+    F_RING = factor(F_RING),
+    EXP.INC = factor(EXP.INC),
+    GROUP = factor(GROUP),
+    CS_sc = as.numeric(scale(CS)),
+    unhatched = CS - BS,
+    brood_id = paste(F_RING, YEAR, BOX, LD, sep = "_")
+  ) %>%
+  droplevels()
+
+hatchability_eggs <- hatchability_broods %>%
+  select(F_RING, YEAR, BOX, LD, EXP.INC, GROUP, CS, CS_sc, BS, unhatched, brood_id) %>%
+  uncount(weights = CS, .id = "egg_index", .remove = FALSE) %>%
+  group_by(brood_id) %>%
+  mutate(HATCHED = as.integer(row_number() <= first(BS))) %>%
+  ungroup() %>%
+  select(F_RING, YEAR, EXP.INC, GROUP, CS, CS_sc, brood_id, egg_index, HATCHED)
+
 analysis_columns <- c(
   "F_RING", "YEAR", "SEX",
   "EXP.INC", "EXP.NEST", "GROUP",
@@ -170,6 +212,8 @@ analysis_nestlings <- prepared_nestlings %>%
 
 saveRDS(analysis_nestlings, "data/prepared_nestlings.rds")
 write_csv(analysis_nestlings, "data/prepared_nestlings.csv")
+saveRDS(hatchability_eggs, "data/prepared_hatchability_eggs.rds")
+write_csv(hatchability_eggs, "data/prepared_hatchability_eggs.csv")
 saveRDS(repeated_females, "data/repeated_females.rds")
 saveRDS(list(b_sma_chicks = b_sma_chicks, L0_chicks = L0_chicks), "data/smi_parameters.rds")
 write_csv(prepared_data_checks, "data/prepared_data_checks.csv")
@@ -177,3 +221,4 @@ write_csv(treatment_counts, "data/treatment_counts.csv")
 write_csv(repeated_females, "data/repeated_females.csv")
 
 message("Prepared nestling data saved to data/prepared_nestlings.rds and data/prepared_nestlings.csv")
+message("Prepared hatchability egg-level data saved to data/prepared_hatchability_eggs.rds and data/prepared_hatchability_eggs.csv")

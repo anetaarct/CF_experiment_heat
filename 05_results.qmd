@@ -30,7 +30,7 @@ if (file.exists(selected_file) && file.exists(coef_file) && file.exists(artifact
 
 distribution_sensitive_terms <- model_coefficients |>
   filter(
-    response != "D12_SURV",
+    !response %in% c("HATCHED", "D12_SURV"),
     model_name %in% c("gaussian_mean", "student_mean"),
     grepl("^EXP\\.", term),
     !is.na(estimate)
@@ -49,6 +49,7 @@ link_path <- function(path, text = basename(path)) {
 
 response_display_label <- function(response, fallback = response) {
   labels <- c(
+    HATCHED = "Hatchability (HATCHED)",
     D2_MASS = "Body mass at day 2 (D2_MASS)",
     D8_MASS = "Body mass at day 8 (D8_MASS)",
     D12_MASS = "Body mass at day 12 (D12_MASS)",
@@ -64,6 +65,7 @@ response_display_label <- function(response, fallback = response) {
 
 response_question <- function(response, response_label) {
   questions <- c(
+    HATCHED = "Does incubation-stage warming affect the probability that eggs hatch?",
     D2_MASS = "Does incubation-stage warming affect nestling body mass at day 2?",
     D8_MASS = "Do incubation-stage and nestling-stage warming affect nestling body mass at day 8?",
     D12_MASS = "Do incubation-stage and nestling-stage warming affect nestling body mass at day 12?",

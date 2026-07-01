@@ -10,6 +10,7 @@ Second, we ask whether measured ambient temperature is associated with the same 
 
 The dependent variables are:
 
+- hatchability (`HATCHED`),
 - day-2 body mass (`D2_MASS`),
 - day-8 body mass (`D8_MASS`),
 - day-12 body mass (`D12_MASS`),
@@ -20,7 +21,7 @@ The dependent variables are:
 - day-12 tarsus length (`D12_RTARS`),
 - day-12 survival (`D12_SURV`).
 
-Day-2 body mass is treated separately because it occurs before most of the nestling-period treatment. All later responses can include both incubation-period and nestling-period predictors.
+Hatchability is modelled separately because it is an egg-level response that occurs before the nestling-period treatment. Day-2 body mass is also treated separately because it occurs before most of the nestling-period treatment. All later nestling responses can include both incubation-period and nestling-period predictors.
 
 ## Distributional strategy
 
@@ -28,9 +29,19 @@ For continuous nestling traits, Gaussian mixed models are used as the primary mo
 
 AIC values are reported descriptively in the distributional sensitivity analysis. Effects that are consistent between Gaussian and Student-t models are interpreted as more robust. Effects that appear only under one distributional assumption are treated cautiously.
 
-For day-12 survival, the primary model uses a binomial error distribution.
+For hatchability and day-12 survival, the primary models use binomial error distributions.
 
 ## Primary experiment models
+
+For hatchability, the primary model tests whether incubation-stage treatment affects the probability that eggs hatch:
+
+```{r}
+#| label: hatchability-main-model
+#| echo: false
+cat("HATCHED ~ EXP.INC + CS_sc + (1|F_RING) + (1|YEAR)")
+```
+
+`HATCHED` is coded as an egg-level binary response, where `1` means that the egg hatched and `0` means that it did not hatch. The model controls for clutch size (`CS_sc`) and includes female identity and year as random effects.
 
 For day-2 body mass, the primary model tests incubation-stage treatment only:
 
@@ -70,12 +81,10 @@ These models address carry-over effects of the experimental treatment. They are 
 
 ## Ambient-temperature models
 
-Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature:
+Measured ambient temperature is analysed on a separate page using an interaction between incubation-period and nestling-period temperature. These models test whether ambient temperature experienced during one breeding stage has carry-over effects on later responses, and whether the association with temperature during one stage depends on the thermal conditions experienced during the other stage:
 
 ```{r}
 #| label: temperature-interaction-model
 #| echo: false
 cat("response ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_sc + SEX + BS_sc + (1|F_RING) + (1|YEAR)")
 ```
-
-These models ask whether natural variation in ambient temperature during one stage modifies the association between temperature in the other stage and the response. They are not the primary experimental test; they are used to separate the biological effect of the manipulation from associations with background thermal conditions.

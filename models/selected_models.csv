@@ -1,4 +1,5 @@
 response,response_label,selected_model,formula,dispersion_formula,n
+HATCHED,Hatchability,binomial,HATCHED ~ EXP.INC + CS_sc + (1 | F_RING) + (1 | YEAR),not used,1170
 D2_MASS,Day-2 body mass,gaussian_mean,D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR),~1,860
 D8_MASS,Day-8 body mass,gaussian_mean,D8_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,777
 D12_MASS,Day-12 body mass,gaussian_mean,D12_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),~1,689

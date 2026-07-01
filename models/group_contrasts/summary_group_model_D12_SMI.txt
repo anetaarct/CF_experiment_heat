@@ -1,0 +1,28 @@
+ Family: gaussian  ( identity )
+Formula:          D12_SMI ~ GROUP + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
+Data: model_data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   2248.8    2289.5   -1115.4    2230.8       672 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ F_RING   (Intercept) 1.29487  1.1379  
+ YEAR     (Intercept) 0.05461  0.2337  
+ Residual             1.04127  1.0204  
+Number of obs: 681, groups:  F_RING, 141; YEAR, 4
+
+Dispersion estimate for gaussian family (sigma^2): 1.04 
+
+Conditional model:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) 13.95140    0.24412   57.15  < 2e-16 ***
+GROUPCONEXP -0.24144    0.29750   -0.81  0.41705    
+GROUPEXPCON -0.29422    0.29834   -0.99  0.32404    
+GROUPEXPEXP  0.20116    0.29181    0.69  0.49059    
+SEXM         0.27641    0.08734    3.16  0.00155 ** 
+BS_sc       -0.19614    0.10037   -1.95  0.05069 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

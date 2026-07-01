@@ -14,7 +14,7 @@ knitr::include_graphics("figures/overview/collared_flycatcher_nest_heating_overv
 
 This project tests how increased thermal conditions during breeding affect reproductive performance and offspring development in a wild population of collared flycatchers (*Ficedula albicollis*). We used a fully factorial 2 x 2 experimental design in which nest boxes were independently warmed during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to test the separate and combined effects of elevated temperature before and after hatching.
 
-We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.
+We analyse reproductive performance as hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined here as survival to day 12. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only hatching and survival, but also the developmental trajectory and condition of surviving young.
 
 The analyses address two related questions. First, we test whether experimental warming during incubation, experimental warming during the nestling period, and their interaction affect reproductive performance and offspring development. Second, we examine whether naturally experienced ambient temperatures during incubation and during the nestling period, together with their interaction, are associated with the same reproductive and developmental responses. Thus, the experimental analyses test causal effects of increased nest temperature, whereas the temperature-based analyses ask whether variation in ambient thermal conditions across breeding stages predicts similar biological outcomes.
 
@@ -31,7 +31,7 @@ The experiment includes two treatment variables:
 | `EXP.INC` | Incubation-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during incubation or remained unheated as a control. | `Control` / `Heated` |
 | `EXP.NEST` | Nestling-stage nest-box warming treatment. Indicates whether the nest box was experimentally warmed during the nestling period or remained unheated as a control. | `Control` / `Heated` |
 
-The combined treatment group is stored as `GROUP`, with four combinations: `CONCON`, `CONEXP`, `EXPCON`, and `EXPEXP`. Nests were paired into blocks according to clutch/egg number and hatching date, and this paired structure is represented by `BLOCK` in the source dataset.
+The combined treatment group is stored as `GROUP`, with four combinations: `CONCON`, `CONEXP`, `EXPCON`, and `EXPEXP`.
 
 ```{r}
 #| label: overview-experimental-design
@@ -43,17 +43,47 @@ The combined treatment group is stored as `GROUP`, with four combinations: `CONC
 knitr::include_graphics("figures/overview/experimental_design.png")
 ```
 
-## Workflow
+## Temperature manipulation check
 
-The website documents the full analytical workflow, from data preparation and treatment coding to response-variable construction, model fitting, diagnostics, sensitivity analyses, prediction plots, and biological interpretation.
+To verify that the experimental treatment changed the thermal environment inside nest boxes, we tested whether nest-box temperature differed between incubation-period control and heated nests while controlling for year:
 
-The workflow is organised around five steps:
+```text
+TEMP.BOX ~ EXP.INC + YEAR
+```
 
-- data import from the raw workbook,
-- creation of the analysis dataset after removing later broods from repeated females,
-- fitting primary experiment models with `glmmTMB`,
-- fitting separate interaction models for experimental treatments and measured nest temperatures,
-- generating model summaries, diagnostics, and publication figures.
+The analysis used brood-level records from `CF_exp.broods_analysis`. In the current workbook, heated nest boxes were on average 2.9 °C warmer than control nest boxes. Mean ± SE nest-box temperature was 17.9 ± 0.3 °C for heated nests and 14.9 ± 0.3 °C for control nests.
+
+```{r}
+#| label: overview-manipulation-check-results
+#| echo: false
+#| message: false
+#| warning: false
+
+library(readr)
+library(dplyr)
+library(knitr)
+
+temperature_tests <- read_csv("models/manipulation_check/nestbox_temperature_tests.csv", show_col_types = FALSE) |>
+  mutate(
+    F_value = round(F_value, 2),
+    p_value = if_else(p_value < 0.001, "<0.001", formatC(p_value, digits = 3, format = "f"))
+  )
+
+kable(
+  temperature_tests,
+  col.names = c("Effect", "df", "Sum of squares", "F", "p")
+)
+```
+
+```{r}
+#| label: overview-manipulation-check-figure
+#| echo: false
+#| out-width: "58%"
+#| fig-align: "center"
+#| fig-cap: "Nest-box temperature in incubation-period control and heated nests. Pale points show brood-level observations; dark points and vertical intervals show mean ± SE."
+
+knitr::include_graphics("figures/manipulation_check/nestbox_temperature_manipulation.png")
+```
 
 ## Files needed to reproduce the analyses
 

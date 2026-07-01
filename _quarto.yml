@@ -38,14 +38,20 @@ website:
 resources:
   - data/prepared_nestlings.csv
   - data/prepared_nestlings.rds
+  - data/prepared_hatchability_eggs.csv
+  - data/prepared_hatchability_eggs.rds
   - CF_exp_all_2026.xlsx
   - models/summary_pdf/*.pdf
   - models/diagnostics/*.pdf
   - models/collinearity/*.csv
+  - models/manipulation_check/*.csv
+  - models/dispersion_effects/*.csv
+  - models/group_contrasts/*.csv
   - figures/model_effects/*
   - figures/raw_distributions/*
   - figures/experiment_interactions/*
   - figures/temperature_interactions/*
+  - figures/manipulation_check/*
 
 format:
   html:

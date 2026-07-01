@@ -1,10 +1,10 @@
-# Data preparation
+﻿# Data preparation
 
 This chapter documents how the nestling-level dataset was prepared before model fitting. Each step below gives the purpose of the operation, a foldable code block showing the exact procedure, and the resulting dataset state.
 
 ## Source data
 
-The nestling-level workflow starts from one raw workbook, `CF_exp_all_2026.xlsx`, using the sheet `CF_exp.nestlings_analysis`. This raw sheet is not treated as the final analysis file because repeated females are removed in a later preparation step. Only variables used later in the analysis are retained at import.
+The nestling-level workflow starts from one raw workbook, `CF_exp_all_2026.xlsx`, using the sheet `CF_exp.nestlings_analysis`. Only variables used later in the analysis are retained at import.
 
 ```{r}
 #| label: prep-source-data-code
@@ -80,38 +80,49 @@ nestlings_typed <- nestlings_typed |>
 
 Result: 885 sexed nestling records are retained.
 
-## Repeated females
+## Hatchability dataset
 
-The analysis keeps one experimental brood per female. Broods are identified by `F_RING`, `YEAR`, `BOX`, and `LD`. If a female appears in more than one brood, the first brood after sorting by `YEAR`, `LD`, and `BOX` is retained, and later broods from the same female are removed.
+Hatchability is prepared from the brood-level sheet `CF_exp.broods_analysis`. For each brood, clutch size (`CS`) gives the number of eggs and brood size (`BS`) gives the number of hatched young. The brood-level records are expanded to an egg-level binary dataset, where `HATCHED = 1` identifies hatched eggs and `HATCHED = 0` identifies eggs that did not hatch.
 
 ```{r}
-#| label: prep-repeated-females-code
+#| label: prep-hatchability-code
 #| eval: false
 #| code-fold: true
-#| code-summary: "Show repeated-female code"
+#| code-summary: "Show hatchability-data code"
 
-brood_order <- nestlings_typed |>
-  dplyr::distinct(F_RING, YEAR, BOX, LD, .keep_all = FALSE) |>
-  dplyr::arrange(F_RING, YEAR, LD, BOX) |>
-  dplyr::group_by(F_RING) |>
-  dplyr::mutate(female_brood_order = dplyr::row_number()) |>
+raw_broods <- read_excel(
+  "CF_exp_all_2026.xlsx",
+  sheet = "CF_exp.broods_analysis",
+  na = c("NA", "", "na", "NaN")
+)
+
+hatchability_broods <- raw_broods |>
+  dplyr::select(F_RING, YEAR, BOX, LD, EXP.INC, GROUP, CS, BS) |>
+  dplyr::mutate(
+    dplyr::across(dplyr::any_of(c("F_RING", "YEAR", "BOX", "EXP.INC", "GROUP")),
+                  ~ stringr::str_squish(as.character(.x))),
+    dplyr::across(dplyr::any_of(c("LD", "CS", "BS")), ~ suppressWarnings(as.numeric(.x)))
+  ) |>
+  dplyr::filter(!is.na(F_RING), !is.na(YEAR), !is.na(EXP.INC),
+                !is.na(CS), !is.na(BS), CS > 0, BS >= 0, BS <= CS) |>
+  dplyr::mutate(
+    YEAR = factor(YEAR),
+    F_RING = factor(F_RING),
+    EXP.INC = factor(EXP.INC),
+    GROUP = factor(GROUP),
+    CS_sc = as.numeric(scale(CS)),
+    unhatched = CS - BS,
+    brood_id = paste(F_RING, YEAR, BOX, LD, sep = "_")
+  )
+
+hatchability_eggs <- hatchability_broods |>
+  tidyr::uncount(weights = CS, .id = "egg_index") |>
+  dplyr::group_by(brood_id) |>
+  dplyr::mutate(HATCHED = as.integer(dplyr::row_number() <= dplyr::first(BS))) |>
   dplyr::ungroup()
-
-repeated_females <- brood_order |>
-  dplyr::count(F_RING, name = "n_broods") |>
-  dplyr::filter(n_broods > 1)
-
-retained_broods <- brood_order |>
-  dplyr::filter(female_brood_order == 1) |>
-  dplyr::transmute(F_RING, YEAR, BOX, LD, retained_brood = TRUE)
-
-prepared_nestlings <- nestlings_typed |>
-  dplyr::inner_join(retained_broods, by = c("F_RING", "YEAR", "BOX", "LD")) |>
-  dplyr::select(-retained_brood) |>
-  droplevels()
 ```
 
-Result: after the source workbook was corrected, no repeated female broods were detected. The dataset remains at 885 sexed nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.
+Result: the hatchability dataset contains 1170 egg-level records from 178 broods.
 
 ## Standardised predictors
 
@@ -136,53 +147,11 @@ Result: the model covariates are `BS_sc`, `HD_sc`, `incubation_temperature_sc`, 
 
 ## Collinearity check
 
-Before fitting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.
+Before fitting the ambient-temperature interaction models, we checked whether the two measured temperature predictors were strongly correlated and whether the fitted models showed problematic collinearity.
 
-```{r}
-#| label: prep-temperature-collinearity
-#| echo: false
-#| message: false
-#| warning: false
+The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is r = -0.062, based on n = 842 complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
 
-library(dplyr)
-library(readr)
-library(knitr)
-
-correlation_file <- "models/collinearity/temperature_correlation.csv"
-vif_file <- "models/collinearity/temperature_model_vif.csv"
-
-if (file.exists(correlation_file) && file.exists(vif_file)) {
-  temperature_correlation <- read_csv(correlation_file, show_col_types = FALSE)
-  vif_table <- read_csv(vif_file, show_col_types = FALSE)
-
-  cat(
-    "The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = ",
-    round(temperature_correlation$pearson_r[1], 3),
-    "` based on `n = ",
-    temperature_correlation$n_complete[1],
-    "` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.\n\n",
-    sep = ""
-  )
-
-  cat(
-    "The largest VIF in the ambient-temperature interaction models is `",
-    round(max(vif_table$VIF, na.rm = TRUE), 2),
-    "`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.\n\n",
-    sep = ""
-  )
-
-  vif_table |>
-    filter(grepl("temperature", Term)) |>
-    mutate(
-      VIF = round(VIF, 2),
-      SE_factor = round(SE_factor, 2)
-    ) |>
-    select(response_label, Term, VIF, SE_factor) |>
-    kable(col.names = c("Response", "Term", "VIF", "SE inflation factor"))
-} else {
-  cat("Collinearity diagnostics are not available yet.")
-}
-```
+The largest VIF in the ambient-temperature interaction models is `4.3`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.
 
 ## Scaled mass index
 
@@ -287,3 +256,4 @@ readr::write_csv(analysis_nestlings, "data/prepared_nestlings.csv")
 ```
 
 Result: the final analysis dataset contains 885 nestling records and 18 columns.
+

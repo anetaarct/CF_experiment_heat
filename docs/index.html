@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#study-system" id="toc-study-system" class="nav-link" data-scroll-target="#study-system">Study system</a></li>
   <li><a href="#experimental-design" id="toc-experimental-design" class="nav-link" data-scroll-target="#experimental-design">Experimental design</a></li>
-  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#temperature-manipulation-check" id="toc-temperature-manipulation-check" class="nav-link" data-scroll-target="#temperature-manipulation-check">Temperature manipulation check</a></li>
   <li><a href="#files-needed-to-reproduce-the-analyses" id="toc-files-needed-to-reproduce-the-analyses" class="nav-link" data-scroll-target="#files-needed-to-reproduce-the-analyses">Files needed to reproduce the analyses</a></li>
   <li><a href="#computational-environment" id="toc-computational-environment" class="nav-link" data-scroll-target="#computational-environment">Computational environment</a></li>
   </ul></li>
@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This project tests how increased thermal conditions during breeding affect reproductive performance and offspring development in a wild population of collared flycatchers (<em>Ficedula albicollis</em>). We used a fully factorial 2 x 2 experimental design in which nest boxes were independently warmed during incubation and during the nestling period. Warming was applied from above by placing heat packs beneath the nest-box roof, thereby increasing nest temperature without placing a heat source directly inside the nest cup. This design created four treatment combinations and allowed us to test the separate and combined effects of elevated temperature before and after hatching.</p>
-<p>We analyse reproductive performance at two key stages: hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined as the probability that hatched young survive to fledging. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only survival, but also the developmental trajectory and condition of surviving young.</p>
+<p>We analyse reproductive performance as hatchability, defined as the probability that eggs hatch, and post-hatching survival, defined here as survival to day 12. In addition, we examine offspring development by analysing nestling growth rate, body size, and body mass. These traits allow us to test whether thermal conditions affect not only hatching and survival, but also the developmental trajectory and condition of surviving young.</p>
 <p>The analyses address two related questions. First, we test whether experimental warming during incubation, experimental warming during the nestling period, and their interaction affect reproductive performance and offspring development. Second, we examine whether naturally experienced ambient temperatures during incubation and during the nestling period, together with their interaction, are associated with the same reproductive and developmental responses. Thus, the experimental analyses test causal effects of increased nest temperature, whereas the temperature-based analyses ask whether variation in ambient thermal conditions across breeding stages predicts similar biological outcomes.</p>
 <section id="study-system" class="level2">
 <h2 class="anchored" data-anchor-id="study-system">Study system</h2>
@@ -244,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>The combined treatment group is stored as <code>GROUP</code>, with four combinations: <code>CONCON</code>, <code>CONEXP</code>, <code>EXPCON</code>, and <code>EXPEXP</code>. Nests were paired into blocks according to clutch/egg number and hatching date, and this paired structure is represented by <code>BLOCK</code> in the source dataset.</p>
+<p>The combined treatment group is stored as <code>GROUP</code>, with four combinations: <code>CONCON</code>, <code>CONEXP</code>, <code>EXPCON</code>, and <code>EXPEXP</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -256,17 +256,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="workflow" class="level2">
-<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
-<p>The website documents the full analytical workflow, from data preparation and treatment coding to response-variable construction, model fitting, diagnostics, sensitivity analyses, prediction plots, and biological interpretation.</p>
-<p>The workflow is organised around five steps:</p>
-<ul>
-<li>data import from the raw workbook,</li>
-<li>creation of the analysis dataset after removing later broods from repeated females,</li>
-<li>fitting primary experiment models with <code>glmmTMB</code>,</li>
-<li>fitting separate interaction models for experimental treatments and measured nest temperatures,</li>
-<li>generating model summaries, diagnostics, and publication figures.</li>
-</ul>
+<section id="temperature-manipulation-check" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-manipulation-check">Temperature manipulation check</h2>
+<p>To verify that the experimental treatment changed the thermal environment inside nest boxes, we tested whether nest-box temperature differed between incubation-period control and heated nests while controlling for year:</p>
+<pre class="text"><code>TEMP.BOX ~ EXP.INC + YEAR</code></pre>
+<p>The analysis used brood-level records from <code>CF_exp.broods_analysis</code>. In the current workbook, heated nest boxes were on average 2.9 °C warmer than control nest boxes. Mean ± SE nest-box temperature was 17.9 ± 0.3 °C for heated nests and 14.9 ± 0.3 °C for control nests.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Effect</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">Sum of squares</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: left;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">EXP.INC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">356.9756</td>
+<td style="text-align: right;">112.44</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">YEAR</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">660.6229</td>
+<td style="text-align: right;">69.36</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/manipulation_check/nestbox_temperature_manipulation.png" class="img-fluid figure-img" style="width:58.0%"></p>
+<figcaption>Nest-box temperature in incubation-period control and heated nests. Pale points show brood-level observations; dark points and vertical intervals show mean ± SE.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="files-needed-to-reproduce-the-analyses" class="level2">
 <h2 class="anchored" data-anchor-id="files-needed-to-reproduce-the-analyses">Files needed to reproduce the analyses</h2>
@@ -278,14 +313,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "R version 4.5.1 (2025-06-13 ucrt)"</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R.version<span class="sc">$</span>platform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>R.version<span class="sc">$</span>platform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "x86_64-w64-mingw32"</code></pre>
