@@ -5,27 +5,27 @@ Growth ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_s
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  -1021.7    -976.7     520.9   -1041.7       654 
+  -1025.1    -980.1     522.5   -1045.1       656 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 1.850e-02 1.360e-01
- YEAR     (Intercept) 1.942e-11 4.407e-06
- Residual             7.180e-03 8.474e-02
-Number of obs: 664, groups:  F_RING, 140; YEAR, 4
+ F_RING   (Intercept) 1.846e-02 1.359e-01
+ YEAR     (Intercept) 1.823e-11 4.269e-06
+ Residual             7.188e-03 8.478e-02
+Number of obs: 666, groups:  F_RING, 140; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.00718 
+Dispersion estimate for gaussian family (sigma^2): 0.00719 
 
 Conditional model:
                            Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                1.065398   0.021865   48.73  < 2e-16 ***
-EXP.INCHeated             -0.026903   0.024185   -1.11 0.265979    
-EXP.NESTHeated            -0.005314   0.024132   -0.22 0.825710    
-incubation_temperature_sc -0.048618   0.013148   -3.70 0.000218 ***
-nestling_temperature_sc   -0.011468   0.012613   -0.91 0.363223    
-SEXM                       0.018657   0.007440    2.51 0.012148 *  
-BS_sc                     -0.005863   0.011450   -0.51 0.608584    
+(Intercept)                1.065050   0.021847   48.75  < 2e-16 ***
+EXP.INCHeated             -0.026823   0.024162   -1.11 0.266941    
+EXP.NESTHeated            -0.005412   0.024109   -0.22 0.822386    
+incubation_temperature_sc -0.048543   0.013123   -3.70 0.000216 ***
+nestling_temperature_sc   -0.011404   0.012613   -0.90 0.365924    
+SEXM                       0.019436   0.007423    2.62 0.008832 ** 
+BS_sc                     -0.005863   0.011427   -0.51 0.607896    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

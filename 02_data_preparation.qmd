@@ -111,7 +111,7 @@ prepared_nestlings <- nestlings_typed |>
   droplevels()
 ```
 
-Result: one female had repeated brood records. Removing the later brood reduced the dataset from 885 to 883 nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.
+Result: after the source workbook was corrected, no repeated female broods were detected. The dataset remains at 885 sexed nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.
 
 ## Standardised predictors
 
@@ -286,4 +286,4 @@ saveRDS(analysis_nestlings, "data/prepared_nestlings.rds")
 readr::write_csv(analysis_nestlings, "data/prepared_nestlings.csv")
 ```
 
-Result: the final analysis dataset contains 883 nestling records and 18 columns.
+Result: the final analysis dataset contains 885 nestling records and 18 columns.

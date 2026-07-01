@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">droplevels</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Result: one female had repeated brood records. Removing the later brood reduced the dataset from 885 to 883 nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.</p>
+<p>Result: after the source workbook was corrected, no repeated female broods were detected. The dataset remains at 885 sexed nestling records, representing 169 retained broods. The dataset after this step is the corrected nestling-level analysis dataset used by the models.</p>
 </section>
 <section id="standardised-predictors" class="level2">
 <h2 class="anchored" data-anchor-id="standardised-predictors">Standardised predictors</h2>
@@ -319,9 +319,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before fitting the ambient-temperature interaction models, we check whether the two measured temperature predictors are strongly correlated and whether the fitted models show problematic collinearity.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 840` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
+<pre><code>The Pearson correlation between `incubation_temperature_sc` and `nestling_temperature_sc` is `r = -0.062` based on `n = 842` complete records. This indicates no strong linear correlation between the two measured ambient-temperature variables.
 
-The largest VIF in the ambient-temperature interaction models is `4.29`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
+The largest VIF in the ambient-temperature interaction models is `4.3`. The highest values occur for the interaction term, which is expected in interaction models. Values remain below the common cautionary threshold of 5, so there is no evidence of severe collinearity.</code></pre>
 </div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -343,7 +343,7 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <tr class="odd">
 <td style="text-align: left;">Day-8 body mass</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.59</td>
+<td style="text-align: right;">1.60</td>
 <td style="text-align: right;">1.26</td>
 </tr>
 <tr class="even">
@@ -355,31 +355,31 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <tr class="odd">
 <td style="text-align: left;">Day-8 body mass</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.72</td>
+<td style="text-align: right;">1.73</td>
 <td style="text-align: right;">1.31</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Day-12 body mass</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.67</td>
-<td style="text-align: right;">1.63</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">1.64</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Day-12 body mass</td>
 <td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.65</td>
+<td style="text-align: right;">2.64</td>
 <td style="text-align: right;">1.63</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Day-12 body mass</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.17</td>
-<td style="text-align: right;">2.04</td>
+<td style="text-align: right;">4.19</td>
+<td style="text-align: right;">2.05</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Early growth</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.41</td>
+<td style="text-align: right;">1.42</td>
 <td style="text-align: right;">1.19</td>
 </tr>
 <tr class="even">
@@ -397,8 +397,8 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <tr class="even">
 <td style="text-align: left;">Late growth</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">1.72</td>
-<td style="text-align: right;">1.31</td>
+<td style="text-align: right;">1.73</td>
+<td style="text-align: right;">1.32</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Late growth</td>
@@ -409,61 +409,61 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <tr class="even">
 <td style="text-align: left;">Late growth</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.68</td>
-<td style="text-align: right;">1.29</td>
+<td style="text-align: right;">1.69</td>
+<td style="text-align: right;">1.30</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.73</td>
-<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">2.75</td>
+<td style="text-align: right;">1.66</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">2.68</td>
 <td style="text-align: right;">1.64</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Whole-period growth</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.29</td>
+<td style="text-align: right;">4.30</td>
 <td style="text-align: right;">2.07</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Day-12 scaled mass index</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.69</td>
-<td style="text-align: right;">1.64</td>
+<td style="text-align: right;">2.71</td>
+<td style="text-align: right;">1.65</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Day-12 scaled mass index</td>
 <td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.63</td>
+<td style="text-align: right;">2.62</td>
 <td style="text-align: right;">1.62</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Day-12 scaled mass index</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.17</td>
+<td style="text-align: right;">4.18</td>
 <td style="text-align: right;">2.04</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Day-12 tarsus length</td>
 <td style="text-align: left;">incubation_temperature_sc</td>
-<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">2.70</td>
 <td style="text-align: right;">1.64</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Day-12 tarsus length</td>
 <td style="text-align: left;">nestling_temperature_sc</td>
-<td style="text-align: right;">2.63</td>
+<td style="text-align: right;">2.62</td>
 <td style="text-align: right;">1.62</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Day-12 tarsus length</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">4.15</td>
+<td style="text-align: right;">4.16</td>
 <td style="text-align: right;">2.04</td>
 </tr>
 <tr class="even">
@@ -481,7 +481,7 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <tr class="even">
 <td style="text-align: left;">Day-12 survival</td>
 <td style="text-align: left;">incubation_temperature_sc:nestling_temperature_sc</td>
-<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">1.26</td>
 <td style="text-align: right;">1.12</td>
 </tr>
 </tbody>
@@ -569,7 +569,7 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <td style="text-align: left;">Control</td>
 <td style="text-align: left;">EXPCON</td>
 <td style="text-align: right;">39</td>
-<td style="text-align: right;">199</td>
+<td style="text-align: right;">201</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Heated</td>
@@ -604,7 +604,7 @@ The largest VIF in the ambient-temperature interaction models is `4.29`. The hig
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(analysis_nestlings, <span class="st">"data/prepared_nestlings.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Result: the final analysis dataset contains 883 nestling records and 18 columns.</p>
+<p>Result: the final analysis dataset contains 885 nestling records and 18 columns.</p>
 
 
 </section>

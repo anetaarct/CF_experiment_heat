@@ -1,5 +1,5 @@
 response,response_label,model_name,model_family,dispersion_formula,AIC,delta_AIC,selected_model
-D8_MASS,Day-8 body mass,student_mean,Student-t,~ 1,2594.6332638291615,0,FALSE
-D8_MASS,Day-8 body mass,student_scale,Student-t,~EXP.INC + EXP.NEST,2596.481341206514,1.848077377352638,FALSE
-D8_MASS,Day-8 body mass,gaussian_mean,Gaussian,~ 1,2690.492985029845,95.85972120068345,TRUE
-D8_MASS,Day-8 body mass,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,2691.9469681517685,97.31370432260701,FALSE
+D8_MASS,Day-8 body mass,student_scale,Student-t,~EXP.INC + EXP.NEST,2605.573885230765,0,FALSE
+D8_MASS,Day-8 body mass,gaussian_mean,Gaussian,~ 1,2698.6031954292785,93.02931019851349,TRUE
+D8_MASS,Day-8 body mass,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,2699.814426392496,94.24054116173102,FALSE
+D8_MASS,Day-8 body mass,student_mean,Student-t,~ 1,NA,NA,FALSE

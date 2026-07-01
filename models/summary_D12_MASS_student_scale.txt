@@ -5,26 +5,26 @@ Dispersion:                ~EXP.INC + EXP.NEST
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-       NA        NA        NA        NA       676 
+       NA        NA        NA        NA       678 
 
 Random effects:
 
 Conditional model:
  Groups Name        Variance Std.Dev.
- F_RING (Intercept)  1.481   1.217   
- YEAR   (Intercept) 46.136   6.792   
-Number of obs: 687, groups:  F_RING, 144; YEAR, 4
+ F_RING (Intercept)  1.509   1.228   
+ YEAR   (Intercept) 55.947   7.480   
+Number of obs: 689, groups:  F_RING, 144; YEAR, 4
 
 Conditional model:
                Estimate Std. Error z value Pr(>|z|)
-(Intercept)     1.18800        NaN     NaN      NaN
-EXP.INCHeated  -0.05517        NaN     NaN      NaN
-EXP.NESTHeated  0.24349        NaN     NaN      NaN
-SEXM            0.11490        NaN     NaN      NaN
-BS_sc           0.05123        NaN     NaN      NaN
+(Intercept)     1.21086        NaN     NaN      NaN
+EXP.INCHeated  -0.17298        NaN     NaN      NaN
+EXP.NESTHeated  0.24676        NaN     NaN      NaN
+SEXM            0.11089        NaN     NaN      NaN
+BS_sc          -0.06866        NaN     NaN      NaN
 
 Dispersion model:
                Estimate Std. Error z value Pr(>|z|)
-(Intercept)    -0.55344        NaN     NaN      NaN
-EXP.INCHeated   0.09323        NaN     NaN      NaN
-EXP.NESTHeated -0.02899        NaN     NaN      NaN
+(Intercept)    -0.53104        NaN     NaN      NaN
+EXP.INCHeated   0.03834        NaN     NaN      NaN
+EXP.NESTHeated -0.02648        NaN     NaN      NaN

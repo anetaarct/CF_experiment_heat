@@ -4,25 +4,25 @@ Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    -1014      -978       515     -1030       656 
+  -1017.4    -981.4     516.7   -1033.4       658 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance  Std.Dev.
- F_RING   (Intercept) 0.0197612 0.14057 
- YEAR     (Intercept) 0.0009999 0.03162 
- Residual             0.0071733 0.08470 
-Number of obs: 664, groups:  F_RING, 140; YEAR, 4
+ F_RING   (Intercept) 0.0197250 0.14045 
+ YEAR     (Intercept) 0.0009979 0.03159 
+ Residual             0.0071811 0.08474 
+Number of obs: 666, groups:  F_RING, 140; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.00717 
+Dispersion estimate for gaussian family (sigma^2): 0.00718 
 
 Conditional model:
                 Estimate Std. Error z value Pr(>|z|)    
-(Intercept)     1.070461   0.027563   38.84   <2e-16 ***
-EXP.INCHeated  -0.028333   0.025064   -1.13   0.2583    
-EXP.NESTHeated -0.005877   0.024945   -0.24   0.8137    
-SEXM            0.018745   0.007441    2.52   0.0118 *  
-BS_sc          -0.003836   0.011607   -0.33   0.7410    
+(Intercept)     1.070176   0.027538   38.86  < 2e-16 ***
+EXP.INCHeated  -0.028230   0.025039   -1.13  0.25956    
+EXP.NESTHeated -0.005979   0.024921   -0.24  0.81039    
+SEXM            0.019525   0.007424    2.63  0.00854 ** 
+BS_sc          -0.003837   0.011583   -0.33  0.74046    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

@@ -1,5 +1,5 @@
 response,response_label,model_name,model_family,dispersion_formula,AIC,delta_AIC,selected_model
-D12_SMI,Day-12 scaled mass index,student_mean,Student-t,~ 1,2239.721299740695,0,FALSE
-D12_SMI,Day-12 scaled mass index,gaussian_mean,Gaussian,~ 1,2241.317148400588,1.5958486598929085,TRUE
-D12_SMI,Day-12 scaled mass index,student_scale,Student-t,~EXP.INC + EXP.NEST,2242.9211551975704,3.1998554568754116,FALSE
-D12_SMI,Day-12 scaled mass index,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,2243.9515798626453,4.230280121950273,FALSE
+D12_SMI,Day-12 scaled mass index,student_mean,Student-t,~ 1,2248.2297849560073,0,FALSE
+D12_SMI,Day-12 scaled mass index,gaussian_mean,Gaussian,~ 1,2249.8755812345216,1.6457962785143536,TRUE
+D12_SMI,Day-12 scaled mass index,student_scale,Student-t,~EXP.INC + EXP.NEST,2251.5294934660897,3.2997085100823824,FALSE
+D12_SMI,Day-12 scaled mass index,gaussian_scale,Gaussian,~EXP.INC + EXP.NEST,2252.6476961296084,4.417911173601169,FALSE

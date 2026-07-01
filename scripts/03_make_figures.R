@@ -122,6 +122,31 @@ plot_model_effect <- function(response) {
         fill = "Observed nestling treatment",
         caption = "Pale bars show observed survival proportions; dark points/lines and vertical intervals show model-predicted survival with 95% confidence intervals."
       )
+  } else if (response %in% c("D8_MASS", "Early.g")) {
+    raw_data <- dat %>% filter(!is.na(.data[[response]]), !is.na(EXP.INC))
+    pred <- ggpredict(fit, terms = "EXP.INC")
+
+    p <- ggplot() +
+      geom_jitter(
+        data = raw_data,
+        aes(x = EXP.INC, y = .data[[response]]),
+        width = 0.13,
+        height = 0,
+        alpha = 0.12,
+        size = 0.9,
+        color = "grey35"
+      ) +
+      geom_pointrange(
+        data = pred,
+        aes(x = x, y = predicted, ymin = conf.low, ymax = conf.high),
+        size = 0.62,
+        linewidth = 0.55,
+        color = "#1F3A3D"
+      ) +
+      labs(
+        x = "Incubation treatment",
+        y = y_label
+      )
   } else {
     raw_data <- dat %>% filter(!is.na(.data[[response]]), !is.na(EXP.INC), !is.na(EXP.NEST))
     pred <- ggpredict(fit, terms = c("EXP.INC", "EXP.NEST"))

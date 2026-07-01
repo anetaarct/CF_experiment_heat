@@ -1,10 +1,10 @@
 response,response_label,selected_model,formula,dispersion_formula,n
-D2_MASS,Day-2 body mass,gaussian_mean,D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR),~1,858
-D8_MASS,Day-8 body mass,gaussian_mean,D8_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,775
-D12_MASS,Day-12 body mass,gaussian_mean,D12_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),~1,687
-Early.g,Early growth,gaussian_mean,Early.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,757
-Late.g,Late growth,gaussian_mean,Late.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,677
-Growth,Whole-period growth,gaussian_mean,Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,664
-D12_SMI,Day-12 scaled mass index,gaussian_mean,D12_SMI ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,679
-D12_RTARS,Day-12 tarsus length,gaussian_mean,D12_RTARS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),~1,680
-D12_SURV,Day-12 survival,binomial,D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),not used,883
+D2_MASS,Day-2 body mass,gaussian_mean,D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR),~1,860
+D8_MASS,Day-8 body mass,gaussian_mean,D8_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,777
+D12_MASS,Day-12 body mass,gaussian_mean,D12_MASS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),~1,689
+Early.g,Early growth,gaussian_mean,Early.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,759
+Late.g,Late growth,gaussian_mean,Late.g ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,679
+Growth,Whole-period growth,gaussian_mean,Growth ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,666
+D12_SMI,Day-12 scaled mass index,gaussian_mean,D12_SMI ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) + (1 |      YEAR),~1,681
+D12_RTARS,Day-12 tarsus length,gaussian_mean,D12_RTARS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),~1,682
+D12_SURV,Day-12 survival,binomial,D12_SURV ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR),not used,885

@@ -5,37 +5,37 @@ Early.g ~ EXP.INC + EXP.NEST + incubation_temperature_sc * nestling_temperature_
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   -543.1    -492.6     282.6    -565.1       717 
+   -540.4    -489.9     281.2    -562.4       719 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance  Std.Dev. 
- F_RING   (Intercept) 5.071e-02 2.252e-01
- YEAR     (Intercept) 3.778e-11 6.146e-06
- Residual             1.541e-02 1.241e-01
-Number of obs: 728, groups:  F_RING, 145; YEAR, 4
+ F_RING   (Intercept) 5.064e-02 2.250e-01
+ YEAR     (Intercept) 3.525e-11 5.937e-06
+ Residual             1.554e-02 1.247e-01
+Number of obs: 730, groups:  F_RING, 145; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.0154 
+Dispersion estimate for gaussian family (sigma^2): 0.0155 
 
 Conditional model:
                                                    Estimate Std. Error z value
-(Intercept)                                        1.564038   0.034518   45.31
-EXP.INCHeated                                     -0.099505   0.038857   -2.56
-EXP.NESTHeated                                    -0.009072   0.038787   -0.23
-incubation_temperature_sc                         -0.041860   0.024094   -1.74
-nestling_temperature_sc                           -0.027398   0.018653   -1.47
-SEXM                                               0.028410   0.010267    2.77
-BS_sc                                             -0.016419   0.018412   -0.89
-incubation_temperature_sc:nestling_temperature_sc  0.038462   0.020636    1.86
+(Intercept)                                        1.563291   0.034505   45.31
+EXP.INCHeated                                     -0.099312   0.038838   -2.56
+EXP.NESTHeated                                    -0.009322   0.038768   -0.24
+incubation_temperature_sc                         -0.041682   0.024114   -1.73
+nestling_temperature_sc                           -0.027328   0.018689   -1.46
+SEXM                                               0.030067   0.010291    2.92
+BS_sc                                             -0.016438   0.018386   -0.89
+incubation_temperature_sc:nestling_temperature_sc  0.038445   0.020690    1.86
                                                   Pr(>|z|)    
 (Intercept)                                        < 2e-16 ***
-EXP.INCHeated                                      0.01044 *  
-EXP.NESTHeated                                     0.81507    
-incubation_temperature_sc                          0.08232 .  
-nestling_temperature_sc                            0.14188    
-SEXM                                               0.00565 ** 
-BS_sc                                              0.37251    
-incubation_temperature_sc:nestling_temperature_sc  0.06235 .  
+EXP.INCHeated                                      0.01056 *  
+EXP.NESTHeated                                     0.80997    
+incubation_temperature_sc                          0.08389 .  
+nestling_temperature_sc                            0.14367    
+SEXM                                               0.00348 ** 
+BS_sc                                              0.37128    
+incubation_temperature_sc:nestling_temperature_sc  0.06315 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

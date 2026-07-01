@@ -80,8 +80,8 @@ significant_experiment_figures <- c("D8_MASS", "Early.g")
 
 experiment_figure_note <- function(response) {
   notes <- c(
-    D8_MASS = "The figure shows day-8 body mass by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). Colours indicate the nestling-stage treatment: `Control` means the nest box was not warmed during the nestling period, and `Heated` means it was warmed during the nestling period. The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes had lower predicted day-8 body mass.",
-    Early.g = "The figure shows early growth rate between day 2 and day 8 by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). Colours indicate the nestling-stage treatment: `Control` means the nest box was not warmed during the nestling period, and `Heated` means it was warmed during the nestling period. The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes showed lower predicted early growth."
+    D8_MASS = "The figure shows day-8 body mass by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes had lower predicted day-8 body mass.",
+    Early.g = "The figure shows early growth rate between day 2 and day 8 by incubation-stage treatment. The x-axis compares nests that were not warmed during incubation (`Control`) with nests warmed during incubation (`Heated`). The supported effect in the primary model is the incubation-stage warming effect: nestlings from incubation-heated nest boxes showed lower predicted early growth."
   )
   notes[[response]] %||% ""
 }

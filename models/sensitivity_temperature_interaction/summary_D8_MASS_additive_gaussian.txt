@@ -5,27 +5,27 @@ D8_MASS ~ EXP.INC + EXP.NEST + incubation_temperature_sc + nestling_temperature_
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2566.5    2612.7   -1273.3    2546.5       736 
+   2574.7    2620.9   -1277.4    2554.7       738 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 1.9413   1.3933  
- YEAR     (Intercept) 0.1073   0.3276  
- Residual             1.1401   1.0678  
-Number of obs: 746, groups:  F_RING, 148; YEAR, 4
+ F_RING   (Intercept) 1.9375   1.3919  
+ YEAR     (Intercept) 0.1081   0.3288  
+ Residual             1.1441   1.0696  
+Number of obs: 748, groups:  F_RING, 148; YEAR, 4
 
 Dispersion estimate for gaussian family (sigma^2): 1.14 
 
 Conditional model:
                           Estimate Std. Error z value Pr(>|z|)    
-(Intercept)               12.53558    0.27464   45.64   <2e-16 ***
-EXP.INCHeated             -0.50606    0.24562   -2.06   0.0394 *  
-EXP.NESTHeated             0.03784    0.24494    0.15   0.8772    
-incubation_temperature_sc -0.27273    0.23881   -1.14   0.2535    
-nestling_temperature_sc   -0.12248    0.29144   -0.42   0.6743    
-SEXM                       0.07338    0.08664    0.85   0.3970    
-BS_sc                     -0.04152    0.11926   -0.35   0.7277    
+(Intercept)               12.53145    0.27475   45.61   <2e-16 ***
+EXP.INCHeated             -0.50423    0.24540   -2.05   0.0399 *  
+EXP.NESTHeated             0.03602    0.24472    0.15   0.8830    
+incubation_temperature_sc -0.27231    0.23793   -1.14   0.2524    
+nestling_temperature_sc   -0.12122    0.28915   -0.42   0.6751    
+SEXM                       0.08365    0.08663    0.97   0.3342    
+BS_sc                     -0.04137    0.11904   -0.35   0.7282    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

@@ -4,24 +4,24 @@ D12_RTARS ~ EXP.INC + EXP.NEST + SEX + BS_sc + (1 | F_RING) +      (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1060.4    1101.1    -521.2    1042.4       671 
+   1061.5    1102.3    -521.8    1043.5       673 
 
 Random effects:
 
 Conditional model:
  Groups Name        Variance Std.Dev.
- F_RING (Intercept) 0.2486   0.4986  
- YEAR   (Intercept) 0.0435   0.2086  
-Number of obs: 680, groups:  F_RING, 141; YEAR, 4
+ F_RING (Intercept) 0.24819  0.4982  
+ YEAR   (Intercept) 0.04336  0.2082  
+Number of obs: 682, groups:  F_RING, 141; YEAR, 4
 
-Dispersion estimate for t family (sigma^2): 0.119 
+Dispersion estimate for t family (sigma^2): 0.118 
 
 Conditional model:
                Estimate Std. Error z value Pr(>|z|)    
-(Intercept)    16.90955    0.13239  127.73   <2e-16 ***
-EXP.INCHeated  -0.14040    0.09179   -1.53   0.1261    
-EXP.NESTHeated  0.03848    0.09129    0.42   0.6734    
-SEXM           -0.05768    0.03450   -1.67   0.0945 .  
-BS_sc           0.05398    0.04569    1.18   0.2375    
+(Intercept)    16.90899    0.13219  127.91   <2e-16 ***
+EXP.INCHeated  -0.13975    0.09166   -1.52    0.127    
+EXP.NESTHeated  0.03784    0.09116    0.42    0.678    
+SEXM           -0.05521    0.03436   -1.61    0.108    
+BS_sc           0.05397    0.04561    1.18    0.237    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

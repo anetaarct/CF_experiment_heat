@@ -1,17 +1,17 @@
 item,value
 Raw nestling records,934
 Records after sex filter,885
-Records after repeated-female brood rule,883
+Records after repeated-female brood rule,885
 Study years,"2022, 2023, 2024, 2025"
 Unique females,169
 Unique broods,169
-Females with repeated broods removed,1
-D2 mass available,858
-D8 mass available,775
-D12 mass available,687
-D12 tarsus available,680
-Early growth available,757
-Late growth available,677
-Whole-period growth available,664
-D12 SMI available,679
-D12 survival available,883
+Females with repeated broods removed,0
+D2 mass available,860
+D8 mass available,777
+D12 mass available,689
+D12 tarsus available,682
+Early growth available,759
+Late growth available,679
+Whole-period growth available,666
+D12 SMI available,681
+D12 survival available,885

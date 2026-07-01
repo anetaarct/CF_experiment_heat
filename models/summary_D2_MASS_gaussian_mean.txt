@@ -3,24 +3,24 @@ Formula:          D2_MASS ~ EXP.INC + SEX + BS_sc + (1 | F_RING) + (1 | YEAR)
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1631.9    1665.1    -808.9    1617.9       851 
+   1633.4    1666.7    -809.7    1619.4       853 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.2039   0.4516  
- YEAR     (Intercept) 0.0195   0.1396  
- Residual             0.2862   0.5350  
-Number of obs: 858, groups:  F_RING, 165; YEAR, 4
+ F_RING   (Intercept) 0.20387  0.4515  
+ YEAR     (Intercept) 0.01943  0.1394  
+ Residual             0.28545  0.5343  
+Number of obs: 860, groups:  F_RING, 165; YEAR, 4
 
-Dispersion estimate for gaussian family (sigma^2): 0.286 
+Dispersion estimate for gaussian family (sigma^2): 0.285 
 
 Conditional model:
                Estimate Std. Error z value Pr(>|z|)    
-(Intercept)    3.170625   0.093401   33.95   <2e-16 ***
-EXP.INCHeated -0.004349   0.080563   -0.05    0.957    
-SEXM          -0.022812   0.039852   -0.57    0.567    
-BS_sc          0.061993   0.038834    1.60    0.110    
+(Intercept)    3.170539   0.093287   33.99   <2e-16 ***
+EXP.INCHeated -0.004009   0.080510   -0.05    0.960    
+SEXM          -0.022326   0.039742   -0.56    0.574    
+BS_sc          0.062049   0.038761    1.60    0.109    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

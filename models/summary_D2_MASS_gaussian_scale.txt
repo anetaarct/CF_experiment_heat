@@ -4,29 +4,29 @@ Dispersion:               ~EXP.INC
 Data: model_data
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   1632.9    1670.9    -808.4    1616.9       850 
+   1634.3    1672.4    -809.2    1618.3       852 
 
 Random effects:
 
 Conditional model:
  Groups   Name        Variance Std.Dev.
- F_RING   (Intercept) 0.20380  0.4514  
- YEAR     (Intercept) 0.01951  0.1397  
+ F_RING   (Intercept) 0.20375  0.4514  
+ YEAR     (Intercept) 0.01944  0.1394  
  Residual                  NA      NA  
-Number of obs: 858, groups:  F_RING, 165; YEAR, 4
+Number of obs: 860, groups:  F_RING, 165; YEAR, 4
 
 Conditional model:
                Estimate Std. Error z value Pr(>|z|)    
-(Intercept)    3.171272   0.093606   33.88   <2e-16 ***
-EXP.INCHeated -0.004334   0.080558   -0.05    0.957    
-SEXM          -0.023945   0.039815   -0.60    0.548    
-BS_sc          0.061841   0.038803    1.59    0.111    
+(Intercept)    3.171208   0.093498   33.92   <2e-16 ***
+EXP.INCHeated -0.003981   0.080506   -0.05    0.961    
+SEXM          -0.023477   0.039699   -0.59    0.554    
+BS_sc          0.061895   0.038729    1.60    0.110    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Dispersion model:
               Estimate Std. Error z value Pr(>|z|)    
-(Intercept)   -0.59860    0.03854 -15.534   <2e-16 ***
-EXP.INCHeated -0.05356    0.05348  -1.001    0.317    
+(Intercept)   -0.59861    0.03854  -15.53   <2e-16 ***
+EXP.INCHeated -0.05607    0.05342   -1.05    0.294    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
